@@ -1,0 +1,3314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Work Report</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href='data:image/svg+xml,
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="10" y="8" width="44" height="52" rx="4" fill="white" stroke="%231e3a8a" stroke-width="3"/>
+  <rect x="22" y="2" width="20" height="8" rx="2" fill="%23f59e0b"/>
+  <rect x="18" y="22" width="5" height="14" fill="%23ef4444"/>
+  <rect x="27" y="16" width="5" height="20" fill="%233b82f6"/>
+  <rect x="36" y="11" width="5" height="25" fill="%2310b981"/>
+  <path d="M18 48 L26 42 L34 46 L42 38 L50 42" fill="none" stroke="%2310b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>'
+    />
+
+    <style>
+      /* Google Font */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #f4f7fc;
+        color: #333;
+      }
+
+      /* Header */
+
+      header {
+        background: #1e3a8a;
+        color: #fff;
+        padding: 15px 35px;
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      header h1 {
+        font-size: 26px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .header-subtitle {
+        font-size: 13px;
+        color: #bfdbfe;
+        margin-top: 4px;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .status-badge {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+        height: 34px;
+        line-height: 1.5;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        display: inline-block;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+        }
+      }
+
+      .container {
+        width: 95%;
+        max-width: 1480px;
+        margin: 35px auto;
+      }
+
+      /* ======================
+        Cards
+====================== */
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-bottom: 35px;
+      }
+
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.05),
+          0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        border-left: 4px solid #d1d5db;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-info {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .card h3 {
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .card h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      .card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+      }
+
+      /* Card themes */
+      .card-invoices {
+        border-left-color: #3b82f6;
+      }
+      .card-invoices .card-icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+      }
+
+      .card-submission {
+        border-left-color: #8b5cf6;
+      }
+      .card-submission .card-icon {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      .card-cases {
+        border-left-color: #f59e0b;
+      }
+      .card-cases .card-icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+      }
+
+      .card-reopen {
+        border-left-color: #f43f5e;
+      }
+      .card-reopen .card-icon {
+        background: rgba(244, 63, 94, 0.1);
+        color: #f43f5e;
+      }
+
+      .card-approval {
+        border-left-color: #10b981;
+      }
+      .card-approval .card-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+      }
+
+      .card-ungate {
+        border-left-color: #06b6d4;
+      }
+      .card-ungate .card-icon {
+        background: rgba(6, 182, 212, 0.1);
+        color: #06b6d4;
+      }
+
+      .card-copy {
+        border-left-color: #6366f1;
+      }
+      .card-copy .card-icon {
+        background: rgba(99, 102, 241, 0.1);
+        color: #6366f1;
+      }
+
+      /* ======================
+        Form
+====================== */
+
+      .form-section {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        margin-bottom: 35px;
+      }
+
+      .form-section h2 {
+        margin-bottom: 25px;
+        color: #1e3a8a;
+      }
+
+      .grouped-form {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 30px;
+        align-items: start;
+      }
+
+      .form-column {
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .form-group-title {
+        font-size: 15px;
+        color: #1e3a8a;
+        margin-bottom: 18px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .input-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+
+      .input-group label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #475569;
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 12px;
+        color: #94a3b8;
+        font-size: 15px;
+        pointer-events: none;
+      }
+
+      .textarea-icon {
+        top: 14px;
+      }
+
+      .input-wrapper input,
+      .input-wrapper select,
+      .input-wrapper textarea {
+        padding: 12px 15px 12px 38px !important;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        outline: none;
+        font-size: 14px;
+        transition: 0.3s;
+        width: 100%;
+        background: #fff;
+      }
+
+      .input-wrapper input:focus,
+      .input-wrapper select:focus,
+      .input-wrapper textarea:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      .full-width {
+        grid-column: 1/-1;
+      }
+
+      /* ======================
+       Buttons
+====================== */
+
+      .buttons {
+        grid-column: 1/-1;
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      button {
+        border: none;
+        padding: 13px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .save-btn {
+        background: #2563eb;
+        color: white;
+      }
+
+      .save-btn:hover {
+        background: #1d4ed8;
+      }
+
+      .reset-btn {
+        background: #ef4444;
+        color: white;
+      }
+
+      .reset-btn:hover {
+        background: #dc2626;
+      }
+
+      /* ======================
+        Table
+====================== */
+
+      .table-section {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      .table-filters {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+        padding: 16px 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(30, 58, 138, 0.06);
+      }
+
+      .filter-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+
+      .filter-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .filter-title i {
+        color: #2563eb;
+      }
+
+      .filter-results-badge {
+        font-size: 11px;
+        font-weight: 600;
+        color: #2563eb;
+        background: rgba(37, 99, 235, 0.08);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+
+      .filter-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .filter-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+
+      .filter-icon-badge {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(37, 99, 235, 0.07);
+        border-right: 1px solid #dbeafe;
+        border-radius: 10px 0 0 10px;
+        color: #2563eb;
+        font-size: 14px;
+        pointer-events: none;
+      }
+
+      .filter-group input {
+        width: 100%;
+        padding: 11px 14px 11px 50px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.25s;
+        background: #fff;
+        color: #334155;
+        font-family: inherit;
+      }
+
+      .filter-group input::placeholder {
+        color: #94a3b8;
+      }
+
+      .filter-group input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        background: #fff;
+      }
+
+      .filter-clear-btn {
+        background: none;
+        border: 1.5px solid #e2e8f0;
+        color: #64748b;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+
+      .filter-clear-btn:hover {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #ef4444;
+      }
+
+      .table-section h2 {
+        margin-bottom: 20px;
+        color: #1e3a8a;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background: #1e3a8a;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      tbody tr {
+        border-bottom: 1px solid #ececec;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #f9fbff;
+      }
+
+      tbody tr:hover {
+        background: #eef4ff;
+      }
+
+      /* Action Buttons */
+
+      .edit-btn,
+      .delete-btn {
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        margin: 0 3px;
+      }
+
+      .edit-btn {
+        background: #f59e0b;
+      }
+
+      .delete-btn {
+        background: #ef4444;
+      }
+
+      /* ======================
+        Select Box
+====================== */
+
+      .input-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #d6d6d6;
+        border-radius: 10px;
+        outline: none;
+        font-size: 15px;
+        background: #fff;
+        color: #333;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .input-group select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+      }
+
+      /* ======================
+        Footer
+      ====================== */
+
+      .footer {
+        margin: 35px auto 20px;
+        width: 95%;
+        max-width: 1400px;
+        background: #fff;
+        border-radius: 15px;
+        padding: 18px 28px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        border-top: 4px solid #ff9900;
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-logo-tag {
+        font-size: 11px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+
+      .footer p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+
+      .footer p span {
+        color: #2563eb;
+        font-weight: 600;
+      }
+
+      .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .table-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* Premium custom scrollbar for table wrapper */
+      .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .table-wrapper::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .table-wrapper::-webkit-scrollbar-track {
+        background: #f8fafc;
+        border-radius: 3px;
+      }
+
+      .table-wrapper::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+      }
+
+      .table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* ======================
+      Responsive Design
+      ====================== */
+
+      /* Medium Screens (Tablets/Mobiles Header Stack, < 992px) */
+      @media (max-width: 992px) {
+        .header-container {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 12px;
+        }
+
+        .header-left {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        header h1 {
+          font-size: 24px;
+          justify-content: center;
+        }
+
+        .header-subtitle {
+          justify-content: center;
+        }
+
+        .header-right {
+          justify-content: center;
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+      }
+
+      /* Medium Screens (Tablets Form Stack, < 1024px) */
+      @media (max-width: 1024px) {
+        .grouped-form {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+
+      /* Small Screens (Mobiles, < 768px) */
+      @media (max-width: 768px) {
+        .container {
+          margin: 20px auto;
+          width: 95%;
+        }
+
+        header {
+          padding: 15px 20px;
+        }
+
+        header h1 {
+          font-size: 22px;
+        }
+
+        /* Metric cards styling for mobile */
+        .cards {
+          grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+          gap: 10px;
+          margin-bottom: 25px;
+        }
+
+        .card {
+          padding: 12px;
+        }
+
+        .card h2 {
+          font-size: 22px;
+        }
+
+        .card h3 {
+          font-size: 10px;
+        }
+
+        .card-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 15px;
+        }
+
+        /* Forms & Containers padding adjustments */
+        .form-section,
+        .table-section {
+          padding: 20px 15px;
+          border-radius: 12px;
+          margin-bottom: 25px;
+        }
+
+        .form-section h2,
+        .table-section h2 {
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+
+        .input-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .buttons {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        /* button {
+          width: 100%;
+        } */
+
+        /* Table header and Actions layout */
+        .table-header {
+          flex-direction: column;
+          gap: 15px;
+          align-items: flex-start;
+        }
+
+        .table-actions {
+          flex-direction: column;
+          width: 100%;
+          gap: 8px;
+        }
+
+        .table-actions button {
+          width: 100%;
+          margin: 0;
+          padding: 10px 15px;
+          font-size: 14px;
+        }
+
+        /* Filters section layout */
+        .filter-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+
+        .filter-clear-btn {
+          width: 100%;
+          justify-content: center;
+          padding: 11px;
+        }
+
+        th,
+        td {
+          font-size: 13px;
+          padding: 10px 8px;
+        }
+
+        /* Modal content adjustments */
+        .modal-content {
+          padding: 16px;
+          width: 95%;
+          border-radius: 12px;
+        }
+
+        /* Footer styling */
+        .footer {
+          padding: 15px;
+          border-radius: 12px;
+        }
+
+        .footer p {
+          font-size: 13px;
+          line-height: 1.6;
+        }
+      }
+
+      /* Duplicate Row Styling */
+      tbody tr.duplicate-row {
+        background-color: #fef2f2 !important;
+      }
+      tbody tr.duplicate-row td {
+        color: #991b1b !important;
+      }
+      tbody tr.duplicate-row:hover {
+        background-color: #fee2e2 !important;
+      }
+
+      /* Error Alert Styling */
+      .alert-danger {
+        background-color: #fef2f2;
+        border: 1px solid #fee2e2;
+        border-left: 4px solid #ef4444;
+        color: #991b1b;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Modal Overlay Styling */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        animation: fadeIn 0.25s ease-out;
+      }
+
+      .modal-content {
+        background: #fff;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 450px;
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        padding: 24px;
+        position: relative;
+        animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        text-align: left;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .modal-header h3 {
+        color: #1e3a8a;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+      }
+
+      .close-modal-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #64748b;
+        cursor: pointer;
+        transition: color 0.2s;
+        line-height: 1;
+      }
+
+      .close-modal-btn:hover {
+        color: #ef4444;
+      }
+
+      .modal-body {
+        color: #334155;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .alert-tip {
+        background: #eff6ff;
+        border-left: 4px solid #3b82f6;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: #1e3a8a;
+        text-align: left;
+      }
+
+      .alert-tip i {
+        margin-top: 3px;
+        color: #3b82f6;
+        font-size: 16px;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .translate-icon-btn {
+        background: none;
+        border: none;
+        color: #64748b;
+        font-size: 20px;
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          transform 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .translate-icon-btn:hover {
+        color: #1e3a8a;
+        transform: scale(1.15);
+      }
+
+      .modal-ok-btn {
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+
+      .modal-ok-btn:hover {
+        background: #1e40af;
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+      }
+
+      /* Duplicate Info Icon Styling */
+      .duplicate-info-icon {
+        color: #991b1b;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          color 0.2s;
+        font-size: 16px;
+        vertical-align: middle;
+      }
+
+      .duplicate-info-icon:hover {
+        transform: scale(1.25);
+        color: #ef4444;
+      }
+
+      /* Merge Action Button Styling */
+      .merge-action-btn {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+
+      .merge-action-btn:hover {
+        background: #dc2626;
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+
+      /* Blocker Alert Styling */
+      .alert-info {
+        background-color: #eff6ff;
+        border: 1px solid #dbeafe;
+        border-left: 4px solid #3b82f6;
+        color: #1e40af;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .blocker-info-icon {
+        color: #1e40af;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          color 0.2s;
+        font-size: 16px;
+        vertical-align: middle;
+      }
+
+      .blocker-info-icon:hover {
+        transform: scale(1.25);
+        color: #3b82f6;
+      }
+
+      /* Blocker Action Button Styling */
+      .blocker-btn {
+        background: #3b82f6;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        margin: 0 3px;
+        transition: all 0.2s;
+        display: inline-block;
+      }
+
+      .blocker-btn:hover {
+        background: #2563eb;
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+      }
+      /* Blocker Save Button */
+      .save-blocker-btn {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 7px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.2s;
+      }
+
+      .save-blocker-btn:hover {
+        background: #1d4ed8;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+      }
+
+      .delete-blocker-btn {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 7px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.2s;
+      }
+
+      .delete-blocker-btn:hover {
+        background: #dc2626;
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+      .header-action-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.25s ease;
+        cursor: pointer;
+        height: 34px;
+        line-height: 1.5;
+      }
+      .header-action-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.45);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .header-action-btn:active {
+        transform: translateY(1px);
+      }
+
+      /* ==========================================
+           AMAZON PREMIUM HEADER
+========================================== */
+
+      header {
+        background: linear-gradient(135deg, #131a22 0%, #232f3e 100%);
+        color: #fff;
+        padding: 18px 40px;
+        border-bottom: 4px solid #ff9900;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        position: sticky;
+        top: -100px;
+        z-index: 999;
+      }
+
+      .header-container {
+        max-width: 1500px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .header-left h1 {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 30px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.3px;
+      }
+
+      .header-left img {
+        transition: 0.35s;
+      }
+
+      .header-left img:hover {
+        transform: rotate(-6deg) scale(1.08);
+      }
+
+      .header-subtitle {
+        margin-top: 6px;
+        margin-left: 126px;
+        color: #d5d9d9;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .header-action-btn {
+        background: #ff9900;
+        color: #111;
+        border: none;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 4px 12px rgba(255, 153, 0, 0.35);
+      }
+
+      .header-action-btn:hover {
+        background: #ffad33;
+        transform: translateY(-2px);
+      }
+
+      .status-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 30px;
+        backdrop-filter: blur(10px);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+        }
+
+        70% {
+          box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+        }
+
+        100% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        }
+      }
+
+      /* ==========================================
+              AMAZON FOOTER
+========================================== */
+
+      .footer {
+        width: 95%;
+        max-width: 1500px;
+
+        margin: 35px auto 20px;
+
+        background: linear-gradient(135deg, #232f3e, #131a22);
+
+        border-top: 4px solid #ff9900;
+
+        border-radius: 16px;
+
+        padding: 22px 30px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+        color: #fff;
+      }
+
+      .footer-inner {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        gap: 15px;
+      }
+
+      .footer-logo {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+      }
+
+      .footer-logo-tag {
+        background: #ff9900;
+
+        color: #111;
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        padding: 5px 12px;
+
+        border-radius: 20px;
+
+        letter-spacing: 1px;
+
+        text-transform: uppercase;
+      }
+
+      .footer p {
+        margin: 0;
+
+        font-size: 14px;
+
+        color: #e5e7eb;
+      }
+
+      .footer p span {
+        color: #ff9900;
+
+        font-weight: 700;
+      }
+
+      .footer:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <div class="header-left">
+          <h1>
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTcyLjAzOCA0MC43MDNjLTUuOCA0LjI4My0xNC4yMzQgNi41Ny0yMS40ODYgNi41Ny0xMC4xNjggMC0xOS4zMjMtMy43Ni0yNi4yNDgtMTAuMDE2LS41NDQtLjQ5Mi0uMDU3LTEuMTYyLjU5Ni0uNzggNy40NzQgNC4zNSAxNi43MTUgNi45NjUgMjYuMjYgNi45NjUgNi40MzggMCAxMy41Mi0xLjMzMiAyMC4wMzItNC4wOTYuOTg0LS40MTggMS44MDYuNjQ0Ljg0NCAxLjM1OG0yLjQxOC0yLjc2NGMtLjc0LS45NS00LjktLjQ0OC02Ljc4Mi0uMjI2LS41Ny4wNy0uNjU3LS40MjctLjE0NC0uNzg0IDMuMzItMi4zMzggOC43Ny0xLjY2MyA5LjQwNy0uODhzLS4xNjUgNi4yNS0zLjI4NiA4Ljg1OGMtLjQ4LjQtLjkzNi4xODctLjcyMy0uMzQ0LjctMS43NSAyLjI3Mi01LjY3MiAxLjUyOC02LjYyNSIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik02Ny44MDMgMjAuNDI3di0yLjI3MmEuNTYuNTYgMCAwIDEgLjU3NS0uNTc1SDc4LjU1Yy4zMjYgMCAuNTg4LjIzNS41ODguNTc1VjIwLjFjLS4wMDQuMzI2LS4yOC43NTMtLjc2NiAxLjQyOGwtNS4yNyA3LjUyNmMxLjk2LS4wNDggNC4wMjYuMjQ0IDUuODAyIDEuMjQ1LjQuMjI2LjUuNTU3LjU0Ljg4NHYyLjQyNWMwIC4zMy0uMzY2LjcxOC0uNzUuNTE4LTMuMTMtMS42NC03LjI4Ny0xLjgyLTEwLjc0Ny4wMTctLjM1My4xOTItLjcyMy0uMTkyLS43MjMtLjUyMnYtMi4zMDNjMC0uMzcuMDA0LTEgLjM3NC0xLjU2M2w2LjEwNy04Ljc1OEg2OC40Yy0uMzI2IDAtLjU4OC0uMjMtLjU4OC0uNTdNMzAuNjk0IDM0LjYwNUgyNy42Yy0uMjk2LS4wMjItLjUzLS4yNDQtLjU1My0uNTI3VjE4LjE5NGMwLS4zMTguMjY2LS41Ny41OTYtLjU3aDIuODg2Yy4zLjAxMy41NC4yNDQuNTYyLjUzdjIuMDc2aC4wNTdjLjc1My0yLjAwNyAyLjE2OC0yLjk0MyA0LjA3NC0yLjk0MyAxLjkzNyAwIDMuMTQ3LjkzNiA0LjAxOCAyLjk0My43NS0yLjAwNyAyLjQ1LTIuOTQzIDQuMjc1LTIuOTQzIDEuMjk3IDAgMi43MTYuNTM1IDMuNTgyIDEuNzM3Ljk4IDEuMzM2Ljc4IDMuMjc4Ljc4IDQuOThMNDcuODcgMzQuMDNjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1VjI1LjZjMC0uNjcuMDYtMi4zNDItLjA4Ny0yLjk3Ny0uMjMtMS4wNjYtLjkyMy0xLjM2Ny0xLjgyLTEuMzY3LS43NSAwLTEuNTMyLjUtMS44NSAxLjMwMnMtLjI4NyAyLjE0Mi0uMjg3IDMuMDQzdjguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zMTMtLjAyMi0uNTU3LS4yNy0uNTU3LS41NzVsLS4wMDQtOC40MmMwLTEuNzcyLjI5Mi00LjM4LTEuOTA3LTQuMzgtMi4yMjQgMC0yLjEzNyAyLjU0Mi0yLjEzNyA0LjM4djguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1TTg3Ljg5NiAxNy4zYzQuNTkyIDAgNy4wNzggMy45NDQgNy4wNzggOC45NTggMCA0Ljg0NS0yLjc0NyA4LjY4OC03LjA3OCA4LjY4OC00LjUgMC02Ljk2NS0zLjk0NC02Ljk2NS04Ljg1OCAwLTQuOTQ1IDIuNDg2LTguOCA2Ljk2NS04LjhtLjAyNiAzLjI0M2MtMi4yOCAwLTIuNDI1IDMuMTA4LTIuNDI1IDUuMDQ1cy0uMDMgNi4wODUgMi4zOTggNi4wODVjMi4zOTggMCAyLjUxMi0zLjM0MyAyLjUxMi01LjM4IDAtMS4zNC0uMDU3LTIuOTQzLS40Ni00LjIxNC0uMzQ4LTEuMTA2LTEuMDQtMS41MzctMi4wMjQtMS41MzdtMTMuMDA3IDE0LjA3NWgtMy4wODJjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1bC0uMDA0LTE1Ljg4OGMuMDI2LS4yOTIuMjgzLS41MTguNTk2LS41MThoMi44N2MuMjcuMDEzLjQ5Mi4xOTYuNTUzLjQ0NHYyLjQzaC4wNTdjLjg2Ni0yLjE3MiAyLjA4LTMuMjA4IDQuMjE4LTMuMjA4IDEuNCAwIDIuNzQyLjUgMy42MTMgMS44NzIuOCAxLjI3LjggMy40MDguOCA0Ljk0NXYxMGMtLjAzNS4yOC0uMjkyLjUtLjU5Ni41SDEwNi4zYy0uMjgzLS4wMjItLjUxOC0uMjMtLjU0OC0uNVYyNS40OGMwLTEuNzM3LjItNC4yOC0xLjkzNy00LjI4LS43NTMgMC0xLjQ0NS41MDUtMS44IDEuMjctLjQzNS45Ny0uNDkyIDEuOTM3LS40OTIgMy4wMDh2OC41NTRjLS4wMDQuMzE4LS4yNzQuNTc1LS42MDUuNTc1bS00MS4yMjUtNy42YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjc1IDEuNDA2LTIuMTQyIDEuNDA2LTEuMTg4IDAtMS44ODUtLjkwNS0xLjg4NS0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNjA1LTMuMTE3di42N20zLjEyIDcuNTQ0Yy0uMjA1LjE4My0uNS4xOTYtLjczLjA3NC0xLjAyNy0uODUzLTEuMjE0LTEuMjUtMS43NzYtMi4wNjMtMS42OTggMS43MzItMi45MDMgMi4yNS01LjEwMiAyLjI1LTIuNjA3IDAtNC42MzItMS42MDYtNC42MzItNC44MjMgMC0yLjUxMiAxLjM1OC00LjIyMiAzLjMtNS4wNTggMS42OC0uNzQgNC4wMjYtLjg3IDUuODItMS4wNzV2LS40YzAtLjczNi4wNTctMS42MDYtLjM4LTIuMjQyLS4zNzQtLjU3LTEuMDk3LS44MDUtMS43MzctLjgwNS0xLjE4IDAtMi4yMy42MDUtMi40ODYgMS44Ni0uMDUyLjI4LS4yNTcuNTUzLS41NC41NjZsLTMtLjMyMmMtLjI1Mi0uMDU3LS41MzUtLjI2LS40Ni0uNjUuNjg4LTMuNjQgMy45OC00LjczNiA2LjkyLTQuNzM2IDEuNTA2IDAgMy40NzQuNCA0LjY2MiAxLjU0IDEuNTA2IDEuNDA2IDEuMzYyIDMuMjgyIDEuMzYyIDUuMzI0djQuODIzYzAgMS40NS42IDIuMDg1IDEuMTY3IDIuODcuMTk2LjI4LjI0LjYxNC0uMDEzLjgyM0w2Mi44MiAzNC41N2wtLjAwNC0uMDFNMTkuMTIgMjcuMDE3YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjcgMS40MDYtMi4xNDIgMS40MDYtMS4xODggMC0xLjg4LS45MDUtMS44OC0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNi0zLjExN3YuNjdtMy4xMiA3LjU0NGMtLjIwNS4xODMtLjUuMTk2LS43My4wNzQtMS4wMjctLjg1My0xLjItMS4yNS0xLjc3Ni0yLjA2My0xLjY5OCAxLjczMi0yLjkgMi4yNS01LjEwMiAyLjI1QzEyLjAyOCAzNC44MjIgMTAgMzMuMjE2IDEwIDMwYzAtMi41MTIgMS4zNjItNC4yMjIgMy4zLTUuMDU4IDEuNjgtLjc0IDQuMDI2LS44NyA1LjgyLTEuMDc1di0uNGMwLS43MzYuMDU3LTEuNjA2LS4zNzQtMi4yNDItLjM4LS41Ny0xLjEtLjgwNS0xLjczNy0uODA1LTEuMTggMC0yLjIzMy42MDUtMi41IDEuODYtLjA1Mi4yOC0uMjU3LjU1My0uNTM1LjU2NmwtMy4wMDQtLjMyMmMtLjI1Mi0uMDU3LS41My0uMjYtLjQ2LS42NS42OTItMy42NCAzLjk4LTQuNzM2IDYuOTItNC43MzYgMS41MDYgMCAzLjQ3NC40IDQuNjYyIDEuNTQgMS41MDYgMS40MDYgMS4zNjIgMy4yODIgMS4zNjIgNS4zMjR2NC44MjNjMCAxLjQ1LjYgMi4wODUgMS4xNjcgMi44Ny4yLjI4LjI0NC42MTQtLjAxLjgyM2wtMi4zNiAyLjA1Mi0uMDEtLjAxIiBmaWxsPSIjMjIxZjFmIi8+PC9zdmc+"
+              alt="Amazon"
+              width="100"
+              height="50"
+              style="
+                vertical-align: middle;
+                display: inline-block;
+                margin-right: 10px;
+                filter: brightness(0) invert(1);
+              "
+            />
+            Daily Work Report
+          </h1>
+          <div class="header-subtitle" id="headerDateTime">
+            <i class="fa-regular fa-calendar-days"></i> Loading date and time...
+          </div>
+        </div>
+        <div class="header-right">
+          <button
+            id="backupBtn"
+            class="header-action-btn"
+            onclick="openBackupModal()"
+            type="button"
+          >
+            <i class="fa-solid fa-database"></i> Backup History
+          </button>
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            <span>Live Session</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Dashboard Cards -->
+      <section class="cards">
+        <div class="card card-invoices">
+          <div class="card-info">
+            <h3>Invoices Made</h3>
+            <h2 id="totalInvoices">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-file-invoice"></i>
+          </div>
+        </div>
+
+        <div class="card card-submission">
+          <div class="card-info">
+            <h3>Submission</h3>
+            <h2 id="totalSubmission">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+        </div>
+
+        <div class="card card-cases">
+          <div class="card-info">
+            <h3>Cases Open</h3>
+            <h2 id="totalCases">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+        </div>
+
+        <div class="card card-reopen">
+          <div class="card-info">
+            <h3>Reopen Cases</h3>
+            <h2 id="totalReopen">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+        </div>
+
+        <div class="card card-approval">
+          <div class="card-info">
+            <h3>Approval</h3>
+            <h2 id="totalApproval">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+
+        <div class="card card-ungate">
+          <div class="card-info">
+            <h3>Auto Ungate</h3>
+            <h2 id="totalUngate">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+        </div>
+
+        <div class="card card-copy">
+          <div class="card-info">
+            <h3>Copy Listing</h3>
+            <h2 id="totalCopyListing">0</h2>
+          </div>
+          <div class="card-icon">
+            <i class="fa-solid fa-copy"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form -->
+      <section class="form-section">
+        <h2>Add Today's Work</h2>
+
+        <form id="workForm" class="grouped-form">
+          <!-- Column 1: Session Details -->
+          <div class="form-column">
+            <h3 class="form-group-title">
+              <i class="fa-solid fa-circle-info"></i> Session Details
+            </h3>
+
+            <div class="input-group">
+              <label>Date</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-calendar input-icon"></i>
+                <input type="date" id="date" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>User Name</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input
+                  type="text"
+                  id="userName"
+                  list="userList"
+                  placeholder="Select or type user name"
+                  required
+                />
+                <datalist id="userList">
+                  <option value="Ashir"></option>
+                  <option value="Abdul Rehman"></option>
+                  <option value="Mehmood"></option>
+                </datalist>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Select Company</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-building input-icon"></i>
+                <select id="company" required>
+                  <option value="">Select Company</option>
+                  <option>Good Choice</option>
+                  <option>OaksMax Inc</option>
+                  <option>OCEANPATH LLC</option>
+                  <option>ValueVault Inc</option>
+                  <option>Amer Canada Inc.</option>
+                  <option>Cornercart Inc.</option>
+                  <option>HBinnovate</option>
+                  <option>URBAN BAZAAR PTY LTD</option>
+                  <option>BUBH Trading Corp.</option>
+                  <option>Bzable Corporation Inc.</option>
+                  <option>Primeshopes Inc.</option>
+                  <option>KDOT STORE</option>
+                  <option>IR Tech</option>
+                  <option>POLAR HORIZON</option>
+                  <option>9teen Trades Inc</option>
+                  <option>BoldBuy Hub Inc</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group full-width" style="margin-bottom: 0">
+              <label
+                >Notes
+                <span style="color: #64748b; font-size: 12px"
+                  >(Store-specific / Tomorrow's Plan)</span
+                ></label
+              >
+              <div class="input-wrapper">
+                <i
+                  class="fa-regular fa-comment-dots input-icon textarea-icon"
+                ></i>
+                <textarea
+                  id="notes"
+                  rows="4"
+                  placeholder="Write today's store-specific work / tomorrow's work..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Work Counters -->
+          <div class="form-column">
+            <h3 class="form-group-title">
+              <i class="fa-solid fa-chart-line"></i> Work Counters
+            </h3>
+            <div class="input-grid">
+              <div class="input-group">
+                <label>Invoices Made</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-file-invoice input-icon"></i>
+                  <input type="number" id="invoice" placeholder="0" />
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Submission</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-paper-plane input-icon"></i>
+                  <input type="number" id="submission" placeholder="0" />
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Cases Open</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-folder-open input-icon"></i>
+                  <input type="number" id="cases" placeholder="0" />
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Reopen Cases</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-rotate input-icon"></i>
+                  <input type="number" id="reopen" placeholder="0" />
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Approval (Ungated)</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-circle-check input-icon"></i>
+                  <input type="number" id="approval" placeholder="0" />
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Auto Ungate</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-bolt input-icon"></i>
+                  <input type="number" id="ungate" placeholder="0" />
+                </div>
+              </div>
+
+              <div class="input-group" style="margin-bottom: 0">
+                <label>Copy Listing</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-copy input-icon"></i>
+                  <input type="number" id="copyListing" placeholder="0" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Global Day Work Blocker -->
+            <div
+              class="input-group full-width"
+              style="margin-top: 20px; margin-bottom: 0"
+            >
+              <label
+                >Blocker<span style="color: #64748b; font-size: 12px"
+                  >(Overall Day Work)</span
+                ></label
+              >
+              <div class="input-wrapper">
+                <i
+                  class="fa-solid fa-circle-exclamation input-icon textarea-icon"
+                ></i>
+                <textarea
+                  id="blocker"
+                  rows="3"
+                  placeholder="Facing internet issue, server down, etc..."
+                ></textarea>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 8px">
+                <button
+                  type="button"
+                  class="save-blocker-btn"
+                  onclick="saveBlocker()"
+                >
+                  <i class="fa-solid fa-floppy-disk"></i> Save
+                </button>
+                <button
+                  type="button"
+                  class="delete-blocker-btn"
+                  onclick="clearBlocker()"
+                >
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons Row -->
+          <div class="buttons">
+            <button type="submit" class="save-btn">
+              <i class="fa-solid fa-floppy-disk"></i>
+              Save Data
+            </button>
+
+            <button type="reset" class="reset-btn">
+              <i class="fa-solid fa-rotate-left"></i>
+              Reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Table -->
+      <section class="table-section">
+        <div class="table-header">
+          <h2>Work History</h2>
+
+          <div class="table-actions">
+            <button id="clearAll" class="reset-btn" type="button">
+              <i class="fa-solid fa-trash-can"></i>
+              Clear All
+            </button>
+
+            <button id="downloadPdf" class="save-btn" type="button">
+              <i class="fa-solid fa-file-pdf"></i>
+              Download PDF
+            </button>
+
+            <button
+              id="downloadImage"
+              class="save-btn"
+              style="background: #10b981"
+              type="button"
+              onclick="downloadScreenshot()"
+            >
+              <i class="fa-solid fa-image"></i>
+              Download Image
+            </button>
+          </div>
+        </div>
+
+        <div class="table-filters">
+          <div class="filter-header">
+            <span class="filter-title">
+              <i class="fa-solid fa-sliders"></i>
+              Filter Records
+            </span>
+            <span class="filter-results-badge" id="filterResultsBadge"
+              >All Records</span
+            >
+          </div>
+          <div class="filter-row">
+            <div class="filter-group">
+              <span class="filter-icon-badge">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </span>
+              <input
+                type="text"
+                id="searchFilter"
+                placeholder="Search by User or Company..."
+              />
+            </div>
+            <div class="filter-group">
+              <span class="filter-icon-badge">
+                <i class="fa-regular fa-calendar-days"></i>
+              </span>
+              <input type="date" id="dateFilter" />
+            </div>
+            <button
+              class="filter-clear-btn"
+              id="clearFiltersBtn"
+              title="Clear all filters"
+            >
+              <i class="fa-solid fa-xmark"></i>
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Duplicate Warning Alert -->
+        <div
+          id="duplicateAlert"
+          class="alert-danger"
+          style="
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 10px; flex: 1">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span></span>
+          </div>
+          <i
+            class="fa-solid fa-circle-info duplicate-info-icon"
+            onclick="showMergeInfoGlobal()"
+            title="Click for merge instructions"
+          ></i>
+        </div>
+
+        <!-- Blocker Warning Alert -->
+        <div
+          id="blockerAlert"
+          class="alert-info"
+          style="
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              flex: 1;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            "
+          >
+            <i
+              class="fa-solid fa-circle-exclamation"
+              style="font-size: 16px"
+            ></i>
+            <span
+              id="blockerAlertText"
+              style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              "
+            ></span>
+          </div>
+          <i
+            class="fa-solid fa-circle-info blocker-info-icon"
+            id="blockerAlertIcon"
+            style="margin-left: 10px"
+            title="Click to view full notes"
+          ></i>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Company</th>
+                <th>Invoices</th>
+                <th>Submission</th>
+                <th>Cases</th>
+                <th>Reopen</th>
+                <th>Approval</th>
+                <th>Auto Ungate</th>
+                <th>Copy Listing</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="tableBody">
+              <!-- JS Data -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <div class="footer">
+        <div class="footer-inner">
+          <div class="footer-logo">
+            <!-- <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTcyLjAzOCA0MC43MDNjLTUuOCA0LjI4My0xNC4yMzQgNi41Ny0yMS40ODYgNi41Ny0xMC4xNjggMC0xOS4zMjMtMy43Ni0yNi4yNDgtMTAuMDE2LS41NDQtLjQ5Mi0uMDU3LTEuMTYyLjU5Ni0uNzggNy40NzQgNC4zNSAxNi43MTUgNi45NjUgMjYuMjYgNi45NjUgNi40MzggMCAxMy41Mi0xLjMzMiAyMC4wMzItNC4wOTYuOTg0LS40MTggMS44MDYuNjQ0Ljg0NCAxLjM1OG0yLjQxOC0yLjc2NGMtLjc0LS45NS00LjktLjQ0OC02Ljc4Mi0uMjI2LS41Ny4wNy0uNjU3LS40MjctLjE0NC0uNzg0IDMuMzItMi4zMzggOC43Ny0xLjY2MyA5LjQwNy0uODhzLS4xNjUgNi4yNS0zLjI4NiA4Ljg1OGMtLjQ4LjQtLjkzNi4xODctLjcyMy0uMzQ0LjctMS43NSAyLjI3Mi01LjY3MiAxLjUyOC02LjYyNSIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik02Ny44MDMgMjAuNDI3di0yLjI3MmEuNTYuNTYgMCAwIDEgLjU3NS0uNTc1SDc4LjU1Yy4zMjYgMCAuNTg4LjIzNS41ODguNTc1VjIwLjFjLS4wMDQuMzI2LS4yOC43NTMtLjc2NiAxLjQyOGwtNS4yNyA3LjUyNmMxLjk2LS4wNDggNC4wMjYuMjQ0IDUuODAyIDEuMjQ1LjQuMjI2LjUuNTU3LjU0Ljg4NHYyLjQyNWMwIC4zMy0uMzY2LjcxOC0uNzUuNTE4LTMuMTMtMS42NC03LjI4Ny0xLjgyLTEwLjc0Ny4wMTctLjM1My4xOTItLjcyMy0uMTkyLS43MjMtLjUyMnYtMi4zMDNjMC0uMzcuMDA0LTEgLjM3NC0xLjU2M2w2LjEwNy04Ljc1OEg2OC40Yy0uMzI2IDAtLjU4OC0uMjMtLjU4OC0uNTdNMzAuNjk0IDM0LjYwNUgyNy42Yy0uMjk2LS4wMjItLjUzLS4yNDQtLjU1My0uNTI3VjE4LjE5NGMwLS4zMTguMjY2LS41Ny41OTYtLjU3aDIuODg2Yy4zLjAxMy41NC4yNDQuNTYyLjUzdjIuMDc2aC4wNTdjLjc1My0yLjAwNyAyLjE2OC0yLjk0MyA0LjA3NC0yLjk0MyAxLjkzNyAwIDMuMTQ3LjkzNiA0LjAxOCAyLjk0My43NS0yLjAwNyAyLjQ1LTIuOTQzIDQuMjc1LTIuOTQzIDEuMjk3IDAgMi43MTYuNTM1IDMuNTgyIDEuNzM3Ljk4IDEuMzM2Ljc4IDMuMjc4Ljc4IDQuOThMNDcuODcgMzQuMDNjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1VjI1LjZjMC0uNjcuMDYtMi4zNDItLjA4Ny0yLjk3Ny0uMjMtMS4wNjYtLjkyMy0xLjM2Ny0xLjgyLTEuMzY3LS43NSAwLTEuNTMyLjUtMS44NSAxLjMwMnMtLjI4NyAyLjE0Mi0uMjg3IDMuMDQzdjguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zMTMtLjAyMi0uNTU3LS4yNy0uNTU3LS41NzVsLS4wMDQtOC40MmMwLTEuNzcyLjI5Mi00LjM4LTEuOTA3LTQuMzgtMi4yMjQgMC0yLjEzNyAyLjU0Mi0yLjEzNyA0LjM4djguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1TTg3Ljg5NiAxNy4zYzQuNTkyIDAgNy4wNzggMy45NDQgNy4wNzggOC45NTggMCA0Ljg0NS0yLjc0NyA4LjY4OC03LjA3OCA4LjY4OC00LjUgMC02Ljk2NS0zLjk0NC02Ljk2NS04Ljg1OCAwLTQuOTQ1IDIuNDg2LTguOCA2Ljk2NS04LjhtLjAyNiAzLjI0M2MtMi4yOCAwLTIuNDI1IDMuMTA4LTIuNDI1IDUuMDQ1cy0uMDMgNi4wODUgMi4zOTggNi4wODVjMi4zOTggMCAyLjUxMi0zLjM0MyAyLjUxMi01LjM4IDAtMS4zNC0uMDU3LTIuOTQzLS40Ni00LjIxNC0uMzQ4LTEuMTA2LTEuMDQtMS41MzctMi4wMjQtMS41MzdtMTMuMDA3IDE0LjA3NWgtMy4wODJjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1bC0uMDA0LTE1Ljg4OGMuMDI2LS4yOTIuMjgzLS41MTguNTk2LS41MThoMi44N2MuMjcuMDEzLjQ5Mi4xOTYuNTUzLjQ0NHYyLjQzaC4wNTdjLjg2Ni0yLjE3MiAyLjA4LTMuMjA4IDQuMjE4LTMuMjA4IDEuNCAwIDIuNzQyLjUgMy42MTMgMS44NzIuOCAxLjI3LjggMy40MDguOCA0Ljk0NXYxMGMtLjAzNS4yOC0uMjkyLjUtLjU5Ni41SDEwNi4zYy0uMjgzLS4wMjItLjUxOC0uMjMtLjU0OC0uNVYyNS40OGMwLTEuNzM3LjItNC4yOC0xLjkzNy00LjI4LS43NTMgMC0xLjQ0NS41MDUtMS44IDEuMjctLjQzNS45Ny0uNDkyIDEuOTM3LS40OTIgMy4wMDh2OC41NTRjLS4wMDQuMzE4LS4yNzQuNTc1LS42MDUuNTc1bS00MS4yMjUtNy42YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjc1IDEuNDA2LTIuMTQyIDEuNDA2LTEuMTg4IDAtMS44ODUtLjkwNS0xLjg4NS0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNjA1LTMuMTE3di42N20zLjEyIDcuNTQ0Yy0uMjA1LjE4My0uNS4xOTYtLjczLjA3NC0xLjAyNy0uODUzLTEuMjE0LTEuMjUtMS43NzYtMi4wNjMtMS42OTggMS43MzItMi45MDMgMi4yNS01LjEwMiAyLjI1LTIuNjA3IDAtNC42MzItMS42MDYtNC42MzItNC44MjMgMC0yLjUxMiAxLjM1OC00LjIyMiAzLjMtNS4wNTggMS42OC0uNzQgNC4wMjYtLjg3IDUuODItMS4wNzV2LS40YzAtLjczNi4wNTctMS42MDYtLjM4LTIuMjQyLS4zNzQtLjU3LTEuMDk3LS44MDUtMS43MzctLjgwNS0xLjE4IDAtMi4yMy42MDUtMi40ODYgMS44Ni0uMDUyLjI4LS4yNTcuNTUzLS41NC41NjZsLTMtLjMyMmMtLjI1Mi0uMDU3LS41MzUtLjI2LS40Ni0uNjUuNjg4LTMuNjQgMy45OC00LjczNiA2LjkyLTQuNzM2IDEuNTA2IDAgMy40NzQuNCA0LjY2MiAxLjU0IDEuNTA2IDEuNDA2IDEuMzYyIDMuMjgyIDEuMzYyIDUuMzI0djQuODIzYzAgMS40NS42IDIuMDg1IDEuMTY3IDIuODcuMTk2LjI4LjI0LjYxNC0uMDEzLjgyM0w2Mi44MiAzNC41N2wtLjAwNC0uMDFNMTkuMTIgMjcuMDE3YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjcgMS40MDYtMi4xNDIgMS40MDYtMS4xODggMC0xLjg4LS45MDUtMS44OC0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNi0zLjExN3YuNjdtMy4xMiA3LjU0NGMtLjIwNS4xODMtLjUuMTk2LS43My4wNzQtMS4wMjctLjg1My0xLjItMS4yNS0xLjc3Ni0yLjA2My0xLjY5OCAxLjczMi0yLjkgMi4yNS01LjEwMiAyLjI1QzEyLjAyOCAzNC44MjIgMTAgMzMuMjE2IDEwIDMwYzAtMi41MTIgMS4zNjItNC4yMjIgMy4zLTUuMDU4IDEuNjgtLjc0IDQuMDI2LS44NyA1LjgyLTEuMDc1di0uNGMwLS43MzYuMDU3LTEuNjA2LS4zNzQtMi4yNDItLjM4LS41Ny0xLjEtLjgwNS0xLjczNy0uODA1LTEuMTggMC0yLjIzMy42MDUtMi41IDEuODYtLjA1Mi4yOC0uMjU3LjU1My0uNTM1LjU2NmwtMy4wMDQtLjMyMmMtLjI1Mi0uMDU3LS41My0uMjYtLjQ2LS42NS42OTItMy42NCAzLjk4LTQuNzM2IDYuOTItNC43MzYgMS41MDYgMCAzLjQ3NC40IDQuNjYyIDEuNTQgMS41MDYgMS40MDYgMS4zNjIgMy4yODIgMS4zNjIgNS4zMjR2NC44MjNjMCAxLjQ1LjYgMi4wODUgMS4xNjcgMi44Ny4yLjI4LjI0NC42MTQtLjAxLjgyM2wtMi4zNiAyLjA1Mi0uMDEtLjAxIiBmaWxsPSIjMjIxZjFmIi8+PC9zdmc+"
+              alt="Amazon"
+              width="90"
+              height="45"
+              style="display: block"
+            /> -->
+
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTcyLjAzOCA0MC43MDNjLTUuOCA0LjI4My0xNC4yMzQgNi41Ny0yMS40ODYgNi41Ny0xMC4xNjggMC0xOS4zMjMtMy43Ni0yNi4yNDgtMTAuMDE2LS41NDQtLjQ5Mi0uMDU3LTEuMTYyLjU5Ni0uNzggNy40NzQgNC4zNSAxNi43MTUgNi45NjUgMjYuMjYgNi45NjUgNi40MzggMCAxMy41Mi0xLjMzMiAyMC4wMzItNC4wOTYuOTg0LS40MTggMS44MDYuNjQ0Ljg0NCAxLjM1OG0yLjQxOC0yLjc2NGMtLjc0LS45NS00LjktLjQ0OC02Ljc4Mi0uMjI2LS41Ny4wNy0uNjU3LS40MjctLjE0NC0uNzg0IDMuMzItMi4zMzggOC43Ny0xLjY2MyA5LjQwNy0uODhzLS4xNjUgNi4yNS0zLjI4NiA4Ljg1OGMtLjQ4LjQtLjkzNi4xODctLjcyMy0uMzQ0LjctMS43NSAyLjI3Mi01LjY3MiAxLjUyOC02LjYyNSIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik02Ny44MDMgMjAuNDI3di0yLjI3MmEuNTYuNTYgMCAwIDEgLjU3NS0uNTc1SDc4LjU1Yy4zMjYgMCAuNTg4LjIzNS41ODguNTc1VjIwLjFjLS4wMDQuMzI2LS4yOC43NTMtLjc2NiAxLjQyOGwtNS4yNyA3LjUyNmMxLjk2LS4wNDggNC4wMjYuMjQ0IDUuODAyIDEuMjQ1LjQuMjI2LjUuNTU3LjU0Ljg4NHYyLjQyNWMwIC4zMy0uMzY2LjcxOC0uNzUuNTE4LTMuMTMtMS42NC03LjI4Ny0xLjgyLTEwLjc0Ny4wMTctLjM1My4xOTItLjcyMy0uMTkyLS43MjMtLjUyMnYtMi4zMDNjMC0uMzcuMDA0LTEgLjM3NC0xLjU2M2w2LjEwNy04Ljc1OEg2OC40Yy0uMzI2IDAtLjU4OC0uMjMtLjU4OC0uNTdNMzAuNjk0IDM0LjYwNUgyNy42Yy0uMjk2LS4wMjItLjUzLS4yNDQtLjU1My0uNTI3VjE4LjE5NGMwLS4zMTguMjY2LS41Ny41OTYtLjU3aDIuODg2Yy4zLjAxMy41NC4yNDQuNTYyLjUzdjIuMDc2aC4wNTdjLjc1My0yLjAwNyAyLjE2OC0yLjk0MyA0LjA3NC0yLjk0MyAxLjkzNyAwIDMuMTQ3LjkzNiA0LjAxOCAyLjk0My43NS0yLjAwNyAyLjQ1LTIuOTQzIDQuMjc1LTIuOTQzIDEuMjk3IDAgMi43MTYuNTM1IDMuNTgyIDEuNzM3Ljk4IDEuMzM2Ljc4IDMuMjc4Ljc4IDQuOThMNDcuODcgMzQuMDNjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1VjI1LjZjMC0uNjcuMDYtMi4zNDItLjA4Ny0yLjk3Ny0uMjMtMS4wNjYtLjkyMy0xLjM2Ny0xLjgyLTEuMzY3LS43NSAwLTEuNTMyLjUtMS44NSAxLjMwMnMtLjI4NyAyLjE0Mi0uMjg3IDMuMDQzdjguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zMTMtLjAyMi0uNTU3LS4yNy0uNTU3LS41NzVsLS4wMDQtOC40MmMwLTEuNzcyLjI5Mi00LjM4LTEuOTA3LTQuMzgtMi4yMjQgMC0yLjEzNyAyLjU0Mi0yLjEzNyA0LjM4djguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1TTg3Ljg5NiAxNy4zYzQuNTkyIDAgNy4wNzggMy45NDQgNy4wNzggOC45NTggMCA0Ljg0NS0yLjc0NyA4LjY4OC03LjA3OCA4LjY4OC00LjUgMC02Ljk2NS0zLjk0NC02Ljk2NS04Ljg1OCAwLTQuOTQ1IDIuNDg2LTguOCA2Ljk2NS04LjhtLjAyNiAzLjI0M2MtMi4yOCAwLTIuNDI1IDMuMTA4LTIuNDI1IDUuMDQ1cy0uMDMgNi4wODUgMi4zOTggNi4wODVjMi4zOTggMCAyLjUxMi0zLjM0MyAyLjUxMi01LjM4IDAtMS4zNC0uMDU3LTIuOTQzLS40Ni00LjIxNC0uMzQ4LTEuMTA2LTEuMDQtMS41MzctMi4wMjQtMS41MzdtMTMuMDA3IDE0LjA3NWgtMy4wODJjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1bC0uMDA0LTE1Ljg4OGMuMDI2LS4yOTIuMjgzLS41MTguNTk2LS41MThoMi44N2MuMjcuMDEzLjQ5Mi4xOTYuNTUzLjQ0NHYyLjQzaC4wNTdjLjg2Ni0yLjE3MiAyLjA4LTMuMjA4IDQuMjE4LTMuMjA4IDEuNCAwIDIuNzQyLjUgMy42MTMgMS44NzIuOCAxLjI3LjggMy40MDguOCA0Ljk0NXYxMGMtLjAzNS4yOC0uMjkyLjUtLjU5Ni41SDEwNi4zYy0uMjgzLS4wMjItLjUxOC0uMjMtLjU0OC0uNVYyNS40OGMwLTEuNzM3LjItNC4yOC0xLjkzNy00LjI4LS43NTMgMC0xLjQ0NS41MDUtMS44IDEuMjctLjQzNS45Ny0uNDkyIDEuOTM3LS40OTIgMy4wMDh2OC41NTRjLS4wMDQuMzE4LS4yNzQuNTc1LS42MDUuNTc1bS00MS4yMjUtNy42YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjc1IDEuNDA2LTIuMTQyIDEuNDA2LTEuMTg4IDAtMS44ODUtLjkwNS0xLjg4NS0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNjA1LTMuMTE3di42N20zLjEyIDcuNTQ0Yy0uMjA1LjE4My0uNS4xOTYtLjczLjA3NC0xLjAyNy0uODUzLTEuMjE0LTEuMjUtMS43NzYtMi4wNjMtMS42OTggMS43MzItMi45MDMgMi4yNS01LjEwMiAyLjI1LTIuNjA3IDAtNC42MzItMS42MDYtNC42MzItNC44MjMgMC0yLjUxMiAxLjM1OC00LjIyMiAzLjMtNS4wNTggMS42OC0uNzQgNC4wMjYtLjg3IDUuODItMS4wNzV2LS40YzAtLjczNi4wNTctMS42MDYtLjM4LTIuMjQyLS4zNzQtLjU3LTEuMDk3LS44MDUtMS43MzctLjgwNS0xLjE4IDAtMi4yMy42MDUtMi40ODYgMS44Ni0uMDUyLjI4LS4yNTcuNTUzLS41NC41NjZsLTMtLjMyMmMtLjI1Mi0uMDU3LS41MzUtLjI2LS40Ni0uNjUuNjg4LTMuNjQgMy45OC00LjczNiA2LjkyLTQuNzM2IDEuNTA2IDAgMy40NzQuNCA0LjY2MiAxLjU0IDEuNTA2IDEuNDA2IDEuMzYyIDMuMjgyIDEuMzYyIDUuMzI0djQuODIzYzAgMS40NS42IDIuMDg1IDEuMTY3IDIuODcuMTk2LjI4LjI0LjYxNC0uMDEzLjgyM0w2Mi44MiAzNC41N2wtLjAwNC0uMDFNMTkuMTIgMjcuMDE3YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjcgMS40MDYtMi4xNDIgMS40MDYtMS4xODggMC0xLjg4LS45MDUtMS44OC0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNi0zLjExN3YuNjdtMy4xMiA3LjU0NGMtLjIwNS4xODMtLjUuMTk2LS43My4wNzQtMS4wMjctLjg1My0xLjItMS4yNS0xLjc3Ni0yLjA2My0xLjY5OCAxLjczMi0yLjkgMi4yNS01LjEwMiAyLjI1QzEyLjAyOCAzNC44MjIgMTAgMzMuMjE2IDEwIDMwYzAtMi41MTIgMS4zNjItNC4yMjIgMy4zLTUuMDU4IDEuNjgtLjc0IDQuMDI2LS44NyA1LjgyLTEuMDc1di0uNGMwLS43MzYuMDU3LTEuNjA2LS4zNzQtMi4yNDItLjM4LS41Ny0xLjEtLjgwNS0xLjczNy0uODA1LTEuMTggMC0yLjIzMy42MDUtMi41IDEuODYtLjA1Mi4yOC0uMjU3LjU1My0uNTM1LjU2NmwtMy4wMDQtLjMyMmMtLjI1Mi0uMDU3LS41My0uMjYtLjQ2LS42NS42OTItMy42NCAzLjk4LTQuNzM2IDYuOTItNC43MzYgMS41MDYgMCAzLjQ3NC40IDQuNjYyIDEuNTQgMS41MDYgMS40MDYgMS4zNjIgMy4yODIgMS4zNjIgNS4zMjR2NC44MjNjMCAxLjQ1LjYgMi4wODUgMS4xNjcgMi44Ny4yLjI4LjI0NC42MTQtLjAxLjgyM2wtMi4zNiAyLjA1Mi0uMDEtLjAxIiBmaWxsPSIjMjIxZjFmIi8+PC9zdmc+"
+              alt="Amazon"
+              width="90"
+              height="45"
+              style="
+                vertical-align: middle;
+                display: inline-block;
+                margin-right: 10px;
+                filter: brightness(0) invert(1);
+              "
+            />
+          </div>
+          <p>
+            © 2026 • Designed &amp; Developed by
+            <span>Abdul Rehman</span> • All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ==============================
+      // Daily Work Report
+      // ==============================
+
+      const form = document.getElementById("workForm");
+      const tableBody = document.getElementById("tableBody");
+
+      const date = document.getElementById("date");
+      const invoice = document.getElementById("invoice");
+      const submission = document.getElementById("submission");
+      const cases = document.getElementById("cases");
+      const reopen = document.getElementById("reopen");
+      const approval = document.getElementById("approval");
+      const ungate = document.getElementById("ungate");
+      const notes = document.getElementById("notes");
+      const blocker = document.getElementById("blocker");
+      const company = document.getElementById("company");
+      const copyListing = document.getElementById("copyListing");
+      const userName = document.getElementById("userName");
+
+      const searchFilter = document.getElementById("searchFilter");
+      const dateFilter = document.getElementById("dateFilter");
+
+      let workData = JSON.parse(localStorage.getItem("amazonWork")) || [];
+
+      // Load global blocker
+      if (blocker) {
+        blocker.value = localStorage.getItem("amazonBlocker") || "";
+      }
+      let editIndex = -1;
+      let totalInvoice = 0;
+      let totalSubmission = 0;
+      let totalCases = 0;
+      let totalReopen = 0;
+      let totalApproval = 0;
+      let totalUngate = 0;
+      let totalCopyListing = 0;
+
+      // Today's Date
+      date.valueAsDate = new Date();
+
+      // ==============================
+      // Save Data
+      // ==============================
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const obj = {
+          date: date.value,
+          userName: userName.value,
+          company: company.value,
+          invoice: Number(invoice.value) || 0,
+          submission: Number(submission.value) || 0,
+          cases: Number(cases.value) || 0,
+          reopen: Number(reopen.value) || 0,
+          approval: Number(approval.value) || 0,
+          ungate: Number(ungate.value) || 0,
+          copyListing: Number(copyListing.value) || 0,
+          notes: notes.value,
+        };
+
+        // Save global blocker on submit too
+        localStorage.setItem("amazonBlocker", blocker.value);
+
+        if (editIndex === -1) {
+          workData.push(obj);
+        } else {
+          workData[editIndex] = obj;
+
+          editIndex = -1;
+        }
+
+        localStorage.setItem("amazonWork", JSON.stringify(workData));
+
+        form.reset();
+
+        company.selectedIndex = 0;
+        //   workType.innerHTML = '<option value="">Select Company First</option>';
+
+        date.valueAsDate = new Date();
+        blocker.value = localStorage.getItem("amazonBlocker") || "";
+
+        loadData();
+        runAutoBackup();
+      });
+
+      // Preserve blocker on manual form resets
+      form.addEventListener("reset", function (e) {
+        setTimeout(() => {
+          blocker.value = localStorage.getItem("amazonBlocker") || "";
+        }, 0);
+      });
+
+      // Standalone blocker save function
+      window.saveBlocker = function () {
+        localStorage.setItem("amazonBlocker", blocker.value);
+        loadData();
+      };
+
+      // Clear blocker function
+      window.clearBlocker = function () {
+        blocker.value = "";
+        localStorage.removeItem("amazonBlocker");
+        loadData();
+      };
+
+      // ==============================
+      // Load Data
+      // ==============================
+
+      function loadData() {
+        tableBody.innerHTML = "";
+
+        totalInvoice = 0;
+        totalSubmission = 0;
+        totalCases = 0;
+        totalReopen = 0;
+        totalApproval = 0;
+        totalUngate = 0;
+        totalCopyListing = 0;
+
+        const searchQuery = searchFilter
+          ? searchFilter.value.toLowerCase().trim()
+          : "";
+        const filterDate = dateFilter ? dateFilter.value : "";
+
+        // Find duplicate indices (same company and date)
+        const duplicateIndices = new Set();
+        for (let i = 0; i < workData.length; i++) {
+          for (let j = i + 1; j < workData.length; j++) {
+            if (
+              workData[i].company &&
+              workData[i].date &&
+              workData[i].company === workData[j].company &&
+              workData[i].date === workData[j].date
+            ) {
+              duplicateIndices.add(i);
+              duplicateIndices.add(j);
+            }
+          }
+        }
+
+        // Show/hide duplicate warning alert
+        const duplicateAlert = document.getElementById("duplicateAlert");
+        if (duplicateAlert) {
+          if (duplicateIndices.size > 0) {
+            duplicateAlert.style.display = "flex";
+            const dupList = [];
+            duplicateIndices.forEach((idx) => {
+              const d = workData[idx];
+              const formattedD = new Date(d.date)
+                .toLocaleDateString("en-GB")
+                .replace(/\//g, "-");
+              const text = `<strong>${d.company}</strong> on <strong>${formattedD}</strong>`;
+              if (!dupList.includes(text)) {
+                dupList.push(text);
+              }
+            });
+            duplicateAlert.querySelector("span").innerHTML =
+              `<strong>Warning:</strong> Duplicate entries detected for ${dupList.join(", ")}. These rows are highlighted in red.`;
+          } else {
+            duplicateAlert.style.display = "none";
+          }
+        }
+
+        workData.forEach((item, index) => {
+          const matchesSearch =
+            !searchQuery ||
+            (item.userName &&
+              item.userName.toLowerCase().includes(searchQuery)) ||
+            (item.company && item.company.toLowerCase().includes(searchQuery));
+
+          const matchesDate = !filterDate || item.date === filterDate;
+
+          if (matchesSearch && matchesDate) {
+            totalInvoice += item.invoice;
+            totalSubmission += item.submission;
+            totalCases += item.cases;
+            totalReopen += item.reopen;
+            totalApproval += item.approval;
+            totalUngate += item.ungate;
+            totalCopyListing += item.copyListing;
+
+            const formattedDate = new Date(item.date)
+              .toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
+              })
+              .replace(/\//g, "-");
+
+            const isDuplicate = duplicateIndices.has(index);
+            const rowClass = isDuplicate ? 'class="duplicate-row"' : "";
+
+            tableBody.innerHTML += `
+              <tr ${rowClass}>
+                <td>${formattedDate}</td>
+                <td>${item.userName}</td>
+                <td>${item.company}</td>
+                <td>${item.invoice}</td>
+                <td>${item.submission}</td>
+                <td>${item.cases}</td>
+                <td>${item.reopen}</td>
+                <td>${item.approval}</td>
+                <td>${item.ungate}</td>
+                <td>${item.copyListing}</td>
+                <td>
+                  ${
+                    item.notes && item.notes.trim()
+                      ? `
+                  <button class="blocker-btn" type="button" onclick="showBlockerPopup('${item.notes.replace(/'/g, "\\'").replace(/\r?\n/g, "\\n")}')" title="View Notes">
+                    <i class="fa-regular fa-comment-dots"></i>
+                  </button>
+                  `
+                      : ""
+                  }
+                  <button class="edit-btn" onclick="editData(${index})">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="delete-btn" onclick="deleteData(${index})">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            `;
+          }
+        });
+
+        // Show/hide blocker alert (global blocker)
+        const blockerAlert = document.getElementById("blockerAlert");
+        if (blockerAlert) {
+          const blockerText = localStorage.getItem("amazonBlocker") || "";
+          if (blockerText.trim()) {
+            blockerAlert.style.display = "flex";
+            const truncated =
+              blockerText.trim().length > 80
+                ? blockerText.trim().substring(0, 80) + "..."
+                : blockerText.trim();
+            document.getElementById("blockerAlertText").innerHTML =
+              `<strong>Blocker:</strong> ${truncated}`;
+
+            document.getElementById("blockerAlertIcon").onclick = function () {
+              showBlockerPopup(blockerText.trim());
+            };
+          } else {
+            blockerAlert.style.display = "none";
+          }
+        }
+
+        const badge = document.getElementById("filterResultsBadge");
+        const visibleCount = tableBody.querySelectorAll("tr").length;
+        if (badge) {
+          const isFiltered = searchQuery || filterDate;
+          badge.textContent = isFiltered
+            ? `${visibleCount} of ${workData.length} records`
+            : `${workData.length} record${workData.length !== 1 ? "s" : ""}`;
+        }
+
+        document.getElementById("totalInvoices").innerText = totalInvoice;
+        document.getElementById("totalSubmission").innerText = totalSubmission;
+        document.getElementById("totalCases").innerText = totalCases;
+        document.getElementById("totalReopen").innerText = totalReopen;
+        document.getElementById("totalApproval").innerText = totalApproval;
+        document.getElementById("totalUngate").innerText = totalUngate;
+        document.getElementById("totalCopyListing").innerText =
+          totalCopyListing;
+      }
+
+      // ==============================
+      // Edit
+      // ==============================
+
+      function editData(index) {
+        const item = workData[index];
+
+        date.value = item.date;
+        userName.value = item.userName;
+        company.value = item.company;
+        invoice.value = item.invoice || "";
+        submission.value = item.submission || "";
+        cases.value = item.cases || "";
+        reopen.value = item.reopen || "";
+        approval.value = item.approval || "";
+        ungate.value = item.ungate || "";
+        copyListing.value = item.copyListing || "";
+        notes.value = item.notes || "";
+
+        editIndex = index;
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      // ==============================
+      // Delete
+      // ==============================
+
+      function deleteData(index) {
+        if (confirm("Delete this record?")) {
+          workData.splice(index, 1);
+
+          localStorage.setItem("amazonWork", JSON.stringify(workData));
+
+          loadData();
+          runAutoBackup();
+        }
+      }
+
+      // ==============================
+      // First Load
+      // ==============================
+
+      loadData();
+      runAutoBackup();
+
+      document
+        .getElementById("clearAll")
+        .addEventListener("click", function () {
+          if (
+            confirm(
+              "Are you sure you want to clear all work tracker data? This action cannot be undone.",
+            )
+          ) {
+            workData = [];
+            localStorage.removeItem("amazonWork");
+            localStorage.removeItem("amazonBlocker");
+            if (blocker) blocker.value = "";
+            loadData();
+            runAutoBackup();
+          }
+        });
+
+      document
+        .getElementById("downloadPdf")
+        .addEventListener("click", downloadPDF);
+
+      function downloadPDF(customData = null, customDateStr = null) {
+        const targetData =
+          customData &&
+          !(customData instanceof Event) &&
+          Array.isArray(customData)
+            ? customData
+            : workData;
+        const { jsPDF } = window.jspdf;
+
+        const doc = new jsPDF("landscape");
+
+        doc.setFontSize(18);
+        doc.text("Daily Work Report", 14, 18);
+
+        let reportDate = new Date();
+        if (customDateStr && typeof customDateStr === "string") {
+          const [yearStr, monthStr, dayStr] = customDateStr.split("-");
+          reportDate = new Date(
+            Number(yearStr),
+            Number(monthStr) - 1,
+            Number(dayStr),
+          );
+        } else if (targetData.length > 0 && targetData[0].date) {
+          const [yearStr, monthStr, dayStr] = targetData[0].date.split("-");
+          reportDate = new Date(
+            Number(yearStr),
+            Number(monthStr) - 1,
+            Number(dayStr),
+          );
+        }
+
+        const day = String(reportDate.getDate()).padStart(2, "0");
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        const month = monthNames[reportDate.getMonth()];
+        const year = reportDate.getFullYear();
+        const formattedDate = `${day} ${month}, ${year}`;
+
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const formattedHours = String(hours).padStart(2, "0");
+        const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
+
+        doc.setFontSize(11);
+        doc.text(`${formattedDate} at ${formattedTime}`, 14, 26);
+
+        const rows = [];
+        let sumInvoice = 0;
+        let sumSubmission = 0;
+        let sumCases = 0;
+        let sumReopen = 0;
+        let sumApproval = 0;
+        let sumUngate = 0;
+        let sumCopyListing = 0;
+
+        targetData.forEach((item) => {
+          sumInvoice += Number(item.invoice) || 0;
+          sumSubmission += Number(item.submission) || 0;
+          sumCases += Number(item.cases) || 0;
+          sumReopen += Number(item.reopen) || 0;
+          sumApproval += Number(item.approval) || 0;
+          sumUngate += Number(item.ungate) || 0;
+          sumCopyListing += Number(item.copyListing) || 0;
+
+          rows.push([
+            new Date(item.date)
+              .toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
+              })
+              .replace(/\//g, "-"),
+
+            item.userName || "-",
+
+            item.company,
+
+            item.invoice,
+
+            item.submission,
+
+            item.cases,
+
+            item.reopen,
+
+            item.approval,
+
+            item.ungate,
+
+            item.copyListing,
+          ]);
+        });
+
+        doc.autoTable({
+          startY: 34,
+
+          head: [
+            [
+              "Date",
+
+              "User",
+
+              "Company",
+
+              "Invoices",
+
+              "Submission",
+
+              "Cases",
+
+              "Reopen",
+
+              "Approval",
+
+              "Auto Ungate",
+
+              "Copy Listing",
+            ],
+          ],
+
+          body: rows,
+
+          theme: "grid",
+
+          styles: {
+            fontSize: 9,
+            halign: "center",
+          },
+
+          headStyles: {
+            fillColor: [30, 58, 138],
+          },
+        });
+
+        let y = doc.lastAutoTable.finalY + 12;
+        if (y + 65 > 210) {
+          doc.addPage();
+          y = 20;
+        }
+
+        // Draw a light gray background card for the summary list
+        doc.setFillColor(248, 250, 252); // Slate-50 background
+        doc.setDrawColor(226, 232, 240); // Slate-200 border
+        doc.setLineWidth(0.5);
+        doc.roundedRect(14, y, 110, 65, 2, 2, "FD");
+
+        // Top accent line in brand blue
+        doc.setFillColor(30, 58, 138);
+        doc.rect(14, y, 110, 3, "F");
+
+        // Section Title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(30, 58, 138);
+        doc.text("TOTAL SUMMARY", 20, y + 10);
+
+        // Underline divider
+        doc.setDrawColor(226, 232, 240);
+        doc.line(20, y + 13, 114, y + 13);
+
+        const summaryItems = [
+          { label: "Invoices Made", value: sumInvoice },
+          { label: "Submission", value: sumSubmission },
+          { label: "Cases Open", value: sumCases },
+          { label: "Reopen Cases", value: sumReopen },
+          { label: "Approval", value: sumApproval },
+          { label: "Auto Ungate", value: sumUngate },
+          { label: "Copy Listing", value: sumCopyListing },
+        ];
+
+        let itemY = y + 19;
+        summaryItems.forEach((item, index) => {
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9.5);
+          doc.setTextColor(71, 85, 105); // Slate-600
+          doc.text(item.label, 20, itemY);
+
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(15, 23, 42); // Slate-900
+          doc.text(String(item.value), 114, itemY, { align: "right" });
+
+          // Subtle divider line for all items except the last one
+          if (index < summaryItems.length - 1) {
+            doc.setDrawColor(241, 245, 249);
+            doc.line(20, itemY + 2.5, 114, itemY + 2.5);
+          }
+
+          itemY += 6.5;
+        });
+
+        // Gather blockers/notes for PDF (only show for current active view, not custom day reports)
+        const pdfBlockerText =
+          customData && !(customData instanceof Event)
+            ? ""
+            : localStorage.getItem("amazonBlocker") || "";
+
+        if (pdfBlockerText.trim()) {
+          // Draw a light blue background card for blockers on the right
+          doc.setFillColor(239, 246, 255); // Blue-50 background
+          doc.setDrawColor(219, 234, 254); // Blue-200 border
+          doc.setLineWidth(0.5);
+          doc.roundedRect(130, y, 153, 65, 2, 2, "FD");
+
+          // Top accent line in warning blue
+          doc.setFillColor(37, 99, 235); // Blue-600
+          doc.rect(130, y, 153, 3, "F");
+
+          // Section Title
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(12);
+          doc.setTextColor(30, 58, 138); // Dark blue text
+          doc.text("BLOCKERS", 136, y + 10);
+
+          // Underline divider
+          doc.setDrawColor(219, 234, 254);
+          doc.line(136, y + 13, 277, y + 13);
+
+          // Render notes list wrapped to width
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9);
+          doc.setTextColor(30, 41, 59); // Slate-800
+
+          let noteY = y + 19;
+          // Wrap text inside 140mm width
+          const splitNotes = doc.splitTextToSize(pdfBlockerText.trim(), 140);
+
+          for (let i = 0; i < splitNotes.length; i++) {
+            if (noteY > y + 60) {
+              doc.text("...", 136, noteY);
+              break;
+            }
+            doc.text(splitNotes[i], 136, noteY);
+            noteY += 5; // line height
+          }
+        }
+
+        const dateSuffix =
+          customDateStr && typeof customDateStr === "string"
+            ? new Date(customDateStr)
+                .toLocaleDateString("en-GB")
+                .replace(/\//g, "-")
+            : new Date().toLocaleDateString("en-GB").replace(/\//g, "-");
+        doc.save("Daily_Report_" + dateSuffix + ".pdf");
+      }
+
+      // Live Header Date & Time
+      function updateHeaderDateTime() {
+        const headerDateTime = document.getElementById("headerDateTime");
+        if (!headerDateTime) return;
+
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        };
+        const dateStr = now.toLocaleDateString("en-GB", options);
+
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const formattedHours = String(hours).padStart(2, "0");
+        const timeStr = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+
+        headerDateTime.innerHTML = `<i class="fa-regular fa-calendar-days"></i> ${dateStr} <span style="margin: 0 6px; opacity: 0.6;">•</span> <i class="fa-regular fa-clock"></i> ${timeStr}`;
+      }
+
+      if (searchFilter) searchFilter.addEventListener("input", loadData);
+      if (dateFilter) dateFilter.addEventListener("change", loadData);
+
+      const clearFiltersBtn = document.getElementById("clearFiltersBtn");
+      if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener("click", function () {
+          if (searchFilter) searchFilter.value = "";
+          if (dateFilter) dateFilter.value = "";
+          loadData();
+        });
+      }
+
+      updateHeaderDateTime();
+      setInterval(updateHeaderDateTime, 1000);
+
+      // Duplicate merge helper popups
+      let modalLang = "en";
+      window.showMergeInfoGlobal = function () {
+        // Reset to English when opening
+        modalLang = "en";
+        document.getElementById("modalMainText").innerHTML =
+          "Duplicate entries (same company and date) have been detected in the work history list.";
+        document.getElementById("modalTipText").innerHTML =
+          "<strong>How to resolve:</strong> You should merge these duplicate lists. Edit one list to add the counters together, and then delete the other duplicate list.";
+
+        const toggleBtn = document.getElementById("langToggleBtn");
+        if (toggleBtn) {
+          toggleBtn.setAttribute("title", "Translate to Urdu");
+        }
+
+        const mergeBtn = document.getElementById("modalMergeBtn");
+        if (mergeBtn)
+          mergeBtn.innerHTML =
+            '<i class="fa-solid fa-code-merge"></i> Merge Automatically';
+
+        document.getElementById("infoModal").style.display = "flex";
+      };
+
+      window.closeInfoModal = function () {
+        document.getElementById("infoModal").style.display = "none";
+      };
+
+      window.toggleModalLanguage = function () {
+        const mainText = document.getElementById("modalMainText");
+        const tipText = document.getElementById("modalTipText");
+        const toggleBtn = document.getElementById("langToggleBtn");
+        const mergeBtn = document.getElementById("modalMergeBtn");
+
+        if (modalLang === "en") {
+          mainText.innerHTML =
+            "Work history list mein aik hi company aur date ki aik se ziada (duplicate) entries mili hain.";
+          tipText.innerHTML =
+            "<strong>Hal kaise karein:</strong> Aap ko in dono lists ko merge karna chahiye. Kisi aik list ko edit karke saare numbers jama (add) kar lein, aur phir doosri duplicate list ko delete kar dein.";
+          if (toggleBtn)
+            toggleBtn.setAttribute("title", "Translate to English");
+          if (mergeBtn)
+            mergeBtn.innerHTML =
+              '<i class="fa-solid fa-code-merge"></i> Auto Merge Karein';
+          modalLang = "ur";
+        } else {
+          mainText.innerHTML =
+            "Duplicate entries (same company and date) have been detected in the work history list.";
+          tipText.innerHTML =
+            "<strong>How to resolve:</strong> You should merge these duplicate lists. Edit one list to add the counters together, and then delete the other duplicate list.";
+          if (toggleBtn) toggleBtn.setAttribute("title", "Translate to Urdu");
+          if (mergeBtn)
+            mergeBtn.innerHTML =
+              '<i class="fa-solid fa-code-merge"></i> Merge Automatically';
+          modalLang = "en";
+        }
+      };
+
+      window.autoMergeDuplicates = function () {
+        // if (!confirm("Are you sure you want to merge all duplicate entries? This will sum up all work counters for matching company/date records and keep a single merged record.")) {
+        //   return;
+        // }
+
+        const groups = {};
+        const mergedData = [];
+
+        workData.forEach((item) => {
+          const key = `${item.company.toLowerCase().trim()}_${item.date}`;
+          if (!groups[key]) {
+            groups[key] = [];
+          }
+          groups[key].push(item);
+        });
+
+        let mergeCount = 0;
+
+        for (const key in groups) {
+          const list = groups[key];
+          if (list.length > 1) {
+            mergeCount += list.length - 1;
+            const master = { ...list[0] };
+
+            for (let i = 1; i < list.length; i++) {
+              const other = list[i];
+              master.invoice = (master.invoice || 0) + (other.invoice || 0);
+              master.submission =
+                (master.submission || 0) + (other.submission || 0);
+              master.cases = (master.cases || 0) + (other.cases || 0);
+              master.reopen = (master.reopen || 0) + (other.reopen || 0);
+              master.approval = (master.approval || 0) + (other.approval || 0);
+              master.ungate = (master.ungate || 0) + (other.ungate || 0);
+              master.copyListing =
+                (master.copyListing || 0) + (other.copyListing || 0);
+
+              if (other.userName && other.userName !== master.userName) {
+                master.userName = master.userName
+                  ? `${master.userName}, ${other.userName}`
+                  : other.userName;
+              }
+
+              if (other.notes && other.notes.trim()) {
+                master.notes =
+                  master.notes && master.notes.trim()
+                    ? `${master.notes} | ${other.notes}`
+                    : other.notes;
+              }
+            }
+            mergedData.push(master);
+          } else {
+            mergedData.push(list[0]);
+          }
+        }
+
+        workData = mergedData;
+        localStorage.setItem("amazonWork", JSON.stringify(workData));
+        loadData();
+        closeInfoModal();
+        runAutoBackup();
+
+        alert(`Successfully merged ${mergeCount} duplicate entries!`);
+      };
+
+      // Blocker popup handlers
+      window.showBlockerPopup = function (text) {
+        document.getElementById("blockerModalText").textContent = text;
+        document.getElementById("blockerModal").style.display = "flex";
+      };
+
+      window.closeBlockerModal = function () {
+        document.getElementById("blockerModal").style.display = "none";
+      };
+
+      // ==============================
+      // Backup Management System
+      // ==============================
+
+      window.openBackupModal = function () {
+        loadBackupList();
+        document.getElementById("backupModal").style.display = "flex";
+      };
+
+      window.closeBackupModal = function () {
+        document.getElementById("backupModal").style.display = "none";
+      };
+
+      function runAutoBackup() {
+        const todayStr = new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD
+        let backups =
+          JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
+
+        // Find if backup for today already exists
+        const existingIndex = backups.findIndex((b) => b.date === todayStr);
+
+        if (existingIndex !== -1) {
+          // Update today's backup with the current state of workData
+          backups[existingIndex].data = JSON.parse(JSON.stringify(workData));
+          backups[existingIndex].timestamp = Date.now();
+        } else {
+          // Add today's backup
+          backups.push({
+            date: todayStr,
+            timestamp: Date.now(),
+            data: JSON.parse(JSON.stringify(workData)),
+          });
+        }
+
+        // Clean up backups older than 7 days
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() - 7);
+        cutoffDate.setHours(0, 0, 0, 0);
+
+        backups = backups.filter((b) => {
+          const bDate = new Date(b.date);
+          bDate.setHours(0, 0, 0, 0);
+          return bDate >= cutoffDate;
+        });
+
+        // Sort backups by date descending (latest first)
+        backups.sort((a, b) => b.date.localeCompare(a.date));
+
+        localStorage.setItem("amazonWorkBackups", JSON.stringify(backups));
+      }
+
+      window.manualBackup = function () {
+        runAutoBackup();
+        loadBackupList();
+        alert("Backup created successfully for today!");
+      };
+
+      function loadBackupList() {
+        const backups =
+          JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
+        const tbody = document.getElementById("backupListBody");
+        tbody.innerHTML = "";
+
+        if (backups.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="padding: 20px; color: #64748b; font-style: italic;">
+                No backups found. Backups are automatically created when saving work.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        backups.forEach((backup, idx) => {
+          const formattedDate = new Date(backup.date)
+            .toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })
+            .replace(/\//g, "-");
+
+          const backupTime = new Date(backup.timestamp).toLocaleTimeString(
+            "en-GB",
+            {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: true,
+            },
+          );
+
+          // Calculate totals for this backup
+          let bInvoices = 0;
+          let bSubmissions = 0;
+          backup.data.forEach((item) => {
+            bInvoices += Number(item.invoice) || 0;
+            bSubmissions += Number(item.submission) || 0;
+          });
+
+          tbody.innerHTML += `
+            <tr>
+              <td style="padding: 10px; font-weight: 600; color: #1e3a8a;">${formattedDate}</td>
+              <td style="padding: 10px; color: #64748b;">${backupTime}</td>
+              <td style="padding: 10px; font-weight: 500;">${backup.data.length}</td>
+              <td style="padding: 10px; color: #3b82f6; font-weight: 600;">${bInvoices}</td>
+              <td style="padding: 10px; color: #8b5cf6; font-weight: 600;">${bSubmissions}</td>
+              <td style="padding: 10px; white-space: nowrap;">
+                <button class="blocker-btn" style="padding: 6px 10px; font-size: 11px; margin: 0 2px;" onclick="restoreBackup(${idx})" title="Restore Data">
+                  <i class="fa-solid fa-clock-rotate-left"></i> Restore
+                </button>
+                <button class="save-btn" style="padding: 6px 10px; font-size: 11px; background: #10b981; margin: 0 2px;" onclick="downloadBackupPDF(${idx})" title="Download PDF of this day's records">
+                  <i class="fa-solid fa-file-pdf"></i> PDF
+                </button>
+                <button class="save-btn" style="padding: 6px 10px; font-size: 11px; background: #06b6d4; margin: 0 2px;" onclick="downloadBackupJSON(${idx})" title="Download JSON file">
+                  <i class="fa-solid fa-file-code"></i> JSON
+                </button>
+                <button class="delete-btn" style="padding: 6px 10px; font-size: 11px; margin: 0 2px;" onclick="deleteBackup(${idx})" title="Delete Backup">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      window.downloadBackupPDF = function (idx) {
+        const backups =
+          JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
+        const backup = backups[idx];
+        if (!backup) return;
+
+        // Filter backup records to only include those matching this backup's date
+        const dayData = backup.data.filter((item) => item.date === backup.date);
+
+        // If there are no records for that date, fall back to downloading all records in the snapshot
+        const targetData = dayData.length > 0 ? dayData : backup.data;
+        downloadPDF(targetData, backup.date);
+      };
+
+      window.downloadBackupJSON = function (idx) {
+        const backups =
+          JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
+        const backup = backups[idx];
+        if (!backup) return;
+
+        // Filter backup records to only include those matching this backup's date
+        const dayData = backup.data.filter((item) => item.date === backup.date);
+        const targetData = dayData.length > 0 ? dayData : backup.data;
+
+        const dataStr =
+          "data:text/json;charset=utf-8," +
+          encodeURIComponent(JSON.stringify(targetData, null, 2));
+        const downloadAnchor = document.createElement("a");
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute(
+          "download",
+          `Daily_Report_Backup_${backup.date}.json`,
+        );
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+      };
+
+      window.restoreBackup = function (idx) {
+        const backups =
+          JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
+        const backup = backups[idx];
+        if (!backup) return;
+
+        const formattedDate = new Date(backup.date)
+          .toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+          .replace(/\//g, "-");
+
+        if (
+          confirm(
+            `Are you sure you want to restore the backup from ${formattedDate}? This will replace your current work tracker records.`,
+          )
+        ) {
+          workData = JSON.parse(JSON.stringify(backup.data));
+          localStorage.setItem("amazonWork", JSON.stringify(workData));
+          loadData();
+          closeBackupModal();
+          alert("Backup restored successfully!");
+        }
+      };
+
+      window.deleteBackup = function (idx) {
+        const backups =
+          JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
+        if (!backups[idx]) return;
+
+        if (confirm("Are you sure you want to delete this backup entry?")) {
+          backups.splice(idx, 1);
+          localStorage.setItem("amazonWorkBackups", JSON.stringify(backups));
+          loadBackupList();
+        }
+      };
+
+      window.downloadScreenshot = function (
+        customData = null,
+        customDateStr = null,
+      ) {
+        const btn = document.getElementById("downloadImage");
+        const originalContent = btn.innerHTML;
+        btn.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+        btn.disabled = true;
+
+        const targetData =
+          customData &&
+          !(customData instanceof Event) &&
+          Array.isArray(customData)
+            ? customData
+            : workData;
+
+        // Calculate Date & Time similar to PDF
+        let reportDate = new Date();
+        if (customDateStr && typeof customDateStr === "string") {
+          const [yearStr, monthStr, dayStr] = customDateStr.split("-");
+          reportDate = new Date(
+            Number(yearStr),
+            Number(monthStr) - 1,
+            Number(dayStr),
+          );
+        } else if (targetData.length > 0 && targetData[0].date) {
+          const [yearStr, monthStr, dayStr] = targetData[0].date.split("-");
+          reportDate = new Date(
+            Number(yearStr),
+            Number(monthStr) - 1,
+            Number(dayStr),
+          );
+        }
+
+        const day = String(reportDate.getDate()).padStart(2, "0");
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        const month = monthNames[reportDate.getMonth()];
+        const year = reportDate.getFullYear();
+        const formattedDate = `${day} ${month}, ${year}`;
+
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const formattedHours = String(hours).padStart(2, "0");
+        const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
+        const reportTimeStr = `${formattedDate} at ${formattedTime}`;
+
+        // Calculate Totals
+        let sumInvoice = 0;
+        let sumSubmission = 0;
+        let sumCases = 0;
+        let sumReopen = 0;
+        let sumApproval = 0;
+        let sumUngate = 0;
+        let sumCopyListing = 0;
+
+        targetData.forEach((item) => {
+          sumInvoice += Number(item.invoice) || 0;
+          sumSubmission += Number(item.submission) || 0;
+          sumCases += Number(item.cases) || 0;
+          sumReopen += Number(item.reopen) || 0;
+          sumApproval += Number(item.approval) || 0;
+          sumUngate += Number(item.ungate) || 0;
+          sumCopyListing += Number(item.copyListing) || 0;
+        });
+
+        // Get Blocker Text
+        const blockerText =
+          customData && !(customData instanceof Event)
+            ? ""
+            : localStorage.getItem("amazonBlocker") || "";
+
+        // Create the off-screen template container
+        const container = document.createElement("div");
+        container.style.position = "absolute";
+        container.style.left = "-9999px";
+        container.style.top = "-9999px";
+        container.style.width = "1120px";
+        container.style.backgroundColor = "#ffffff";
+        container.style.padding = "40px";
+        container.style.fontFamily = "'Poppins', 'Helvetica', sans-serif";
+        container.style.boxSizing = "border-box";
+
+        // Title section
+        let html = `
+          <div style="margin-bottom: 25px;">
+            <h1 style="font-size: 26px; color: #1e293b; margin: 0; font-weight: 600;">Daily Work Report</h1>
+            <p style="font-size: 13px; color: #64748b; margin: 5px 0 0 0;">${reportTimeStr}</p>
+          </div>
+          
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 12px; text-align: center;">
+            <thead>
+              <tr style="background-color: #1e3a8a; color: #ffffff;">
+                <th style="padding: 10px font-weight: 600;">Date</th>
+                <th style="padding: 10px font-weight: 600;">User</th>
+                <th style="padding: 10px font-weight: 600;">Company</th>
+                <th style="padding: 10px font-weight: 600;">Invoices</th>
+                <th style="padding: 10px font-weight: 600;">Submission</th>
+                <th style="padding: 10px font-weight: 600;">Cases</th>
+                <th style="padding: 10px font-weight: 600;">Reopen</th>
+                <th style="padding: 10px font-weight: 600;">Approval</th>
+                <th style="padding: 10px font-weight: 600;">Auto Ungate</th>
+                <th style="padding: 10px font-weight: 600;">Copy Listing</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        // Render Table Rows
+        targetData.forEach((item, index) => {
+          const rowBg = index % 2 === 0 ? "#ffffff" : "#f8fafc";
+          const formattedRowDate = new Date(item.date)
+            .toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "2-digit",
+            })
+            .replace(/\//g, "-");
+
+          html += `
+            <tr style="background-color: ${rowBg}; color: #334155;">
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${formattedRowDate}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.userName || "-"}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 500;">${item.company}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.invoice}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.submission}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.cases}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.reopen}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.approval}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.ungate}</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.copyListing}</td>
+            </tr>
+          `;
+        });
+
+        html += `
+            </tbody>
+          </table>
+          
+          <div style="display: flex; gap: 30px; align-items: flex-start; justify-content: flex-start;">
+            <!-- Summary card -->
+            <div style="flex: 1; max-width: 450px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; border-top: 4px solid #1e3a8a; box-sizing: border-box; padding: 20px;">
+              <h2 style="font-size: 13px; color: #1e3a8a; margin: 0 0 15px 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">TOTAL SUMMARY</h2>
+              
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #475569;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
+                  <span>Invoices Made</span><span style="font-weight: 700; color: #0f172a;">${sumInvoice}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
+                  <span>Submission</span><span style="font-weight: 700; color: #0f172a;">${sumSubmission}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
+                  <span>Cases Open</span><span style="font-weight: 700; color: #0f172a;">${sumCases}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
+                  <span>Reopen Cases</span><span style="font-weight: 700; color: #0f172a;">${sumReopen}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
+                  <span>Approval</span><span style="font-weight: 700; color: #0f172a;">${sumApproval}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
+                  <span>Auto Ungate</span><span style="font-weight: 700; color: #0f172a;">${sumUngate}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding-bottom: 4px;">
+                  <span>Copy Listing</span><span style="font-weight: 700; color: #0f172a;">${sumCopyListing}</span>
+                </div>
+              </div>
+            </div>
+        `;
+
+        if (blockerText.trim()) {
+          html += `
+            <!-- Blocker card -->
+            <div style="flex: 1.3; background-color: #eff6ff; border: 1px solid #dbeafe; border-radius: 8px; border-top: 4px solid #2563eb; box-sizing: border-box; padding: 20px;">
+              <h2 style="font-size: 13px; color: #1e3a8a; margin: 0 0 15px 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #dbeafe; padding-bottom: 8px;">BLOCKERS</h2>
+              <p style="font-size: 12px; color: #1e40af; line-height: 1.6; white-space: pre-wrap; font-weight: 500; margin: 0;">${blockerText.trim()}</p>
+            </div>
+          `;
+        }
+
+        html += `
+          </div>
+        `;
+
+        container.innerHTML = html;
+        document.body.appendChild(container);
+
+        // Run html2canvas on the off-screen template element
+        html2canvas(container, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: "#ffffff",
+        })
+          .then((canvas) => {
+            // Remove temporary container
+            document.body.removeChild(container);
+
+            // Convert canvas to JPG image and download
+            const link = document.createElement("a");
+            const dateSuffix =
+              customDateStr && typeof customDateStr === "string"
+                ? new Date(customDateStr)
+                    .toLocaleDateString("en-GB")
+                    .replace(/\//g, "-")
+                : new Date().toLocaleDateString("en-GB").replace(/\//g, "-");
+
+            link.download = `Daily_Report_${dateSuffix}.jpg`;
+            link.href = canvas.toDataURL("image/jpeg", 0.95);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+          })
+          .catch((err) => {
+            if (document.body.contains(container)) {
+              document.body.removeChild(container);
+            }
+            btn.innerHTML = originalContent;
+            btn.disabled = false;
+            alert("Error generating image report: " + err.message);
+          });
+      };
+    </script>
+
+    <!-- Info Modal for Duplicates -->
+    <div id="infoModal" class="modal-overlay" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-circle-info"></i> Duplicate Entries</h3>
+          <div style="display: flex; align-items: center; gap: 15px">
+            <button
+              type="button"
+              class="translate-icon-btn"
+              id="langToggleBtn"
+              onclick="toggleModalLanguage()"
+              title="Translate to Urdu"
+            >
+              <i class="fa-solid fa-language"></i>
+            </button>
+            <button
+              type="button"
+              class="close-modal-btn"
+              onclick="closeInfoModal()"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p id="modalMainText">
+            Duplicate entries (same company and date) have been detected in the
+            work history list.
+          </p>
+          <div class="alert-tip">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span id="modalTipText"
+              ><strong>How to resolve:</strong> You should merge these duplicate
+              lists. Edit one list to add the counters together, and then delete
+              the other duplicate list.</span
+            >
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+          style="
+            justify-content: flex-end;
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            width: 100%;
+          "
+        >
+          <button
+            type="button"
+            class="merge-action-btn"
+            id="modalMergeBtn"
+            onclick="autoMergeDuplicates()"
+          >
+            <i class="fa-solid fa-code-merge"></i> Merge Automatically
+          </button>
+          <button type="button" class="modal-ok-btn" onclick="closeInfoModal()">
+            Got it
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blocker Modal -->
+    <div id="blockerModal" class="modal-overlay" style="display: none">
+      <div class="modal-content" style="border-left: 4px solid #3b82f6">
+        <div class="modal-header">
+          <h3 style="color: #1e40af">
+            <i class="fa-solid fa-circle-info"></i> Blocker / Notes Detail
+          </h3>
+          <button
+            type="button"
+            class="close-modal-btn"
+            onclick="closeBlockerModal()"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <p
+            id="blockerModalText"
+            style="white-space: pre-wrap; font-weight: 500"
+          ></p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="modal-ok-btn"
+            style="background: #1e40af"
+            onclick="closeBlockerModal()"
+          >
+            Got it
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backup History Modal -->
+    <div id="backupModal" class="modal-overlay" style="display: none">
+      <div
+        class="modal-content"
+        style="max-width: 800px; border-left: 4px solid #1e3a8a"
+      >
+        <div class="modal-header">
+          <h3>
+            <i class="fa-solid fa-database"></i> Backup History &amp; Restore
+          </h3>
+          <button
+            type="button"
+            class="close-modal-btn"
+            onclick="closeBackupModal()"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body" style="max-height: 400px; overflow-y: auto">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 20px;
+              background: #f8fafc;
+              padding: 12px 16px;
+              border-radius: 8px;
+              border: 1px solid #e2e8f0;
+              gap: 10px;
+              flex-wrap: wrap;
+            "
+          >
+            <div
+              style="
+                font-size: 13px;
+                color: #475569;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              "
+            >
+              <i class="fa-solid fa-circle-check" style="color: #10b981"></i>
+              <span>Auto-backup active. Last 7 days kept.</span>
+            </div>
+            <button
+              type="button"
+              class="save-btn"
+              style="
+                padding: 8px 14px;
+                font-size: 12px;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                margin: 0;
+              "
+              onclick="manualBackup()"
+            >
+              <i class="fa-solid fa-plus"></i> Backup Current Data
+            </button>
+          </div>
+          <div class="table-wrapper">
+            <table style="font-size: 13px; width: 100%">
+              <thead>
+                <tr>
+                  <th style="padding: 10px">Backup Date</th>
+                  <th style="padding: 10px">Time</th>
+                  <th style="padding: 10px">Records</th>
+                  <th style="padding: 10px">Invoices</th>
+                  <th style="padding: 10px">Submissions</th>
+                  <th style="padding: 10px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="backupListBody">
+                <!-- JS Data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer" style="margin-top: 10px">
+          <button
+            type="button"
+            class="modal-ok-btn"
+            onclick="closeBackupModal()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </body>
+</html>
