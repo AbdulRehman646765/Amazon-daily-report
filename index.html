@@ -9,6 +9,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
+    <!-- Google Font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
     <link
       rel="icon"
       type="image/svg+xml"
@@ -24,8 +29,87 @@
     />
 
     <style>
-      /* Google Font */
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+      :root {
+        --bg-main: #f4f7fc;
+        --color-text-main: #333333;
+        --bg-card: #ffffff;
+        --color-text-title: #64748b;
+        --color-text-value: #1e293b;
+        --bg-form-section: #ffffff;
+        --bg-form-col: #f8fafc;
+        --color-border: #e2e8f0;
+        --color-label: #475569;
+        --color-input-border: #cbd5e1;
+        --bg-input: #ffffff;
+        --color-input-text: #333333;
+        --bg-table-section: #ffffff;
+        --bg-table-even: #f9fbff;
+        --bg-table-hover: #eef4ff;
+        --color-table-border: #ececec;
+        --color-card-shadow: rgba(0, 0, 0, 0.05);
+        --color-section-shadow: rgba(0, 0, 0, 0.08);
+
+        --bg-alert-danger: #fef2f2;
+        --color-alert-danger: #991b1b;
+        --border-alert-danger: #fee2e2;
+        --bg-alert-info: #eff6ff;
+        --color-alert-info: #1e40af;
+        --border-alert-info: #dbeafe;
+
+        --bg-modal: #ffffff;
+        --color-modal-text: #334155;
+
+        /* Filters & Dynamic CSS elements */
+        --bg-filters: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+        --bg-table-header: #1e3a8a;
+        --bg-filter-badge: rgba(37, 99, 235, 0.07);
+        --color-filter-badge: #2563eb;
+        --border-filter-badge: #dbeafe;
+        --bg-scrollbar-track: #f8fafc;
+        --bg-scrollbar-thumb: #cbd5e1;
+        --bg-scrollbar-thumb-hover: #94a3b8;
+      }
+
+      body.dark-mode {
+        --bg-main: #0f172a;
+        --color-text-main: #e2e8f0;
+        --bg-card: #1e293b;
+        --color-text-title: #94a3b8;
+        --color-text-value: #f8fafc;
+        --bg-form-section: #1e293b;
+        --bg-form-col: #0f172a;
+        --color-border: #334155;
+        --color-label: #94a3b8;
+        --color-input-border: #475569;
+        --bg-input: #0f172a;
+        --color-input-text: #f1f5f9;
+        --bg-table-section: #1e293b;
+        --bg-table-even: #151f32;
+        --bg-table-hover: #27303f;
+        --color-table-border: #334155;
+        --color-card-shadow: rgba(0, 0, 0, 0.3);
+        --color-section-shadow: rgba(0, 0, 0, 0.4);
+
+        --bg-alert-danger: #450a0a;
+        --color-alert-danger: #fca5a5;
+        --border-alert-danger: #7f1d1d;
+        --bg-alert-info: #172554;
+        --color-alert-info: #93c5fd;
+        --border-alert-info: #1e3a8a;
+
+        --bg-modal: #1e293b;
+        --color-modal-text: #e2e8f0;
+
+        /* Filters & Dynamic CSS elements */
+        --bg-filters: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        --bg-table-header: #232f3e;
+        --bg-filter-badge: rgba(255, 153, 0, 0.15);
+        --color-filter-badge: #ff9900;
+        --border-filter-badge: rgba(255, 153, 0, 0.3);
+        --bg-scrollbar-track: #0f172a;
+        --bg-scrollbar-thumb: #475569;
+        --bg-scrollbar-thumb-hover: #64748b;
+      }
 
       * {
         margin: 0;
@@ -35,8 +119,11 @@
       }
 
       body {
-        background: #f4f7fc;
-        color: #333;
+        background: var(--bg-main);
+        color: var(--color-text-main);
+        transition:
+          background 0.3s,
+          color 0.3s;
       }
 
       /* Header */
@@ -139,18 +226,19 @@
       }
 
       .card {
-        background: #fff;
+        background: var(--bg-card);
         padding: 20px;
         border-radius: 12px;
         box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.05),
-          0 2px 4px -1px rgba(0, 0, 0, 0.03);
+          0 4px 6px -1px var(--color-card-shadow),
+          0 2px 4px -1px var(--color-card-shadow);
         display: flex;
         justify-content: space-between;
         align-items: center;
         transition:
           transform 0.3s,
-          box-shadow 0.3s;
+          box-shadow 0.3s,
+          background 0.3s;
         border-left: 4px solid #d1d5db;
       }
 
@@ -168,7 +256,7 @@
       }
 
       .card h3 {
-        color: #64748b;
+        color: var(--color-text-title);
         font-size: 11px;
         font-weight: 600;
         text-transform: uppercase;
@@ -179,7 +267,7 @@
       .card h2 {
         font-size: 28px;
         font-weight: 700;
-        color: #1e293b;
+        color: var(--color-text-value);
       }
 
       .card-icon {
@@ -254,16 +342,21 @@
 ====================== */
 
       .form-section {
-        background: #fff;
+        background: var(--bg-form-section);
         padding: 30px;
         border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 25px var(--color-section-shadow);
         margin-bottom: 35px;
+        transition: background 0.3s;
       }
 
       .form-section h2 {
         margin-bottom: 25px;
         color: #1e3a8a;
+      }
+
+      body.dark-mode .form-section h2 {
+        color: #ff9900;
       }
 
       .grouped-form {
@@ -274,17 +367,18 @@
       }
 
       .form-column {
-        background: #f8fafc;
+        background: var(--bg-form-col);
         padding: 20px;
         border-radius: 12px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--color-border);
+        transition: background 0.3s;
       }
 
       .form-group-title {
         font-size: 15px;
         color: #1e3a8a;
         margin-bottom: 18px;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid var(--color-border);
         padding-bottom: 8px;
         display: flex;
         align-items: center;
@@ -292,6 +386,10 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+      }
+
+      body.dark-mode .form-group-title {
+        color: #ff9900;
       }
 
       .input-grid {
@@ -310,7 +408,7 @@
         margin-bottom: 8px;
         font-weight: 500;
         font-size: 14px;
-        color: #475569;
+        color: var(--color-label);
       }
 
       .input-wrapper {
@@ -332,17 +430,45 @@
         top: 14px;
       }
 
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 16px;
+        padding-right: 40px !important;
+        cursor: pointer;
+      }
+
+      body.dark-mode select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff9900' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+      }
+
       .input-wrapper input,
-      .input-wrapper select,
       .input-wrapper textarea {
         padding: 12px 15px 12px 38px !important;
-        border: 1px solid #cbd5e1;
+        border: 1px solid var(--color-input-border);
         border-radius: 10px;
         outline: none;
         font-size: 14px;
         transition: 0.3s;
         width: 100%;
-        background: #fff;
+        background: var(--bg-input);
+        color: var(--color-input-text);
+      }
+
+      .input-wrapper select {
+        padding: 12px 40px 12px 38px !important;
+        border: 1px solid var(--color-input-border);
+        border-radius: 10px;
+        outline: none;
+        font-size: 14px;
+        transition: 0.3s;
+        width: 100%;
+        background-color: var(--bg-input);
+        color: var(--color-input-text);
       }
 
       .input-wrapper input:focus,
@@ -404,10 +530,11 @@
 ====================== */
 
       .table-section {
-        background: white;
+        background: var(--bg-table-section);
         padding: 30px;
         border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 25px var(--color-section-shadow);
+        transition: background 0.3s;
       }
 
       .table-filters {
@@ -415,10 +542,10 @@
         flex-direction: column;
         gap: 12px;
         margin-bottom: 20px;
-        background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+        background: var(--bg-filters);
         padding: 16px 20px;
         border-radius: 12px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--color-border);
         box-shadow: 0 2px 8px rgba(30, 58, 138, 0.06);
       }
 
@@ -432,7 +559,7 @@
       .filter-title {
         font-size: 12px;
         font-weight: 700;
-        color: #64748b;
+        color: var(--color-label);
         text-transform: uppercase;
         letter-spacing: 0.8px;
         display: flex;
@@ -441,15 +568,15 @@
       }
 
       .filter-title i {
-        color: #2563eb;
+        color: var(--color-filter-badge);
       }
 
       .filter-results-badge {
         font-size: 11px;
         font-weight: 600;
-        color: #2563eb;
-        background: rgba(37, 99, 235, 0.08);
-        border: 1px solid rgba(37, 99, 235, 0.2);
+        color: var(--color-filter-badge);
+        background: var(--bg-filter-badge);
+        border: 1px solid var(--border-filter-badge);
         padding: 3px 10px;
         border-radius: 20px;
       }
@@ -476,10 +603,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(37, 99, 235, 0.07);
-        border-right: 1px solid #dbeafe;
+        background: var(--bg-filter-badge);
+        border-right: 1px solid var(--color-border);
         border-radius: 10px 0 0 10px;
-        color: #2563eb;
+        color: var(--color-filter-badge);
         font-size: 14px;
         pointer-events: none;
       }
@@ -487,30 +614,31 @@
       .filter-group input {
         width: 100%;
         padding: 11px 14px 11px 50px;
-        border: 1.5px solid #e2e8f0;
+        border: 1.5px solid var(--color-input-border);
         border-radius: 10px;
         font-size: 14px;
         outline: none;
         transition: all 0.25s;
-        background: #fff;
-        color: #334155;
+        background: var(--bg-input);
+        color: var(--color-input-text);
         font-family: inherit;
       }
 
       .filter-group input::placeholder {
-        color: #94a3b8;
+        color: var(--color-label);
+        opacity: 0.6;
       }
 
       .filter-group input:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-        background: #fff;
+        border-color: var(--color-filter-badge);
+        box-shadow: 0 0 0 3px var(--border-filter-badge);
+        background: var(--bg-input);
       }
 
       .filter-clear-btn {
         background: none;
-        border: 1.5px solid #e2e8f0;
-        color: #64748b;
+        border: 1.5px solid var(--color-input-border);
+        color: var(--color-label);
         padding: 10px 16px;
         border-radius: 10px;
         font-size: 13px;
@@ -524,14 +652,18 @@
       }
 
       .filter-clear-btn:hover {
-        background: #fee2e2;
-        border-color: #ef4444;
-        color: #ef4444;
+        background: var(--bg-alert-danger);
+        border-color: var(--border-alert-danger);
+        color: var(--color-alert-danger);
       }
 
       .table-section h2 {
         margin-bottom: 20px;
         color: #1e3a8a;
+      }
+
+      body.dark-mode .table-section h2 {
+        color: #ff9900;
       }
 
       .table-wrapper {
@@ -544,8 +676,9 @@
       }
 
       thead {
-        background: #1e3a8a;
+        background: var(--bg-table-header);
         color: white;
+        transition: background 0.3s;
       }
 
       th,
@@ -556,15 +689,15 @@
       }
 
       tbody tr {
-        border-bottom: 1px solid #ececec;
+        border-bottom: 1px solid var(--color-table-border);
       }
 
       tbody tr:nth-child(even) {
-        background: #f9fbff;
+        background: var(--bg-table-even);
       }
 
       tbody tr:hover {
-        background: #eef4ff;
+        background: var(--bg-table-hover);
       }
 
       /* Action Buttons */
@@ -593,20 +726,20 @@
 
       .input-group select {
         width: 100%;
-        padding: 12px 15px;
-        border: 1px solid #d6d6d6;
+        padding: 12px 40px 12px 39px !important;
+        border: 1px solid var(--color-input-border);
         border-radius: 10px;
         outline: none;
         font-size: 15px;
-        background: #fff;
-        color: #333;
+        background-color: var(--bg-input);
+        color: var(--color-input-text);
         cursor: pointer;
         transition: 0.3s;
       }
 
       .input-group select:focus {
         border-color: #2563eb;
-        box-shadow: 0 0 8px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
       }
 
       /* ======================
@@ -686,17 +819,17 @@
       }
 
       .table-wrapper::-webkit-scrollbar-track {
-        background: #f8fafc;
+        background: var(--bg-scrollbar-track);
         border-radius: 3px;
       }
 
       .table-wrapper::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
+        background: var(--bg-scrollbar-thumb);
         border-radius: 3px;
       }
 
       .table-wrapper::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
+        background: var(--bg-scrollbar-thumb-hover);
       }
 
       /* ======================
@@ -871,21 +1004,21 @@
 
       /* Duplicate Row Styling */
       tbody tr.duplicate-row {
-        background-color: #fef2f2 !important;
+        background-color: var(--bg-alert-danger) !important;
       }
       tbody tr.duplicate-row td {
-        color: #991b1b !important;
+        color: var(--color-alert-danger) !important;
       }
       tbody tr.duplicate-row:hover {
-        background-color: #fee2e2 !important;
+        background-color: var(--border-alert-danger) !important;
       }
 
       /* Error Alert Styling */
       .alert-danger {
-        background-color: #fef2f2;
-        border: 1px solid #fee2e2;
+        background-color: var(--bg-alert-danger);
+        border: 1px solid var(--border-alert-danger);
         border-left: 4px solid #ef4444;
-        color: #991b1b;
+        color: var(--color-alert-danger);
         padding: 12px 16px;
         border-radius: 8px;
         margin-bottom: 20px;
@@ -925,17 +1058,18 @@
       }
 
       .modal-content {
-        background: #fff;
+        background: var(--bg-modal);
         border-radius: 16px;
         width: 90%;
         max-width: 450px;
         box-shadow:
-          0 20px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+          0 20px 25px -5px rgba(0, 0, 0, 0.25),
+          0 10px 10px -5px rgba(0, 0, 0, 0.1);
         padding: 24px;
         position: relative;
         animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         text-align: left;
+        transition: background 0.3s;
       }
 
       @keyframes slideUp {
@@ -966,6 +1100,10 @@
         margin: 0;
       }
 
+      body.dark-mode .modal-header h3 {
+        color: #ff9900;
+      }
+
       .close-modal-btn {
         background: none;
         border: none;
@@ -980,35 +1118,202 @@
         color: #ef4444;
       }
 
+      .settings-tab:hover {
+        background: rgba(255, 153, 0, 0.05) !important;
+        color: #ff9900 !important;
+      }
+
+      #darkModeToggle:checked + #darkModeSlider {
+        background-color: #10b981 !important;
+      }
+
+      #darkModeToggle:checked + #darkModeSlider span {
+        left: 27px !important;
+      }
+
       .modal-body {
-        color: #334155;
+        color: var(--color-modal-text);
         font-size: 14px;
         line-height: 1.6;
         margin-bottom: 20px;
       }
 
       .alert-tip {
-        background: #eff6ff;
-        border-left: 4px solid #3b82f6;
+        background: var(--bg-alert-info);
+        border-left: 4px solid var(--color-filter-badge);
         padding: 12px 16px;
         border-radius: 8px;
         margin-top: 15px;
         display: flex;
         gap: 10px;
         align-items: flex-start;
-        color: #1e3a8a;
+        color: var(--color-alert-info);
         text-align: left;
       }
 
       .alert-tip i {
         margin-top: 3px;
-        color: #3b82f6;
+        color: var(--color-filter-badge);
         font-size: 16px;
       }
 
       .modal-footer {
         display: flex;
         justify-content: flex-end;
+      }
+
+      /* ====================== Import Modal ====================== */
+      .import-drop-zone {
+        border: 2.5px dashed var(--color-input-border);
+        border-radius: 12px;
+        padding: 28px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.25s;
+        background: var(--bg-form-col);
+        position: relative;
+      }
+      .import-drop-zone:hover,
+      .import-drop-zone.drag-over {
+        border-color: #ff9900;
+        background: rgba(255, 153, 0, 0.05);
+      }
+      .import-drop-zone .drop-icon {
+        font-size: 36px;
+        color: #ff9900;
+        margin-bottom: 10px;
+        display: block;
+        transition: transform 0.2s;
+      }
+      .import-drop-zone:hover .drop-icon {
+        transform: translateY(-4px);
+      }
+      .import-drop-zone p {
+        font-size: 13px;
+        color: var(--color-label);
+        margin: 0;
+      }
+      .import-drop-zone strong {
+        color: #ff9900;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .import-preview-box {
+        background: var(--bg-form-col);
+        border: 1.5px solid var(--color-border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-top: 14px;
+        font-size: 13px;
+        display: none;
+        animation: fadeInUp 0.3s ease;
+      }
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .import-preview-box .preview-title {
+        font-weight: 700;
+        color: var(--color-text-value);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .preview-stat {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-label);
+      }
+      .preview-stat:last-child { border-bottom: none; }
+      .preview-stat span:last-child {
+        font-weight: 600;
+        color: var(--color-text-value);
+      }
+      .import-action-btn {
+        padding: 9px 18px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.22s;
+      }
+      .import-action-btn.btn-merge {
+        background: #10b981;
+        color: #fff;
+      }
+      .import-action-btn.btn-merge:hover {
+        background: #059669;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+        transform: translateY(-1px);
+      }
+      .import-action-btn.btn-overwrite {
+        background: #ef4444;
+        color: #fff;
+      }
+      .import-action-btn.btn-overwrite:hover {
+        background: #dc2626;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+        transform: translateY(-1px);
+      }
+      .import-action-btn.btn-cancel-import {
+        background: var(--bg-form-col);
+        color: var(--color-label);
+        border: 1.5px solid var(--color-border);
+      }
+      .import-action-btn.btn-cancel-import:hover {
+        background: var(--color-border);
+      }
+      .import-warning-box {
+        background: #fef2f2;
+        border: 1.5px solid #fee2e2;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 12px;
+        color: #991b1b;
+        display: none;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 12px;
+        animation: fadeInUp 0.25s ease;
+      }
+      body.dark-mode .import-warning-box {
+        background: #450a0a;
+        border-color: #7f1d1d;
+        color: #fca5a5;
+      }
+      .import-success-toast {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        background: #10b981;
+        color: #fff;
+        padding: 13px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        z-index: 9999;
+        animation: toastSlideIn 0.35s ease, toastFadeOut 0.4s ease 2.8s forwards;
+        pointer-events: none;
+      }
+      @keyframes toastSlideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes toastFadeOut {
+        from { opacity: 1; }
+        to   { opacity: 0; }
       }
 
       .translate-icon-btn {
@@ -1031,7 +1336,7 @@
       }
 
       .modal-ok-btn {
-        background: #1e3a8a;
+        background: #232f3e;
         color: white;
         border: none;
         padding: 8px 20px;
@@ -1042,8 +1347,19 @@
       }
 
       .modal-ok-btn:hover {
-        background: #1e40af;
-        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+        background: #131a22;
+        box-shadow: 0 4px 12px rgba(19, 26, 34, 0.25);
+      }
+
+      body.dark-mode .modal-ok-btn {
+        background: #ff9900;
+        color: #111;
+        font-weight: 700;
+      }
+
+      body.dark-mode .modal-ok-btn:hover {
+        background: #ffad33;
+        box-shadow: 0 4px 12px rgba(255, 153, 0, 0.35);
       }
 
       /* Duplicate Info Icon Styling */
@@ -1085,10 +1401,10 @@
 
       /* Blocker Alert Styling */
       .alert-info {
-        background-color: #eff6ff;
-        border: 1px solid #dbeafe;
+        background-color: var(--bg-alert-info);
+        border: 1px solid var(--border-alert-info);
         border-left: 4px solid #3b82f6;
-        color: #1e40af;
+        color: var(--color-alert-info);
         padding: 12px 16px;
         border-radius: 8px;
         margin-bottom: 20px;
@@ -1318,71 +1634,48 @@
       .footer {
         width: 95%;
         max-width: 1500px;
-
         margin: 35px auto 20px;
-
         background: linear-gradient(135deg, #232f3e, #131a22);
-
         border-top: 4px solid #ff9900;
-
         border-radius: 16px;
-
         padding: 22px 30px;
-
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-
         color: #fff;
       }
 
       .footer-inner {
         display: flex;
-
         justify-content: space-between;
-
         align-items: center;
-
         flex-wrap: wrap;
-
         gap: 15px;
       }
 
       .footer-logo {
         display: flex;
-
         align-items: center;
-
         gap: 12px;
       }
 
       .footer-logo-tag {
         background: #ff9900;
-
         color: #111;
-
         font-size: 11px;
-
         font-weight: 700;
-
         padding: 5px 12px;
-
         border-radius: 20px;
-
         letter-spacing: 1px;
-
         text-transform: uppercase;
       }
 
       .footer p {
         margin: 0;
-
         font-size: 14px;
-
         color: #e5e7eb;
       }
 
       .footer p span {
         color: #ff9900;
-
         font-weight: 700;
       }
 
@@ -1418,6 +1711,14 @@
         </div>
         <div class="header-right">
           <button
+            id="settingsBtn"
+            class="header-action-btn"
+            onclick="openSettingsModal()"
+            type="button"
+          >
+            <i class="fa-solid fa-gear"></i> Settings
+          </button>
+          <button
             id="backupBtn"
             class="header-action-btn"
             onclick="openBackupModal()"
@@ -1434,77 +1735,9 @@
     </header>
 
     <div class="container">
-      <!-- Dashboard Cards -->
-      <section class="cards">
-        <div class="card card-invoices">
-          <div class="card-info">
-            <h3>Invoices Made</h3>
-            <h2 id="totalInvoices">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-file-invoice"></i>
-          </div>
-        </div>
-
-        <div class="card card-submission">
-          <div class="card-info">
-            <h3>Submission</h3>
-            <h2 id="totalSubmission">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-paper-plane"></i>
-          </div>
-        </div>
-
-        <div class="card card-cases">
-          <div class="card-info">
-            <h3>Cases Open</h3>
-            <h2 id="totalCases">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-folder-open"></i>
-          </div>
-        </div>
-
-        <div class="card card-reopen">
-          <div class="card-info">
-            <h3>Reopen Cases</h3>
-            <h2 id="totalReopen">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-rotate"></i>
-          </div>
-        </div>
-
-        <div class="card card-approval">
-          <div class="card-info">
-            <h3>Approval</h3>
-            <h2 id="totalApproval">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-circle-check"></i>
-          </div>
-        </div>
-
-        <div class="card card-ungate">
-          <div class="card-info">
-            <h3>Auto Ungate</h3>
-            <h2 id="totalUngate">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-bolt"></i>
-          </div>
-        </div>
-
-        <div class="card card-copy">
-          <div class="card-info">
-            <h3>Copy Listing</h3>
-            <h2 id="totalCopyListing">0</h2>
-          </div>
-          <div class="card-icon">
-            <i class="fa-solid fa-copy"></i>
-          </div>
-        </div>
+      <!-- Dashboard Cards (Dynamic) -->
+      <section class="cards" id="dashboardCards">
+        <!-- Rendered by JS renderDashboard() -->
       </section>
 
       <!-- Form -->
@@ -1530,44 +1763,48 @@
               <label>User Name</label>
               <div class="input-wrapper">
                 <i class="fa-regular fa-user input-icon"></i>
-                <input
-                  type="text"
-                  id="userName"
-                  list="userList"
-                  placeholder="Select or type user name"
-                  required
-                />
-                <datalist id="userList">
-                  <option value="Ashir"></option>
-                  <option value="Abdul Rehman"></option>
-                  <option value="Mehmood"></option>
-                </datalist>
+                <select id="userName" required>
+                  <option value="">Select User</option>
+                </select>
               </div>
             </div>
 
             <div class="input-group">
-              <label>Select Company</label>
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 8px;
+                "
+              >
+                <label style="margin-bottom: 0">Select Company</label>
+                <button
+                  type="button"
+                  onclick="openCompanyModal()"
+                  style="
+                    background: none;
+                    border: none;
+                    color: #ff9900;
+                    font-size: 13px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    padding: 0;
+                    transition: color 0.2s;
+                  "
+                  onmouseover="this.style.color = '#ffad33'"
+                  onmouseout="this.style.color = '#ff9900'"
+                >
+                  <i class="fa-solid fa-gear"></i> Manage
+                </button>
+              </div>
               <div class="input-wrapper">
                 <i class="fa-regular fa-building input-icon"></i>
                 <select id="company" required>
                   <option value="">Select Company</option>
-                  <option>Good Choice</option>
-                  <option>OaksMax Inc</option>
-                  <option>OCEANPATH LLC</option>
-                  <option>ValueVault Inc</option>
-                  <option>Amer Canada Inc.</option>
-                  <option>Cornercart Inc.</option>
-                  <option>HBinnovate</option>
-                  <option>URBAN BAZAAR PTY LTD</option>
-                  <option>BUBH Trading Corp.</option>
-                  <option>Bzable Corporation Inc.</option>
-                  <option>Primeshopes Inc.</option>
-                  <option>KDOT STORE</option>
-                  <option>IR Tech</option>
-                  <option>POLAR HORIZON</option>
-                  <option>9teen Trades Inc</option>
-                  <option>BoldBuy Hub Inc</option>
-                  <option>Eblitz Enterprises Inc.</option>
                 </select>
               </div>
             </div>
@@ -1597,62 +1834,9 @@
             <h3 class="form-group-title">
               <i class="fa-solid fa-chart-line"></i> Work Counters
             </h3>
-            <div class="input-grid">
-              <div class="input-group">
-                <label>Invoices Made</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-file-invoice input-icon"></i>
-                  <input type="number" id="invoice" placeholder="0" />
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label>Submission</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-paper-plane input-icon"></i>
-                  <input type="number" id="submission" placeholder="0" />
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label>Cases Open</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-folder-open input-icon"></i>
-                  <input type="number" id="cases" placeholder="0" />
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label>Reopen Cases</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-rotate input-icon"></i>
-                  <input type="number" id="reopen" placeholder="0" />
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label>Approval (Ungated)</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-circle-check input-icon"></i>
-                  <input type="number" id="approval" placeholder="0" />
-                </div>
-              </div>
-
-              <div class="input-group">
-                <label>Auto Ungate</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-bolt input-icon"></i>
-                  <input type="number" id="ungate" placeholder="0" />
-                </div>
-              </div>
-
-              <div class="input-group" style="margin-bottom: 0">
-                <label>Copy Listing</label>
-                <div class="input-wrapper">
-                  <i class="fa-solid fa-copy input-icon"></i>
-                  <input type="number" id="copyListing" placeholder="0" />
-                </div>
-              </div>
+            <!-- Work Counters (Dynamic) -->
+            <div class="input-grid" id="formCountersGrid">
+              <!-- Rendered by JS renderFormCounters() -->
             </div>
 
             <!-- Global Day Work Blocker -->
@@ -1841,20 +2025,8 @@
 
         <div class="table-wrapper">
           <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>User</th>
-                <th>Company</th>
-                <th>Invoices</th>
-                <th>Submission</th>
-                <th>Cases</th>
-                <th>Reopen</th>
-                <th>Approval</th>
-                <th>Auto Ungate</th>
-                <th>Copy Listing</th>
-                <th>Action</th>
-              </tr>
+            <thead id="tableHead">
+              <!-- Rendered dynamically by JS renderTableHeader() -->
             </thead>
 
             <tbody id="tableBody">
@@ -1897,52 +2069,1761 @@
       </div>
     </footer>
 
-    <script>
-      // ==============================
-      // Daily Work Report
-      // ==============================
+    <!-- ============================================================
+         SETTINGS MODAL
+    ============================================================ -->
+    <div id="settingsModal" class="modal-overlay" style="display: none">
+      <div
+        class="modal-content"
+        style="
+          max-width: 680px;
+          width: 95%;
+          padding: 0;
+          overflow: hidden;
+          border-top: 4px solid #ff9900;
+        "
+      >
+        <!-- Modal Header -->
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--bg-form-col);
+          "
+        >
+          <h3
+            style="
+              color: #ff9900;
+              font-size: 18px;
+              font-weight: 700;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              margin: 0;
+            "
+          >
+            <i class="fa-solid fa-gear"></i> App Settings
+          </h3>
+          <button
+            type="button"
+            class="close-modal-btn"
+            onclick="closeSettingsModal()"
+          >
+            &times;
+          </button>
+        </div>
 
+        <!-- Tabs -->
+        <div
+          style="
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--bg-form-col);
+          "
+        >
+          <button
+            type="button"
+            class="settings-tab active"
+            id="tab-users"
+            onclick="switchSettingsTab('users')"
+            style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: #ff9900;
+              border-bottom: 2px solid #ff9900;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+          >
+            <i class="fa-solid fa-users"></i><br />Team / Users
+          </button>
+          <button
+            type="button"
+            class="settings-tab"
+            id="tab-counters"
+            onclick="switchSettingsTab('counters')"
+            style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+          >
+            <i class="fa-solid fa-chart-bar"></i><br />Work Counters
+          </button>
+          <button
+            type="button"
+            class="settings-tab"
+            id="tab-appearance"
+            onclick="switchSettingsTab('appearance')"
+            style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+          >
+            <i class="fa-solid fa-palette"></i><br />Appearance
+          </button>
+          <button
+            type="button"
+            class="settings-tab"
+            id="tab-guide"
+            onclick="switchSettingsTab('guide')"
+            style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+          >
+            <i class="fa-solid fa-circle-question"></i><br />User Guide
+          </button>
+        </div>
+
+        <!-- Tab Bodies -->
+        <div
+          style="
+            padding: 22px 24px;
+            max-height: 420px;
+            overflow-y: auto;
+            background: var(--bg-modal);
+          "
+        >
+          <!-- USERS TAB -->
+          <div id="settingsPanel-users">
+            <p
+              style="
+                font-size: 12px;
+                color: var(--color-label);
+                margin-bottom: 14px;
+              "
+            >
+              Manage your team members. The <strong>default user</strong> will
+              auto-fill in the form on load.
+            </p>
+            <div style="display: flex; gap: 8px; margin-bottom: 16px">
+              <input
+                type="text"
+                id="newUserName"
+                placeholder="Type new team member name..."
+                style="
+                  flex: 1;
+                  padding: 10px 12px;
+                  border: 1.5px solid var(--color-input-border);
+                  border-radius: 8px;
+                  font-size: 13px;
+                  outline: none;
+                  background: var(--bg-input);
+                  color: var(--color-input-text);
+                "
+                onfocus="this.style.borderColor = '#ff9900'"
+                onblur="this.style.borderColor = ''"
+              />
+              <button
+                type="button"
+                class="save-btn"
+                style="
+                  padding: 10px 16px;
+                  font-size: 13px;
+                  margin: 0;
+                  background: #ff9900;
+                  color: #111;
+                  font-weight: 700;
+                "
+                onclick="addUser()"
+              >
+                Add
+              </button>
+            </div>
+            <div
+              style="
+                margin-bottom: 14px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex-wrap: wrap;
+              "
+            >
+              <label
+                style="
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--color-label);
+                  white-space: nowrap;
+                "
+                >Default User:</label
+              >
+              <select
+                id="defaultUserSelect"
+                onchange="saveDefaultUser()"
+                style="
+                  flex: 1;
+                  padding: 8px 32px 8px 12px !important;
+                  border: 1.5px solid var(--color-input-border);
+                  border-radius: 8px;
+                  font-size: 13px;
+                  outline: none;
+                  background: var(--bg-input);
+                  color: var(--color-input-text);
+                "
+              ></select>
+            </div>
+            <div
+              id="userListWrapper"
+              style="
+                border: 1.5px solid var(--color-border);
+                border-radius: 10px;
+                background: var(--bg-form-col);
+                overflow: hidden;
+                max-height: 200px;
+                overflow-y: auto;
+              "
+            >
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <!-- COUNTERS TAB -->
+          <div id="settingsPanel-counters" style="display: none">
+            <p
+              style="
+                font-size: 12px;
+                color: var(--color-label);
+                margin-bottom: 14px;
+              "
+            >
+              Toggle visibility of built-in counters. Add custom counters that
+              appear in the form, dashboard and table.
+            </p>
+            <div
+              id="counterToggleList"
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 18px;
+              "
+            >
+              <!-- rendered by JS -->
+            </div>
+            <div
+              style="
+                border-top: 1px solid var(--color-border);
+                padding-top: 16px;
+              "
+            >
+              <p
+                style="
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: var(--color-label);
+                  margin-bottom: 10px;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                "
+              >
+                Add Custom Counter
+              </p>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                <input
+                  type="text"
+                  id="customCounterLabel"
+                  placeholder="Label (e.g. Sourcing)"
+                  style="
+                    flex: 1;
+                    min-width: 120px;
+                    padding: 9px 12px;
+                    border: 1.5px solid var(--color-input-border);
+                    border-radius: 8px;
+                    font-size: 13px;
+                    outline: none;
+                    background: var(--bg-input);
+                    color: var(--color-input-text);
+                  "
+                  onfocus="this.style.borderColor = '#ff9900'"
+                  onblur="this.style.borderColor = ''"
+                />
+                <select
+                  id="customCounterIcon"
+                  style="
+                    flex: 1;
+                    min-width: 120px;
+                    padding: 9px 32px 9px 12px !important;
+                    border: 1.5px solid var(--color-input-border);
+                    border-radius: 8px;
+                    font-size: 13px;
+                    outline: none;
+                    background: var(--bg-input);
+                    color: var(--color-input-text);
+                  "
+                  onfocus="this.style.borderColor = '#ff9900'"
+                  onblur="this.style.borderColor = ''"
+                >
+                  <option value="fa-solid fa-star">⭐ Star</option>
+                  <option value="fa-solid fa-circle-check">
+                    ✅ Check/Completed
+                  </option>
+                  <option value="fa-solid fa-gear">⚙️ Gear/Settings</option>
+                  <option value="fa-solid fa-envelope">✉️ Email/Message</option>
+                  <option value="fa-solid fa-phone">📞 Phone/Call</option>
+                  <option value="fa-solid fa-cart-shopping">
+                    🛒 Sourcing/Cart
+                  </option>
+                  <option value="fa-solid fa-box">📦 Package/Box</option>
+                  <option value="fa-solid fa-truck">🚚 Delivery/Truck</option>
+                  <option value="fa-solid fa-file-invoice">
+                    📑 Invoice/Doc
+                  </option>
+                  <option value="fa-solid fa-paper-plane">✈️ Submission</option>
+                  <option value="fa-solid fa-folder-open">
+                    📂 Cases/Folder
+                  </option>
+                  <option value="fa-solid fa-rotate">🔄 Reload/Reopen</option>
+                  <option value="fa-solid fa-bolt">⚡ Bolt/Auto</option>
+                  <option value="fa-solid fa-copy">📋 Copy/Listing</option>
+                  <option value="fa-solid fa-clock">⏰ Clock/Time</option>
+                  <option value="fa-solid fa-chart-line">📈 Stats/Chart</option>
+                  <option value="fa-solid fa-dollar-sign">
+                    💰 Sales/Dollar
+                  </option>
+                  <option value="fa-solid fa-tag">🏷️ Tag/Price</option>
+                  <option value="fa-solid fa-users">👥 Team/Users</option>
+                  <option value="fa-solid fa-shield-halved">
+                    🛡️ Ungate/Shield
+                  </option>
+                  <option value="fa-solid fa-magnifying-glass">
+                    🔍 Search/Find
+                  </option>
+                  <option value="fa-solid fa-ban">🚫 Blocked/Ban</option>
+                  <option value="fa-solid fa-bullhorn">📢 Promo/Horn</option>
+                  <option value="fa-solid fa-key">🔑 Key/Password</option>
+                  <option value="fa-solid fa-thumbs-up">
+                    👍 Like/Approval
+                  </option>
+                </select>
+                <button
+                  type="button"
+                  class="save-btn"
+                  style="
+                    padding: 9px 14px;
+                    font-size: 13px;
+                    margin: 0;
+                    background: #ff9900;
+                    color: #111;
+                    font-weight: 700;
+                    white-space: nowrap;
+                  "
+                  onclick="addCustomCounter()"
+                >
+                  <i class="fa-solid fa-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- APPEARANCE TAB -->
+          <div id="settingsPanel-appearance" style="display: none">
+            <p
+              style="
+                font-size: 12px;
+                color: var(--color-label);
+                margin-bottom: 20px;
+              "
+            >
+              Switch between Amazon Light Theme and the premium Dark Slate Mode.
+            </p>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: var(--bg-form-col);
+                padding: 16px 18px;
+                border-radius: 12px;
+                border: 1.5px solid var(--color-border);
+              "
+            >
+              <div style="display: flex; align-items: center; gap: 12px">
+                <i
+                  class="fa-solid fa-moon"
+                  style="font-size: 20px; color: #8b5cf6"
+                ></i>
+                <div>
+                  <p
+                    style="
+                      font-size: 14px;
+                      font-weight: 600;
+                      color: var(--color-text-main);
+                      margin: 0;
+                    "
+                  >
+                    Dark Mode
+                  </p>
+                  <p
+                    style="
+                      font-size: 12px;
+                      color: var(--color-label);
+                      margin: 2px 0 0;
+                    "
+                  >
+                    Amazon Slate — eye-friendly dark theme
+                  </p>
+                </div>
+              </div>
+              <label
+                style="
+                  position: relative;
+                  display: inline-block;
+                  width: 50px;
+                  height: 26px;
+                  cursor: pointer;
+                "
+              >
+                <input
+                  type="checkbox"
+                  id="darkModeToggle"
+                  style="opacity: 0; width: 0; height: 0"
+                  onchange="toggleDarkMode()"
+                />
+                <span
+                  id="darkModeSlider"
+                  style="
+                    position: absolute;
+                    inset: 0;
+                    background: #cbd5e1;
+                    border-radius: 26px;
+                    transition: 0.3s;
+                    cursor: pointer;
+                  "
+                >
+                  <span
+                    style="
+                      position: absolute;
+                      height: 20px;
+                      width: 20px;
+                      left: 3px;
+                      bottom: 3px;
+                      background: #fff;
+                      border-radius: 50%;
+                      transition: 0.3s;
+                      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+                    "
+                  ></span>
+                </span>
+              </label>
+            </div>
+            <div
+              style="
+                margin-top: 14px;
+                background: var(--bg-alert-info);
+                border: 1px solid var(--border-alert-info);
+                border-radius: 8px;
+                padding: 10px 14px;
+                font-size: 12px;
+                color: var(--color-alert-info);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              "
+            >
+              <i class="fa-solid fa-circle-info"></i>
+              Theme preference is saved automatically and restores on page load.
+            </div>
+          </div>
+
+          <!-- USER GUIDE TAB -->
+          <div id="settingsPanel-guide" style="display: none">
+            <p
+              style="
+                font-size: 13px;
+                font-weight: 600;
+                color: #ff9900;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+              "
+            >
+              <i class="fa-solid fa-book-open"></i> Daily Report Editor Guide
+            </p>
+            <p
+              style="
+                font-size: 11px;
+                color: var(--color-label);
+                margin-bottom: 15px;
+                line-height: 1.5;
+              "
+            >
+              A comprehensive guide explaining all application options,
+              features, dark mode settings, and system configurations.
+            </p>
+
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                font-size: 12.5px;
+                line-height: 1.5;
+                color: var(--color-modal-text);
+              "
+            >
+              <!-- Section 1: Team & Users -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >1</span
+                  >
+                  Team &amp; User Management
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Add Users:</strong> Enter a user name under the
+                    <em>Team / Users</em> settings tab and click
+                    <strong>Add</strong>.
+                  </li>
+                  <li>
+                    <strong>Rename Users:</strong> Click the edit (pen) icon to
+                    rename a team member. The system will automatically rename
+                    that user across all previously saved records in your
+                    history database!
+                  </li>
+                  <li>
+                    <strong>Default User:</strong> Select a default user to
+                    auto-fill the user selector dropdown every time the
+                    application is loaded.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 2: Custom Counters -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >2</span
+                  >
+                  Dynamic Work Counters
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Custom Counters:</strong> Create new counters under
+                    <em>Work Counters</em> by writing a label and choosing one
+                    of the 25 custom icons from the icon list.
+                  </li>
+                  <li>
+                    <strong>Toggle Switches:</strong> Temporarily hide built-in
+                    or custom counters from the page layout using the toggle
+                    switch. The values are preserved but hidden from active
+                    inputs, statistics, and reports.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 3: Data Entry & Company Management -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >3</span
+                  >
+                  Form Entry &amp; Company Manager
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Daily Entry:</strong> Enter the Date, User, Company,
+                    and counter values, then click <strong>Submit</strong>.
+                  </li>
+                  <li>
+                    <strong>Company List:</strong> Click the
+                    <strong>Manage</strong> button next to "Select Company" to
+                    add, edit, or delete companies from the dropdown menu.
+                  </li>
+                  <li>
+                    <strong>Inactive Companies:</strong> If you edit a record
+                    that uses a deleted company name, the dropdown automatically
+                    shows it as <em>(Inactive)</em> so you don't lose data
+                    consistency.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 4: Auto Merge duplicates -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >4</span
+                  >
+                  Duplicate Detection &amp; Auto Merge
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Smart Alerts:</strong> If duplicate entries (same
+                    company on the same date) are recorded, a red alert banner
+                    lights up. Click the banner to view details in English and
+                    Urdu.
+                  </li>
+                  <li>
+                    <strong>Auto Merge:</strong> Click the
+                    <strong>Merge Automatically</strong> button to combine these
+                    duplicate entries: it sums the counter values, merges notes
+                    with a divider <code>|</code>, and appends user names
+                    together automatically!
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 5: Theme & Custom Styling -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >5</span
+                  >
+                  Dark Slate Mode &amp; Typography
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Theme Toggling:</strong> Go to the
+                    <em>Appearance</em> tab to toggle the premium
+                    <strong>Dark Mode</strong>. It transforms the screen into an
+                    eye-friendly dark slate layout matching Amazon Central
+                    accents.
+                  </li>
+                  <li>
+                    <strong>Auto Memory:</strong> Theme settings are saved in
+                    your browser and automatically loaded on refresh.
+                  </li>
+                  <li>
+                    <strong>Custom Select Styles:</strong> Dropdowns are custom
+                    styled with vector arrows that switch colors dynamically
+                    depending on the active theme.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 6: Realtime Dashboard & History -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >6</span
+                  >
+                  Interactive Dashboard &amp; History list
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Live Metrics:</strong> The dashboard cards show
+                    overall sums for each active counter. When filters are
+                    applied, the dashboard dynamically updates to reflect only
+                    the filtered subset!
+                  </li>
+                  <li>
+                    <strong>Search and Filter:</strong> Use the live search
+                    field to instantly filter by user or company, or target
+                    specific calendar dates.
+                  </li>
+                  <li>
+                    <strong>Edit/Delete:</strong> Click the edit (yellow pen) or
+                    delete (red trash) icons next to any row in the history list
+                    to manage entries.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 7: Automatic & Manual Backups -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >7</span
+                  >
+                  Automatic Backup &amp; Recovery
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Auto Backups:</strong> The system automatically
+                    records a daily restore point inside local storage every
+                    time you submit a change.
+                  </li>
+                  <li>
+                    <strong>Backup Operations:</strong> Click the
+                    <strong>Manage Backups</strong> button at the bottom of the
+                    page to view date-wise backups. You can restore previous
+                    databases, delete unneeded snapshots, or export backups as
+                    PDF / JSON files.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 8: Exporting & Report Generation -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >8</span
+                  >
+                  PDF &amp; High-Res Image Exporter
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Download PDF:</strong> Generates and downloads a
+                    clean A4 PDF table including a dedicated sums summary card
+                    at the bottom.
+                  </li>
+                  <li>
+                    <strong>Download Image:</strong> Renders and downloads a
+                    premium Daily Report image card. The card automatically
+                    prints user summaries, active blockers/notes, and
+                    timestamps, perfect for immediate sharing with clients.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 9: Data Persistence & Safety -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                       background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >9</span
+                  >
+                  Local Storage &amp; Data Safety
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>Data Persistence:</strong> All entered reports,
+                    custom counters, added companies, and user lists are saved
+                    directly to browser local storage. Your configuration
+                    remains intact even if the tab is closed.
+                  </li>
+                  <li>
+                    <strong>Clear Data:</strong> Use the
+                    <strong>Clear All</strong> button to reset the database. The
+                    system will prompt a confirmation modal to avoid accidental
+                    data loss.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Section 10: Import & Restore Backup -->
+              <div
+                style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                "
+              >
+                <h5
+                  style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <span
+                    style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    "
+                    >10</span
+                  >
+                  Import &amp; Restore Backup (JSON)
+                </h5>
+                <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                  <li>
+                    <strong>How to Open:</strong> Click the
+                    <strong
+                      style="
+                        background: #6366f1;
+                        color: #fff;
+                        padding: 1px 6px;
+                        border-radius: 4px;
+                        font-size: 11px;
+                      "
+                      ><i class="fa-solid fa-file-import"></i> Import JSON
+                      Backup</strong
+                    >
+                    button at the bottom of the <strong>Backup History</strong>
+                    modal. A dedicated Import window will open.
+                  </li>
+                  <li>
+                    <strong>Upload File:</strong> Either
+                    <strong>drag &amp; drop</strong> your
+                    <code>.json</code> backup file into the upload zone, or
+                    click the zone / &ldquo;click to browse&rdquo; to select
+                    the file from your computer.
+                  </li>
+                  <li>
+                    <strong>File Preview:</strong> Once a valid file is loaded,
+                    a preview card shows the <em>total records</em>,
+                    <em>date range</em>, <em>companies</em> in the file, and
+                    how many <em>new records</em> will actually be added
+                    (exact duplicates are pre-counted and excluded).
+                  </li>
+                  <li>
+                    <strong style="color: #10b981">Merge:</strong> Appends
+                    only <em>new</em> records from the file to your existing
+                    data. Exact duplicates (same date + company + user) are
+                    automatically skipped — no manual cleanup needed.
+                  </li>
+                  <li>
+                    <strong style="color: #ef4444">Overwrite:</strong> Deletes
+                    <em>all</em> current records and replaces them with the
+                    imported file. A confirmation dialog appears before any
+                    data is deleted. Ideal for migrating to a new device.
+                  </li>
+                  <li>
+                    <strong>After Import:</strong> Data is sorted by date,
+                    saved to local storage, an auto-backup is created, and a
+                    green success toast appears at the bottom-right of the
+                    screen.
+                  </li>
+                  <li>
+                    <strong>Compatible Files:</strong> Works with any
+                    <code>.json</code> file exported via the
+                    <em>Download JSON</em> button in the Backup History panel.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+          style="
+            padding: 14px 24px;
+            border-top: 1px solid var(--color-border);
+            background: var(--bg-form-col);
+            display: flex;
+            justify-content: flex-end;
+          "
+        >
+          <button
+            type="button"
+            class="modal-ok-btn"
+            onclick="closeSettingsModal()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end #settingsModal -->
+
+    <script>
+      // ============================================================
+      // Dark Mode & Settings Initialization
+      // ============================================================
+      const currentTheme = localStorage.getItem("amazonTheme") || "light";
+      if (currentTheme === "dark") {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+
+      let teamUsers = JSON.parse(localStorage.getItem("amazonUsers"));
+      if (!teamUsers || !Array.isArray(teamUsers)) {
+        teamUsers = ["Ashir", "Abdul Rehman", "Mehmood"];
+        localStorage.setItem("amazonUsers", JSON.stringify(teamUsers));
+      }
+      let defaultUser = localStorage.getItem("amazonDefaultUser") || "";
+
+      const defaultCounters = [
+        {
+          id: "invoice",
+          label: "Invoices Made",
+          icon: "fa-solid fa-file-invoice",
+          isDefault: true,
+          active: true,
+        },
+        {
+          id: "submission",
+          label: "Submission",
+          icon: "fa-solid fa-paper-plane",
+          isDefault: true,
+          active: true,
+        },
+        {
+          id: "cases",
+          label: "Cases Open",
+          icon: "fa-solid fa-folder-open",
+          isDefault: true,
+          active: true,
+        },
+        {
+          id: "reopen",
+          label: "Reopen Cases",
+          icon: "fa-solid fa-rotate",
+          isDefault: true,
+          active: true,
+        },
+        {
+          id: "approval",
+          label: "Approval",
+          icon: "fa-solid fa-circle-check",
+          isDefault: true,
+          active: true,
+        },
+        {
+          id: "ungate",
+          label: "Auto Ungate",
+          icon: "fa-solid fa-bolt",
+          isDefault: true,
+          active: true,
+        },
+        {
+          id: "copyListing",
+          label: "Copy Listing",
+          icon: "fa-solid fa-copy",
+          isDefault: true,
+          active: true,
+        },
+      ];
+      let configCounters = JSON.parse(localStorage.getItem("amazonCounters"));
+      if (!configCounters || !Array.isArray(configCounters)) {
+        configCounters = defaultCounters;
+        localStorage.setItem("amazonCounters", JSON.stringify(configCounters));
+      } else {
+        // Safe upgrade and migration for default counters
+        configCounters.forEach((c) => {
+          if (c.id === "approval" && c.label === "Approval (Ungated)") {
+            c.label = "Approval";
+          }
+        });
+        defaultCounters.forEach((dc) => {
+          if (!configCounters.find((c) => c.id === dc.id)) {
+            configCounters.push(dc);
+          }
+        });
+        localStorage.setItem("amazonCounters", JSON.stringify(configCounters));
+      }
+
+      // Counter Premium Colors Palette
+      const counterColors = {
+        invoice: "#3b82f6",
+        submission: "#8b5cf6",
+        cases: "#f59e0b",
+        reopen: "#f43f5e",
+        approval: "#10b981",
+        ungate: "#06b6d4",
+        copyListing: "#6366f1",
+      };
+      const defaultPresetColors = [
+        "#3b82f6",
+        "#8b5cf6",
+        "#f59e0b",
+        "#f43f5e",
+        "#10b981",
+        "#06b6d4",
+        "#6366f1",
+        "#ec4899",
+        "#14b8a6",
+        "#f97316",
+      ];
+
+      function getCounterColor(counterId, index) {
+        if (counterColors[counterId]) return counterColors[counterId];
+        return defaultPresetColors[index % defaultPresetColors.length];
+      }
+
+      // DOM References
       const form = document.getElementById("workForm");
       const tableBody = document.getElementById("tableBody");
-
       const date = document.getElementById("date");
-      const invoice = document.getElementById("invoice");
-      const submission = document.getElementById("submission");
-      const cases = document.getElementById("cases");
-      const reopen = document.getElementById("reopen");
-      const approval = document.getElementById("approval");
-      const ungate = document.getElementById("ungate");
       const notes = document.getElementById("notes");
       const blocker = document.getElementById("blocker");
       const company = document.getElementById("company");
-      const copyListing = document.getElementById("copyListing");
       const userName = document.getElementById("userName");
-
       const searchFilter = document.getElementById("searchFilter");
       const dateFilter = document.getElementById("dateFilter");
 
       let workData = JSON.parse(localStorage.getItem("amazonWork")) || [];
+
+      // Company Management System variables
+      const defaultCompanies = [
+        "Amer Canada Inc.",
+        "BoldBuy Hub Inc",
+        "BUBH Trading Corp.",
+        "Bzable Corporation Inc.",
+        "Cornercart Inc.",
+        "Eblitz Enterprises Inc.",
+        "Good Choice",
+        "HBinnovate",
+        "IR Tech",
+        "KDOT STORE",
+        "OaksMax Inc",
+        "OCEANPATH LLC",
+        "POLAR HORIZON",
+        "Primeshopes Inc.",
+        "URBAN BAZAAR PTY LTD",
+        "ValueVault Inc",
+        "9teen Trades Inc",
+      ];
+      let companies = JSON.parse(localStorage.getItem("amazonCompanies"));
+      if (!companies || !Array.isArray(companies)) {
+        companies = defaultCompanies;
+        localStorage.setItem("amazonCompanies", JSON.stringify(companies));
+      }
+      let editingCompanyIndex = -1;
+      let editingUserIndex = -1;
+
+      function populateCompanyDropdown() {
+        if (!company) return;
+        const currentSelected = company.value;
+        company.innerHTML = '<option value="">Select Company</option>';
+        companies.forEach((co) => {
+          const opt = document.createElement("option");
+          opt.value = co;
+          opt.textContent = co;
+          company.appendChild(opt);
+        });
+        if (companies.includes(currentSelected)) {
+          company.value = currentSelected;
+        } else {
+          company.selectedIndex = 0;
+        }
+      }
+
+      function populateUserDropdown() {
+        if (!userName) return;
+        const currentSelected = userName.value;
+        userName.innerHTML = '<option value="">Select User</option>';
+        teamUsers.forEach((user) => {
+          const opt = document.createElement("option");
+          opt.value = user;
+          opt.textContent = user;
+          userName.appendChild(opt);
+        });
+        if (teamUsers.includes(currentSelected)) {
+          userName.value = currentSelected;
+        } else if (defaultUser && teamUsers.includes(defaultUser)) {
+          userName.value = defaultUser;
+        } else {
+          userName.selectedIndex = 0;
+        }
+      }
 
       // Load global blocker
       if (blocker) {
         blocker.value = localStorage.getItem("amazonBlocker") || "";
       }
       let editIndex = -1;
-      let totalInvoice = 0;
-      let totalSubmission = 0;
-      let totalCases = 0;
-      let totalReopen = 0;
-      let totalApproval = 0;
-      let totalUngate = 0;
-      let totalCopyListing = 0;
 
       // Today's Date
       date.valueAsDate = new Date();
 
-      // ==============================
-      // Save Data
-      // ==============================
+      // ============================================================
+      // Settings Modal Tab & Actions Logic
+      // ============================================================
+      window.openSettingsModal = function () {
+        document.getElementById("settingsModal").style.display = "flex";
+        switchSettingsTab("users");
+        renderSettingsUsers();
+        renderSettingsCounters();
 
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        if (darkModeToggle) {
+          darkModeToggle.checked =
+            document.body.classList.contains("dark-mode");
+        }
+      };
+
+      window.closeSettingsModal = function () {
+        document.getElementById("settingsModal").style.display = "none";
+        renderUI();
+      };
+
+      window.switchSettingsTab = function (tabName) {
+        document.getElementById("settingsPanel-users").style.display = "none";
+        document.getElementById("settingsPanel-counters").style.display =
+          "none";
+        document.getElementById("settingsPanel-appearance").style.display =
+          "none";
+        document.getElementById("settingsPanel-guide").style.display = "none";
+
+        document.getElementById(`settingsPanel-${tabName}`).style.display =
+          "block";
+
+        const tabs = document.querySelectorAll(".settings-tab");
+        tabs.forEach((btn) => {
+          if (btn.id === `tab-${tabName}`) {
+            btn.classList.add("active");
+            btn.style.color = "#ff9900";
+            btn.style.borderBottomColor = "#ff9900";
+          } else {
+            btn.classList.remove("active");
+            btn.style.color = "var(--color-label)";
+            btn.style.borderBottomColor = "transparent";
+          }
+        });
+      };
+
+      window.renderSettingsUsers = function () {
+        const wrapper = document.getElementById("userListWrapper");
+        if (!wrapper) return;
+        wrapper.innerHTML = "";
+
+        if (teamUsers.length === 0) {
+          wrapper.innerHTML = `
+            <div style="padding: 15px; text-align: center; color: var(--color-label); font-style: italic;">
+              No team members added yet.
+            </div>
+          `;
+          return;
+        }
+
+        teamUsers.forEach((user, idx) => {
+          const isDefault = defaultUser === user;
+          const div = document.createElement("div");
+          div.style.display = "flex";
+          div.style.justifyContent = "space-between";
+          div.style.alignItems = "center";
+          div.style.gap = "12px";
+          div.style.padding = "10px 12px";
+          div.style.background =
+            idx % 2 === 0 ? "var(--bg-modal)" : "var(--bg-form-col)";
+          div.style.borderBottom =
+            idx < teamUsers.length - 1
+              ? "1px solid var(--color-border)"
+              : "none";
+
+          if (editingUserIndex === idx) {
+            div.innerHTML = `
+              <input type="text" id="editUserVal_${idx}" value="${user.replace(/"/g, "&quot;")}" style="flex: 1; padding: 6px 10px; border: 1.5px solid #ff9900; border-radius: 6px; font-size: 13px; outline: none; margin-right: 8px; min-width: 0; background: var(--bg-input); color: var(--color-input-text);" />
+              <div style="display: flex; gap: 4px; flex-shrink: 0;">
+                <button type="button" class="save-btn" style="padding: 6px 10px; font-size: 11px; margin: 0; background: #10b981;" onclick="saveUserEdit(${idx})">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button type="button" class="delete-btn" style="padding: 6px 10px; font-size: 11px; margin: 0; background: #64748b;" onclick="cancelUserEdit()">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            `;
+          } else {
+            div.innerHTML = `
+              <span style="font-size: 14px; font-weight: 500; color: var(--color-text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;" title="${user.replace(/"/g, "&quot;")}">
+                ${user} ${isDefault ? '<span style="color:#ff9900; font-size:11px; font-weight:700; margin-left:6px;">(Default)</span>' : ""}
+              </span>
+              <div style="display: flex; gap: 4px; flex-shrink: 0;">
+                <button type="button" class="edit-btn" style="padding: 6px 10px; font-size: 11px; margin: 0;" onclick="startUserEdit(${idx})">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="delete-btn" style="padding: 6px 10px; font-size: 11px; margin: 0;" onclick="deleteUser(${idx})">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            `;
+          }
+          wrapper.appendChild(div);
+        });
+
+        const defaultSelect = document.getElementById("defaultUserSelect");
+        if (defaultSelect) {
+          defaultSelect.innerHTML = '<option value="">None</option>';
+          teamUsers.forEach((user) => {
+            const opt = document.createElement("option");
+            opt.value = user;
+            opt.textContent = user;
+            if (user === defaultUser) {
+              opt.selected = true;
+            }
+            defaultSelect.appendChild(opt);
+          });
+        }
+
+        populateUserDropdown();
+      };
+
+      window.addUser = function () {
+        const input = document.getElementById("newUserName");
+        if (!input) return;
+        const val = input.value.trim();
+
+        if (!val) {
+          alert("Please enter a valid name.");
+          return;
+        }
+
+        const exists = teamUsers.some(
+          (u) => u.toLowerCase() === val.toLowerCase(),
+        );
+        if (exists) {
+          alert("This user name already exists.");
+          return;
+        }
+
+        teamUsers.push(val);
+        localStorage.setItem("amazonUsers", JSON.stringify(teamUsers));
+        input.value = "";
+        renderSettingsUsers();
+      };
+
+      window.deleteUser = function (idx) {
+        const name = teamUsers[idx];
+        if (confirm(`Are you sure you want to delete "${name}"?`)) {
+          teamUsers.splice(idx, 1);
+          if (defaultUser === name) {
+            defaultUser = "";
+            localStorage.removeItem("amazonDefaultUser");
+          }
+          localStorage.setItem("amazonUsers", JSON.stringify(teamUsers));
+          renderSettingsUsers();
+        }
+      };
+
+      window.startUserEdit = function (idx) {
+        editingUserIndex = idx;
+        renderSettingsUsers();
+        const input = document.getElementById(`editUserVal_${idx}`);
+        if (input) {
+          input.focus();
+          input.select();
+        }
+      };
+
+      window.saveUserEdit = function (idx) {
+        const input = document.getElementById(`editUserVal_${idx}`);
+        if (!input) return;
+        const val = input.value.trim();
+
+        if (!val) {
+          alert("Please enter a valid name.");
+          return;
+        }
+
+        const exists = teamUsers.some(
+          (u, i) => i !== idx && u.toLowerCase() === val.toLowerCase(),
+        );
+        if (exists) {
+          alert("This user name already exists.");
+          return;
+        }
+
+        const oldName = teamUsers[idx];
+        teamUsers[idx] = val;
+        localStorage.setItem("amazonUsers", JSON.stringify(teamUsers));
+
+        // Update defaultUser if the edited user was the default
+        if (defaultUser === oldName) {
+          defaultUser = val;
+          localStorage.setItem("amazonDefaultUser", val);
+        }
+
+        // Update existing work records with the old name
+        let updated = false;
+        workData.forEach((item) => {
+          if (item.userName === oldName) {
+            item.userName = val;
+            updated = true;
+          }
+        });
+        if (updated) {
+          localStorage.setItem("amazonWork", JSON.stringify(workData));
+          loadData();
+        }
+
+        editingUserIndex = -1;
+        renderSettingsUsers();
+      };
+
+      window.cancelUserEdit = function () {
+        editingUserIndex = -1;
+        renderSettingsUsers();
+      };
+
+      window.saveDefaultUser = function () {
+        const defaultSelect = document.getElementById("defaultUserSelect");
+        if (defaultSelect) {
+          defaultUser = defaultSelect.value;
+          if (defaultUser) {
+            localStorage.setItem("amazonDefaultUser", defaultUser);
+          } else {
+            localStorage.removeItem("amazonDefaultUser");
+          }
+          renderSettingsUsers();
+        }
+      };
+
+      window.renderSettingsCounters = function () {
+        const listContainer = document.getElementById("counterToggleList");
+        if (!listContainer) return;
+        listContainer.innerHTML = "";
+
+        configCounters.forEach((c, idx) => {
+          const div = document.createElement("div");
+          div.style.display = "flex";
+          div.style.alignItems = "center";
+          div.style.justifyContent = "space-between";
+          div.style.background = "var(--bg-form-col)";
+          div.style.padding = "10px 14px";
+          div.style.borderRadius = "8px";
+          div.style.border = "1.5px solid var(--color-border)";
+
+          let deleteBtnHtml = "";
+          if (!c.isDefault) {
+            deleteBtnHtml = `
+              <button type="button" class="delete-btn" style="padding: 4px 8px; font-size: 11px; margin: 0 0 0 10px;" onclick="deleteCustomCounter(${idx})">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            `;
+          }
+
+          div.innerHTML = `
+            <div style="display:flex; align-items:center; gap:10px;">
+              <i class="${c.icon}" style="color: #ff9900; font-size: 16px; width: 20px; text-align: center;"></i>
+              <span style="font-size: 13px; font-weight: 600; color: var(--color-text-main);">${c.label} ${!c.isDefault ? '<span style="color:#3b82f6; font-size:10px; font-weight:700; margin-left:4px;">(Custom)</span>' : ""}</span>
+            </div>
+            <div style="display:flex; align-items:center;">
+              <label style="position:relative; display:inline-block; width:36px; height:20px; cursor:pointer;">
+                <input type="checkbox" id="toggle-counter-${c.id}" ${c.active ? "checked" : ""} onchange="toggleCounterActive(${idx})" style="opacity:0; width:0; height:0;">
+                <span style="position:absolute; inset:0; background:${c.active ? "#10b981" : "#cbd5e1"}; border-radius:20px; transition:0.3s; cursor:pointer;">
+                  <span style="position:absolute; height:14px; width:14px; left:${c.active ? "19px" : "3px"}; bottom:3px; background:#fff; border-radius:50%; transition:0.3s;"></span>
+                </span>
+              </label>
+              ${deleteBtnHtml}
+            </div>
+          `;
+          listContainer.appendChild(div);
+        });
+      };
+
+      window.toggleCounterActive = function (idx) {
+        configCounters[idx].active = !configCounters[idx].active;
+        localStorage.setItem("amazonCounters", JSON.stringify(configCounters));
+        renderSettingsCounters();
+      };
+
+      window.addCustomCounter = function () {
+        const labelInp = document.getElementById("customCounterLabel");
+        const iconInp = document.getElementById("customCounterIcon");
+        if (!labelInp || !iconInp) return;
+
+        const label = labelInp.value.trim();
+        let icon = iconInp.value.trim();
+
+        if (!label) {
+          alert("Please enter a label for the counter.");
+          return;
+        }
+
+        if (!icon) {
+          icon = "fa-solid fa-star";
+        } else if (!icon.startsWith("fa-")) {
+          icon = "fa-solid " + icon;
+        }
+
+        const id = "custom_" + label.toLowerCase().replace(/[^a-z0-9]/g, "_");
+
+        const exists = configCounters.some(
+          (c) => c.id === id || c.label.toLowerCase() === label.toLowerCase(),
+        );
+        if (exists) {
+          alert("A counter with this label already exists.");
+          return;
+        }
+
+        configCounters.push({
+          id: id,
+          label: label,
+          icon: icon,
+          isDefault: false,
+          active: true,
+        });
+
+        localStorage.setItem("amazonCounters", JSON.stringify(configCounters));
+
+        labelInp.value = "";
+        iconInp.value = "fa-solid fa-star";
+        renderSettingsCounters();
+      };
+
+      window.deleteCustomCounter = function (idx) {
+        const counter = configCounters[idx];
+        if (counter.isDefault) return;
+
+        if (
+          confirm(
+            `Are you sure you want to delete custom counter "${counter.label}"? This will hide it from view permanently.`,
+          )
+        ) {
+          configCounters.splice(idx, 1);
+          localStorage.setItem(
+            "amazonCounters",
+            JSON.stringify(configCounters),
+          );
+          renderSettingsCounters();
+        }
+      };
+
+      window.toggleDarkMode = function () {
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        if (darkModeToggle.checked) {
+          document.body.classList.add("dark-mode");
+          localStorage.setItem("amazonTheme", "dark");
+        } else {
+          document.body.classList.remove("dark-mode");
+          localStorage.setItem("amazonTheme", "light");
+        }
+      };
+
+      // ============================================================
+      // Dynamic Renderers
+      // ============================================================
+      function renderTableHeader() {
+        const thead = document.getElementById("tableHead");
+        if (!thead) return;
+
+        const activeCounters = configCounters.filter((c) => c.active);
+        let headerHtml = `
+          <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Company</th>
+        `;
+        activeCounters.forEach((c) => {
+          headerHtml += `<th>${c.label}</th>`;
+        });
+        headerHtml += `
+            <th>Action</th>
+          </tr>
+        `;
+        thead.innerHTML = headerHtml;
+      }
+
+      function renderFormCounters() {
+        const grid = document.getElementById("formCountersGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        const activeCounters = configCounters.filter((c) => c.active);
+        activeCounters.forEach((c) => {
+          grid.innerHTML += `
+            <div class="input-group">
+              <label>${c.label}</label>
+              <div class="input-wrapper">
+                <i class="${c.icon} input-icon"></i>
+                <input type="number" id="${c.id}" placeholder="0" />
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      function renderDashboard(totals) {
+        const dashboard = document.getElementById("dashboardCards");
+        if (!dashboard) return;
+        dashboard.innerHTML = "";
+
+        const activeCounters = configCounters.filter((c) => c.active);
+        activeCounters.forEach((c, idx) => {
+          const color = getCounterColor(c.id, idx);
+          dashboard.innerHTML += `
+            <div class="card" style="border-left-color: ${color};">
+              <div class="card-info">
+                <h3>${c.label}</h3>
+                <h2 id="total-${c.id}">${totals[c.id] || 0}</h2>
+              </div>
+              <div class="card-icon" style="background: ${color}1a; color: ${color};">
+                <i class="${c.icon}"></i>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      window.renderUI = function () {
+        renderTableHeader();
+        renderFormCounters();
+        loadData();
+      };
+
+      // ============================================================
+      // Form Save / Submit Data
+      // ============================================================
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -1950,75 +3831,70 @@
           date: date.value,
           userName: userName.value,
           company: company.value,
-          invoice: Number(invoice.value) || 0,
-          submission: Number(submission.value) || 0,
-          cases: Number(cases.value) || 0,
-          reopen: Number(reopen.value) || 0,
-          approval: Number(approval.value) || 0,
-          ungate: Number(ungate.value) || 0,
-          copyListing: Number(copyListing.value) || 0,
           notes: notes.value,
         };
 
-        // Save global blocker on submit too
+        configCounters.forEach((c) => {
+          const inp = document.getElementById(c.id);
+          obj[c.id] = inp ? Number(inp.value) || 0 : 0;
+        });
+
         localStorage.setItem("amazonBlocker", blocker.value);
 
         if (editIndex === -1) {
           workData.push(obj);
         } else {
           workData[editIndex] = obj;
-
           editIndex = -1;
         }
 
         localStorage.setItem("amazonWork", JSON.stringify(workData));
-
         form.reset();
 
+        populateUserDropdown();
+        populateCompanyDropdown();
         company.selectedIndex = 0;
-        //   workType.innerHTML = '<option value="">Select Company First</option>';
-
         date.valueAsDate = new Date();
         blocker.value = localStorage.getItem("amazonBlocker") || "";
+
+        if (defaultUser) {
+          userName.value = defaultUser;
+        }
 
         loadData();
         runAutoBackup();
       });
 
-      // Preserve blocker on manual form resets
       form.addEventListener("reset", function (e) {
         setTimeout(() => {
           blocker.value = localStorage.getItem("amazonBlocker") || "";
+          populateUserDropdown();
+          populateCompanyDropdown();
+          if (defaultUser) {
+            userName.value = defaultUser;
+          }
         }, 0);
       });
 
-      // Standalone blocker save function
       window.saveBlocker = function () {
         localStorage.setItem("amazonBlocker", blocker.value);
         loadData();
       };
 
-      // Clear blocker function
       window.clearBlocker = function () {
         blocker.value = "";
         localStorage.removeItem("amazonBlocker");
         loadData();
       };
 
-      // ==============================
-      // Load Data
-      // ==============================
-
+      // ============================================================
+      // Load Data / Render Table
+      // ============================================================
       function loadData() {
         tableBody.innerHTML = "";
 
-        totalInvoice = 0;
-        totalSubmission = 0;
-        totalCases = 0;
-        totalReopen = 0;
-        totalApproval = 0;
-        totalUngate = 0;
-        totalCopyListing = 0;
+        const totals = {};
+        configCounters.forEach((c) => (totals[c.id] = 0));
 
         const searchQuery = searchFilter
           ? searchFilter.value.toLowerCase().trim()
@@ -2041,7 +3917,6 @@
           }
         }
 
-        // Show/hide duplicate warning alert
         const duplicateAlert = document.getElementById("duplicateAlert");
         if (duplicateAlert) {
           if (duplicateIndices.size > 0) {
@@ -2064,6 +3939,8 @@
           }
         }
 
+        const activeCounters = configCounters.filter((c) => c.active);
+
         workData.forEach((item, index) => {
           const matchesSearch =
             !searchQuery ||
@@ -2074,13 +3951,9 @@
           const matchesDate = !filterDate || item.date === filterDate;
 
           if (matchesSearch && matchesDate) {
-            totalInvoice += item.invoice;
-            totalSubmission += item.submission;
-            totalCases += item.cases;
-            totalReopen += item.reopen;
-            totalApproval += item.approval;
-            totalUngate += item.ungate;
-            totalCopyListing += item.copyListing;
+            configCounters.forEach((c) => {
+              totals[c.id] += Number(item[c.id]) || 0;
+            });
 
             const formattedDate = new Date(item.date)
               .toLocaleDateString("en-GB", {
@@ -2093,18 +3966,17 @@
             const isDuplicate = duplicateIndices.has(index);
             const rowClass = isDuplicate ? 'class="duplicate-row"' : "";
 
+            let cellsHtml = "";
+            activeCounters.forEach((c) => {
+              cellsHtml += `<td>${item[c.id] || 0}</td>`;
+            });
+
             tableBody.innerHTML += `
               <tr ${rowClass}>
                 <td>${formattedDate}</td>
-                <td>${item.userName}</td>
+                <td>${item.userName || "-"}</td>
                 <td>${item.company}</td>
-                <td>${item.invoice}</td>
-                <td>${item.submission}</td>
-                <td>${item.cases}</td>
-                <td>${item.reopen}</td>
-                <td>${item.approval}</td>
-                <td>${item.ungate}</td>
-                <td>${item.copyListing}</td>
+                ${cellsHtml}
                 <td>
                   ${
                     item.notes && item.notes.trim()
@@ -2127,7 +3999,6 @@
           }
         });
 
-        // Show/hide blocker alert (global blocker)
         const blockerAlert = document.getElementById("blockerAlert");
         if (blockerAlert) {
           const blockerText = localStorage.getItem("amazonBlocker") || "";
@@ -2157,65 +4028,64 @@
             : `${workData.length} record${workData.length !== 1 ? "s" : ""}`;
         }
 
-        document.getElementById("totalInvoices").innerText = totalInvoice;
-        document.getElementById("totalSubmission").innerText = totalSubmission;
-        document.getElementById("totalCases").innerText = totalCases;
-        document.getElementById("totalReopen").innerText = totalReopen;
-        document.getElementById("totalApproval").innerText = totalApproval;
-        document.getElementById("totalUngate").innerText = totalUngate;
-        document.getElementById("totalCopyListing").innerText =
-          totalCopyListing;
+        renderDashboard(totals);
       }
 
-      // ==============================
-      // Edit
-      // ==============================
-
-      function editData(index) {
+      // ============================================================
+      // Edit Data
+      // ============================================================
+      window.editData = function (index) {
         const item = workData[index];
 
         date.value = item.date;
-        userName.value = item.userName;
-        company.value = item.company;
-        invoice.value = item.invoice || "";
-        submission.value = item.submission || "";
-        cases.value = item.cases || "";
-        reopen.value = item.reopen || "";
-        approval.value = item.approval || "";
-        ungate.value = item.ungate || "";
-        copyListing.value = item.copyListing || "";
+
+        populateUserDropdown();
+        if (item.userName && !teamUsers.includes(item.userName)) {
+          const opt = document.createElement("option");
+          opt.value = item.userName;
+          opt.textContent = `${item.userName} (Inactive)`;
+          userName.appendChild(opt);
+        }
+        userName.value = item.userName || "";
+
+        populateCompanyDropdown();
+        if (item.company && !companies.includes(item.company)) {
+          const opt = document.createElement("option");
+          opt.value = item.company;
+          opt.textContent = `${item.company} (Inactive)`;
+          company.appendChild(opt);
+        }
+
+        company.value = item.company || "";
         notes.value = item.notes || "";
 
-        editIndex = index;
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
+        configCounters.forEach((c) => {
+          const inp = document.getElementById(c.id);
+          if (inp) {
+            inp.value =
+              item[c.id] !== undefined && item[c.id] !== null ? item[c.id] : "";
+          }
         });
-      }
 
-      // ==============================
-      // Delete
-      // ==============================
+        editIndex = index;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
 
-      function deleteData(index) {
+      // ============================================================
+      // Delete Data
+      // ============================================================
+      window.deleteData = function (index) {
         if (confirm("Delete this record?")) {
           workData.splice(index, 1);
-
           localStorage.setItem("amazonWork", JSON.stringify(workData));
-
           loadData();
           runAutoBackup();
         }
-      }
+      };
 
-      // ==============================
-      // First Load
-      // ==============================
-
-      loadData();
-      runAutoBackup();
-
+      // ============================================================
+      // Dynamic Exporters (PDF & Screenshot)
+      // ============================================================
       document
         .getElementById("clearAll")
         .addEventListener("click", function () {
@@ -2245,7 +4115,6 @@
             ? customData
             : workData;
         const { jsPDF } = window.jspdf;
-
         const doc = new jsPDF("landscape");
 
         doc.setFontSize(18);
@@ -2299,193 +4168,127 @@
         doc.setFontSize(11);
         doc.text(`${formattedDate} at ${formattedTime}`, 14, 26);
 
+        const activeCounters = configCounters.filter((c) => c.active);
+
+        // Header for PDF autoTable
+        const pdfHead = ["Date", "User", "Company"];
+        activeCounters.forEach((c) => pdfHead.push(c.label));
+
+        // Rows for PDF
         const rows = [];
-        let sumInvoice = 0;
-        let sumSubmission = 0;
-        let sumCases = 0;
-        let sumReopen = 0;
-        let sumApproval = 0;
-        let sumUngate = 0;
-        let sumCopyListing = 0;
+        const sums = {};
+        activeCounters.forEach((c) => (sums[c.id] = 0));
 
         targetData.forEach((item) => {
-          sumInvoice += Number(item.invoice) || 0;
-          sumSubmission += Number(item.submission) || 0;
-          sumCases += Number(item.cases) || 0;
-          sumReopen += Number(item.reopen) || 0;
-          sumApproval += Number(item.approval) || 0;
-          sumUngate += Number(item.ungate) || 0;
-          sumCopyListing += Number(item.copyListing) || 0;
-
-          rows.push([
-            new Date(item.date)
-              .toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "2-digit",
-              })
-              .replace(/\//g, "-"),
-
+          const rowData = [
+            new Date(item.date).toLocaleDateString("en-GB").replace(/\//g, "-"),
             item.userName || "-",
+            item.company || "-",
+          ];
 
-            item.company,
+          activeCounters.forEach((c) => {
+            const val = Number(item[c.id]) || 0;
+            sums[c.id] += val;
+            rowData.push(val);
+          });
 
-            item.invoice,
-
-            item.submission,
-
-            item.cases,
-
-            item.reopen,
-
-            item.approval,
-
-            item.ungate,
-
-            item.copyListing,
-          ]);
+          rows.push(rowData);
         });
 
         doc.autoTable({
           startY: 34,
-
-          head: [
-            [
-              "Date",
-
-              "User",
-
-              "Company",
-
-              "Invoices",
-
-              "Submission",
-
-              "Cases",
-
-              "Reopen",
-
-              "Approval",
-
-              "Auto Ungate",
-
-              "Copy Listing",
-            ],
-          ],
-
+          head: [pdfHead],
           body: rows,
-
           theme: "grid",
-
           styles: {
             fontSize: 9,
             halign: "center",
           },
-
           headStyles: {
             fillColor: [30, 58, 138],
           },
         });
 
         let y = doc.lastAutoTable.finalY + 12;
-        if (y + 65 > 210) {
+        const summaryCount = activeCounters.length;
+        const cardHeight = 15 + summaryCount * 6.5 + 5;
+
+        if (y + cardHeight > 210) {
           doc.addPage();
           y = 20;
         }
 
-        // Draw a light gray background card for the summary list
-        doc.setFillColor(248, 250, 252); // Slate-50 background
-        doc.setDrawColor(226, 232, 240); // Slate-200 border
+        // Draw Summary Card
+        doc.setFillColor(248, 250, 252);
+        doc.setDrawColor(226, 232, 240);
         doc.setLineWidth(0.5);
-        doc.roundedRect(14, y, 110, 65, 2, 2, "FD");
+        doc.roundedRect(14, y, 110, cardHeight, 2, 2, "FD");
 
-        // Top accent line in brand blue
         doc.setFillColor(30, 58, 138);
         doc.rect(14, y, 110, 3, "F");
 
-        // Section Title
         doc.setFont("helvetica", "bold");
         doc.setFontSize(12);
         doc.setTextColor(30, 58, 138);
         doc.text("TOTAL SUMMARY", 20, y + 10);
 
-        // Underline divider
         doc.setDrawColor(226, 232, 240);
         doc.line(20, y + 13, 114, y + 13);
 
-        const summaryItems = [
-          { label: "Invoices Made", value: sumInvoice },
-          { label: "Submission", value: sumSubmission },
-          { label: "Cases Open", value: sumCases },
-          { label: "Reopen Cases", value: sumReopen },
-          { label: "Approval", value: sumApproval },
-          { label: "Auto Ungate", value: sumUngate },
-          { label: "Copy Listing", value: sumCopyListing },
-        ];
-
         let itemY = y + 19;
-        summaryItems.forEach((item, index) => {
+        activeCounters.forEach((c, index) => {
           doc.setFont("helvetica", "normal");
           doc.setFontSize(9.5);
-          doc.setTextColor(71, 85, 105); // Slate-600
-          doc.text(item.label, 20, itemY);
+          doc.setTextColor(71, 85, 105);
+          doc.text(c.label, 20, itemY);
 
           doc.setFont("helvetica", "bold");
-          doc.setTextColor(15, 23, 42); // Slate-900
-          doc.text(String(item.value), 114, itemY, { align: "right" });
+          doc.setTextColor(15, 23, 42);
+          doc.text(String(sums[c.id]), 114, itemY, { align: "right" });
 
-          // Subtle divider line for all items except the last one
-          if (index < summaryItems.length - 1) {
+          if (index < activeCounters.length - 1) {
             doc.setDrawColor(241, 245, 249);
             doc.line(20, itemY + 2.5, 114, itemY + 2.5);
           }
-
           itemY += 6.5;
         });
 
-        // Gather blockers/notes for PDF (only show for current active view, not custom day reports)
         const pdfBlockerText =
           customData && !(customData instanceof Event)
             ? ""
             : localStorage.getItem("amazonBlocker") || "";
 
         if (pdfBlockerText.trim()) {
-          // Draw a light blue background card for blockers on the right
-          doc.setFillColor(239, 246, 255); // Blue-50 background
-          doc.setDrawColor(219, 234, 254); // Blue-200 border
+          doc.setFillColor(239, 246, 255);
+          doc.setDrawColor(219, 234, 254);
           doc.setLineWidth(0.5);
-          doc.roundedRect(130, y, 153, 65, 2, 2, "FD");
+          doc.roundedRect(130, y, 153, cardHeight, 2, 2, "FD");
 
-          // Top accent line in warning blue
-          doc.setFillColor(37, 99, 235); // Blue-600
+          doc.setFillColor(37, 99, 235);
           doc.rect(130, y, 153, 3, "F");
 
-          // Section Title
           doc.setFont("helvetica", "bold");
           doc.setFontSize(12);
-          doc.setTextColor(30, 58, 138); // Dark blue text
+          doc.setTextColor(30, 58, 138);
           doc.text("BLOCKERS", 136, y + 10);
 
-          // Underline divider
           doc.setDrawColor(219, 234, 254);
           doc.line(136, y + 13, 277, y + 13);
 
-          // Render notes list wrapped to width
           doc.setFont("helvetica", "normal");
           doc.setFontSize(9);
-          doc.setTextColor(30, 41, 59); // Slate-800
+          doc.setTextColor(30, 41, 59);
 
           let noteY = y + 19;
-          // Wrap text inside 140mm width
           const splitNotes = doc.splitTextToSize(pdfBlockerText.trim(), 140);
 
           for (let i = 0; i < splitNotes.length; i++) {
-            if (noteY > y + 60) {
+            if (noteY > y + cardHeight - 5) {
               doc.text("...", 136, noteY);
               break;
             }
             doc.text(splitNotes[i], 136, noteY);
-            noteY += 5; // line height
+            noteY += 5;
           }
         }
 
@@ -2539,10 +4342,9 @@
       updateHeaderDateTime();
       setInterval(updateHeaderDateTime, 1000);
 
-      // Duplicate merge helper popups
+      // Duplicate Merge System
       let modalLang = "en";
       window.showMergeInfoGlobal = function () {
-        // Reset to English when opening
         modalLang = "en";
         document.getElementById("modalMainText").innerHTML =
           "Duplicate entries (same company and date) have been detected in the work history list.";
@@ -2555,9 +4357,10 @@
         }
 
         const mergeBtn = document.getElementById("modalMergeBtn");
-        if (mergeBtn)
+        if (mergeBtn) {
           mergeBtn.innerHTML =
             '<i class="fa-solid fa-code-merge"></i> Merge Automatically';
+        }
 
         document.getElementById("infoModal").style.display = "flex";
       };
@@ -2597,10 +4400,6 @@
       };
 
       window.autoMergeDuplicates = function () {
-        // if (!confirm("Are you sure you want to merge all duplicate entries? This will sum up all work counters for matching company/date records and keep a single merged record.")) {
-        //   return;
-        // }
-
         const groups = {};
         const mergedData = [];
 
@@ -2622,15 +4421,11 @@
 
             for (let i = 1; i < list.length; i++) {
               const other = list[i];
-              master.invoice = (master.invoice || 0) + (other.invoice || 0);
-              master.submission =
-                (master.submission || 0) + (other.submission || 0);
-              master.cases = (master.cases || 0) + (other.cases || 0);
-              master.reopen = (master.reopen || 0) + (other.reopen || 0);
-              master.approval = (master.approval || 0) + (other.approval || 0);
-              master.ungate = (master.ungate || 0) + (other.ungate || 0);
-              master.copyListing =
-                (master.copyListing || 0) + (other.copyListing || 0);
+
+              configCounters.forEach((c) => {
+                master[c.id] =
+                  (Number(master[c.id]) || 0) + (Number(other[c.id]) || 0);
+              });
 
               if (other.userName && other.userName !== master.userName) {
                 master.userName = master.userName
@@ -2656,11 +4451,9 @@
         loadData();
         closeInfoModal();
         runAutoBackup();
-
         alert(`Successfully merged ${mergeCount} duplicate entries!`);
       };
 
-      // Blocker popup handlers
       window.showBlockerPopup = function (text) {
         document.getElementById("blockerModalText").textContent = text;
         document.getElementById("blockerModal").style.display = "flex";
@@ -2670,10 +4463,9 @@
         document.getElementById("blockerModal").style.display = "none";
       };
 
-      // ==============================
+      // ============================================================
       // Backup Management System
-      // ==============================
-
+      // ============================================================
       window.openBackupModal = function () {
         loadBackupList();
         document.getElementById("backupModal").style.display = "flex";
@@ -2684,19 +4476,15 @@
       };
 
       function runAutoBackup() {
-        const todayStr = new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD
+        const todayStr = new Date().toLocaleDateString("sv-SE");
         let backups =
           JSON.parse(localStorage.getItem("amazonWorkBackups")) || [];
-
-        // Find if backup for today already exists
         const existingIndex = backups.findIndex((b) => b.date === todayStr);
 
         if (existingIndex !== -1) {
-          // Update today's backup with the current state of workData
           backups[existingIndex].data = JSON.parse(JSON.stringify(workData));
           backups[existingIndex].timestamp = Date.now();
         } else {
-          // Add today's backup
           backups.push({
             date: todayStr,
             timestamp: Date.now(),
@@ -2704,7 +4492,6 @@
           });
         }
 
-        // Clean up backups older than 7 days
         const cutoffDate = new Date();
         cutoffDate.setDate(cutoffDate.getDate() - 7);
         cutoffDate.setHours(0, 0, 0, 0);
@@ -2715,9 +4502,7 @@
           return bDate >= cutoffDate;
         });
 
-        // Sort backups by date descending (latest first)
         backups.sort((a, b) => b.date.localeCompare(a.date));
-
         localStorage.setItem("amazonWorkBackups", JSON.stringify(backups));
       }
 
@@ -2736,7 +4521,7 @@
         if (backups.length === 0) {
           tbody.innerHTML = `
             <tr>
-              <td colspan="6" style="padding: 20px; color: #64748b; font-style: italic;">
+              <td colspan="6" style="padding: 20px; color: var(--color-label); font-style: italic;">
                 No backups found. Backups are automatically created when saving work.
               </td>
             </tr>
@@ -2744,15 +4529,22 @@
           return;
         }
 
+        const active = configCounters.filter((c) => c.active);
+        const c1 = active[0];
+        const c2 = active[1];
+        const c1Label = c1 ? c1.label : "Invoices";
+        const c2Label = c2 ? c2.label : "Submissions";
+
+        const heads = document.querySelectorAll("#backupModal table thead th");
+        if (heads && heads.length >= 5) {
+          heads[3].textContent = c1Label;
+          heads[4].textContent = c2Label;
+        }
+
         backups.forEach((backup, idx) => {
           const formattedDate = new Date(backup.date)
-            .toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-            })
+            .toLocaleDateString("en-GB")
             .replace(/\//g, "-");
-
           const backupTime = new Date(backup.timestamp).toLocaleTimeString(
             "en-GB",
             {
@@ -2763,21 +4555,20 @@
             },
           );
 
-          // Calculate totals for this backup
-          let bInvoices = 0;
-          let bSubmissions = 0;
+          let b1Sum = 0;
+          let b2Sum = 0;
           backup.data.forEach((item) => {
-            bInvoices += Number(item.invoice) || 0;
-            bSubmissions += Number(item.submission) || 0;
+            if (c1) b1Sum += Number(item[c1.id]) || 0;
+            if (c2) b2Sum += Number(item[c2.id]) || 0;
           });
 
           tbody.innerHTML += `
             <tr>
-              <td style="padding: 10px; font-weight: 600; color: #1e3a8a;">${formattedDate}</td>
-              <td style="padding: 10px; color: #64748b;">${backupTime}</td>
-              <td style="padding: 10px; font-weight: 500;">${backup.data.length}</td>
-              <td style="padding: 10px; color: #3b82f6; font-weight: 600;">${bInvoices}</td>
-              <td style="padding: 10px; color: #8b5cf6; font-weight: 600;">${bSubmissions}</td>
+              <td style="padding: 10px; font-weight: 600; color: var(--color-filter-badge);">${formattedDate}</td>
+              <td style="padding: 10px; color: var(--color-label);">${backupTime}</td>
+              <td style="padding: 10px; font-weight: 500; color: var(--color-text-main);">${backup.data.length}</td>
+              <td style="padding: 10px; color: #3b82f6; font-weight: 600;">${b1Sum}</td>
+              <td style="padding: 10px; color: #8b5cf6; font-weight: 600;">${b2Sum}</td>
               <td style="padding: 10px; white-space: nowrap;">
                 <button class="blocker-btn" style="padding: 6px 10px; font-size: 11px; margin: 0 2px;" onclick="restoreBackup(${idx})" title="Restore Data">
                   <i class="fa-solid fa-clock-rotate-left"></i> Restore
@@ -2803,10 +4594,7 @@
         const backup = backups[idx];
         if (!backup) return;
 
-        // Filter backup records to only include those matching this backup's date
         const dayData = backup.data.filter((item) => item.date === backup.date);
-
-        // If there are no records for that date, fall back to downloading all records in the snapshot
         const targetData = dayData.length > 0 ? dayData : backup.data;
         downloadPDF(targetData, backup.date);
       };
@@ -2817,7 +4605,6 @@
         const backup = backups[idx];
         if (!backup) return;
 
-        // Filter backup records to only include those matching this backup's date
         const dayData = backup.data.filter((item) => item.date === backup.date);
         const targetData = dayData.length > 0 ? dayData : backup.data;
 
@@ -2842,11 +4629,7 @@
         if (!backup) return;
 
         const formattedDate = new Date(backup.date)
-          .toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          })
+          .toLocaleDateString("en-GB")
           .replace(/\//g, "-");
 
         if (
@@ -2874,6 +4657,246 @@
         }
       };
 
+      // ============================================================
+      // Import / Restore Backup from JSON File
+      // ============================================================
+      let importedRecords = null; // holds parsed JSON data from uploaded file
+
+      window.openImportModal = function () {
+        importedRecords = null;
+        resetImportUI();
+        document.getElementById("importChoiceModal").style.display = "flex";
+      };
+
+      window.closeImportModal = function () {
+        document.getElementById("importChoiceModal").style.display = "none";
+        importedRecords = null;
+        resetImportUI();
+        // also clear the file input so re-selecting same file triggers onchange
+        const fileInput = document.getElementById("importJsonFileInput");
+        if (fileInput) fileInput.value = "";
+      };
+
+      function resetImportUI() {
+        document.getElementById("importPreviewBox").style.display = "none";
+        document.getElementById("importWarningBox").style.display = "none";
+        setImportBtnsEnabled(false);
+      }
+
+      function setImportBtnsEnabled(enabled) {
+        const mergeBtn = document.getElementById("importMergeBtn");
+        const overwriteBtn = document.getElementById("importOverwriteBtn");
+        if (mergeBtn) {
+          mergeBtn.disabled = !enabled;
+          mergeBtn.style.opacity = enabled ? "1" : "0.45";
+          mergeBtn.style.cursor = enabled ? "pointer" : "not-allowed";
+        }
+        if (overwriteBtn) {
+          overwriteBtn.disabled = !enabled;
+          overwriteBtn.style.opacity = enabled ? "1" : "0.45";
+          overwriteBtn.style.cursor = enabled ? "pointer" : "not-allowed";
+        }
+      }
+
+      // Triggered by file <input> change
+      window.handleImportFileSelect = function (event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        processImportFile(file);
+      };
+
+      // Drag-and-drop handlers
+      window.handleImportDragOver = function (event) {
+        event.preventDefault();
+        document.getElementById("importDropZone").classList.add("drag-over");
+      };
+
+      window.handleImportDragLeave = function (event) {
+        document.getElementById("importDropZone").classList.remove("drag-over");
+      };
+
+      window.handleImportDrop = function (event) {
+        event.preventDefault();
+        document.getElementById("importDropZone").classList.remove("drag-over");
+        const file =
+          event.dataTransfer.files && event.dataTransfer.files[0];
+        if (!file) return;
+        if (!file.name.endsWith(".json")) {
+          showImportWarning("Please drop a valid .json file.");
+          return;
+        }
+        processImportFile(file);
+      };
+
+      function processImportFile(file) {
+        resetImportUI();
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          let parsed;
+          try {
+            parsed = JSON.parse(e.target.result);
+          } catch (err) {
+            showImportWarning("Invalid JSON file. Please use a file downloaded from this app.");
+            return;
+          }
+
+          // Accept both array (single-day export) and wrapped object formats
+          let records = [];
+          if (Array.isArray(parsed)) {
+            records = parsed;
+          } else if (parsed && Array.isArray(parsed.data)) {
+            records = parsed.data;
+          } else {
+            showImportWarning("Unrecognised file format. The JSON must be an array of work records.");
+            return;
+          }
+
+          // Basic validation — each item must have at least a date field
+          const valid = records.every(
+            (r) => r && typeof r === "object" && r.date
+          );
+          if (!valid || records.length === 0) {
+            showImportWarning(
+              records.length === 0
+                ? "The file contains 0 records."
+                : "Some records are missing required fields (date). Please check the file."
+            );
+            return;
+          }
+
+          importedRecords = records;
+
+          // Build preview stats
+          const dates = records
+            .map((r) => r.date)
+            .filter(Boolean)
+            .sort();
+          const earliestDate = dates[0];
+          const latestDate = dates[dates.length - 1];
+          const companies = [
+            ...new Set(records.map((r) => r.company).filter(Boolean)),
+          ];
+
+          // Count new records (not already in current workData by date+company+user)
+          const existingKeys = new Set(
+            workData.map(
+              (r) =>
+                `${(r.date || "").trim()}_${(r.company || "").toLowerCase().trim()}_${(r.userName || "").toLowerCase().trim()}`
+            )
+          );
+          const newCount = records.filter(
+            (r) =>
+              !existingKeys.has(
+                `${(r.date || "").trim()}_${(r.company || "").toLowerCase().trim()}_${(r.userName || "").toLowerCase().trim()}`
+              )
+          ).length;
+
+          function fmtDate(str) {
+            if (!str) return "?";
+            const [y, m, d] = str.split("-");
+            return new Date(+y, +m - 1, +d).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
+          }
+
+          document.getElementById("importPreviewFileName").textContent = file.name;
+          document.getElementById("importPreviewRecords").textContent = records.length;
+          document.getElementById("importPreviewDateRange").textContent =
+            earliestDate === latestDate
+              ? fmtDate(earliestDate)
+              : `${fmtDate(earliestDate)} → ${fmtDate(latestDate)}`;
+          document.getElementById("importPreviewCompanies").textContent =
+            companies.length > 0
+              ? companies.slice(0, 4).join(", ") +
+                (companies.length > 4 ? ` +${companies.length - 4} more` : "")
+              : "–";
+          document.getElementById("importPreviewNew").textContent =
+            `${newCount} new record${newCount !== 1 ? "s" : ""} will be added`;
+
+          document.getElementById("importPreviewBox").style.display = "block";
+          setImportBtnsEnabled(true);
+
+          // Show overwrite warning if current data is non-empty
+          if (workData.length > 0) {
+            showImportWarning(
+              `Overwrite will permanently delete your ${workData.length} existing record${workData.length !== 1 ? "s" : ""}. Use Merge to keep both datasets.`
+            );
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      function showImportWarning(msg) {
+        const box = document.getElementById("importWarningBox");
+        document.getElementById("importWarningText").textContent = msg;
+        box.style.display = "flex";
+      }
+
+      window.executeImport = function (mode) {
+        if (!importedRecords || importedRecords.length === 0) return;
+
+        if (mode === "overwrite") {
+          if (
+            !confirm(
+              `⚠️ OVERWRITE: This will permanently delete all ${workData.length} existing records and replace them with ${importedRecords.length} imported records.\n\nAre you sure?`
+            )
+          )
+            return;
+          workData = JSON.parse(JSON.stringify(importedRecords));
+        } else {
+          // MERGE — skip exact duplicates (same date + company + userName)
+          const existingKeys = new Set(
+            workData.map(
+              (r) =>
+                `${(r.date || "").trim()}_${(r.company || "").toLowerCase().trim()}_${(r.userName || "").toLowerCase().trim()}`
+            )
+          );
+          const toAdd = importedRecords.filter(
+            (r) =>
+              !existingKeys.has(
+                `${(r.date || "").trim()}_${(r.company || "").toLowerCase().trim()}_${(r.userName || "").toLowerCase().trim()}`
+              )
+          );
+          workData = workData.concat(toAdd);
+        }
+
+        // Sort by date descending
+        workData.sort((a, b) =>
+          (b.date || "").localeCompare(a.date || "")
+        );
+
+        localStorage.setItem("amazonWork", JSON.stringify(workData));
+        loadData();
+        runAutoBackup();
+        closeImportModal();
+        closeBackupModal();
+
+        // Show success toast
+        const modeLabel = mode === "overwrite" ? "Overwrite" : "Merge";
+        const count =
+          mode === "overwrite"
+            ? importedRecords.length
+            : workData.length;
+        showImportSuccessToast(
+          `${modeLabel} complete! ${count} record${count !== 1 ? "s" : ""} loaded.`
+        );
+      };
+
+      function showImportSuccessToast(msg) {
+        const existing = document.getElementById("importSuccessToast");
+        if (existing) existing.remove();
+        const toast = document.createElement("div");
+        toast.id = "importSuccessToast";
+        toast.className = "import-success-toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${msg}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3300);
+      }
+
+
+      // Screenshot Generator
       window.downloadScreenshot = function (
         customData = null,
         customDateStr = null,
@@ -2891,7 +4914,6 @@
             ? customData
             : workData;
 
-        // Calculate Date & Time similar to PDF
         let reportDate = new Date();
         if (customDateStr && typeof customDateStr === "string") {
           const [yearStr, monthStr, dayStr] = customDateStr.split("-");
@@ -2938,30 +4960,22 @@
         const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
         const reportTimeStr = `${formattedDate} at ${formattedTime}`;
 
-        // Calculate Totals
-        let sumInvoice = 0;
-        let sumSubmission = 0;
-        let sumCases = 0;
-        let sumReopen = 0;
-        let sumApproval = 0;
-        let sumUngate = 0;
-        let sumCopyListing = 0;
-
-        targetData.forEach((item) => {
-          sumInvoice += Number(item.invoice) || 0;
-          sumSubmission += Number(item.submission) || 0;
-          sumCases += Number(item.cases) || 0;
-          sumReopen += Number(item.reopen) || 0;
-          sumApproval += Number(item.approval) || 0;
-          sumUngate += Number(item.ungate) || 0;
-          sumCopyListing += Number(item.copyListing) || 0;
-        });
-
-        // Get Blocker Text
         const blockerText =
           customData && !(customData instanceof Event)
             ? ""
             : localStorage.getItem("amazonBlocker") || "";
+
+        const activeCounters = configCounters.filter((c) => c.active);
+
+        // Header for screenshot table
+        let tableHeaderCellsHtml = `
+          <th style="padding: 10px; font-weight: 600;">Date</th>
+          <th style="padding: 10px; font-weight: 600;">User</th>
+          <th style="padding: 10px; font-weight: 600;">Company</th>
+        `;
+        activeCounters.forEach((c) => {
+          tableHeaderCellsHtml += `<th style="padding: 10px; font-weight: 600;">${c.label}</th>`;
+        });
 
         // Create the off-screen template container
         const container = document.createElement("div");
@@ -2974,7 +4988,6 @@
         container.style.fontFamily = "'Poppins', 'Helvetica', sans-serif";
         container.style.boxSizing = "border-box";
 
-        // Title section
         let html = `
           <div style="margin-bottom: 25px;">
             <h1 style="font-size: 26px; color: #1e293b; margin: 0; font-weight: 600;">Daily Work Report</h1>
@@ -2984,44 +4997,29 @@
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 12px; text-align: center;">
             <thead>
               <tr style="background-color: #1e3a8a; color: #ffffff;">
-                <th style="padding: 10px font-weight: 600;">Date</th>
-                <th style="padding: 10px font-weight: 600;">User</th>
-                <th style="padding: 10px font-weight: 600;">Company</th>
-                <th style="padding: 10px font-weight: 600;">Invoices</th>
-                <th style="padding: 10px font-weight: 600;">Submission</th>
-                <th style="padding: 10px font-weight: 600;">Cases</th>
-                <th style="padding: 10px font-weight: 600;">Reopen</th>
-                <th style="padding: 10px font-weight: 600;">Approval</th>
-                <th style="padding: 10px font-weight: 600;">Auto Ungate</th>
-                <th style="padding: 10px font-weight: 600;">Copy Listing</th>
+                ${tableHeaderCellsHtml}
               </tr>
             </thead>
             <tbody>
         `;
 
-        // Render Table Rows
         targetData.forEach((item, index) => {
           const rowBg = index % 2 === 0 ? "#ffffff" : "#f8fafc";
           const formattedRowDate = new Date(item.date)
-            .toLocaleDateString("en-GB", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "2-digit",
-            })
+            .toLocaleDateString("en-GB")
             .replace(/\//g, "-");
+
+          let rowCellsHtml = "";
+          activeCounters.forEach((c) => {
+            rowCellsHtml += `<td style="padding: 10px; border: 1px solid #e2e8f0;">${item[c.id] || 0}</td>`;
+          });
 
           html += `
             <tr style="background-color: ${rowBg}; color: #334155;">
               <td style="padding: 10px; border: 1px solid #e2e8f0;">${formattedRowDate}</td>
               <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.userName || "-"}</td>
               <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: 500;">${item.company}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.invoice}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.submission}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.cases}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.reopen}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.approval}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.ungate}</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">${item.copyListing}</td>
+              ${rowCellsHtml}
             </tr>
           `;
         });
@@ -3031,39 +5029,39 @@
           </table>
           
           <div style="display: flex; gap: 30px; align-items: flex-start; justify-content: flex-start;">
-            <!-- Summary card -->
             <div style="flex: 1; max-width: 450px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; border-top: 4px solid #1e3a8a; box-sizing: border-box; padding: 20px;">
               <h2 style="font-size: 13px; color: #1e3a8a; margin: 0 0 15px 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">TOTAL SUMMARY</h2>
               
               <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #475569;">
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
-                  <span>Invoices Made</span><span style="font-weight: 700; color: #0f172a;">${sumInvoice}</span>
+        `;
+
+        const sums = {};
+        activeCounters.forEach((c) => (sums[c.id] = 0));
+        targetData.forEach((item) => {
+          activeCounters.forEach((c) => {
+            sums[c.id] += Number(item[c.id]) || 0;
+          });
+        });
+
+        activeCounters.forEach((c, idx) => {
+          const borderStyle =
+            idx < activeCounters.length - 1
+              ? "border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;"
+              : "padding-bottom: 4px;";
+          html += `
+                <div style="display: flex; justify-content: space-between; ${borderStyle}">
+                  <span>${c.label}</span><span style="font-weight: 700; color: #0f172a;">${sums[c.id]}</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
-                  <span>Submission</span><span style="font-weight: 700; color: #0f172a;">${sumSubmission}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
-                  <span>Cases Open</span><span style="font-weight: 700; color: #0f172a;">${sumCases}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
-                  <span>Reopen Cases</span><span style="font-weight: 700; color: #0f172a;">${sumReopen}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
-                  <span>Approval</span><span style="font-weight: 700; color: #0f172a;">${sumApproval}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px;">
-                  <span>Auto Ungate</span><span style="font-weight: 700; color: #0f172a;">${sumUngate}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; padding-bottom: 4px;">
-                  <span>Copy Listing</span><span style="font-weight: 700; color: #0f172a;">${sumCopyListing}</span>
-                </div>
+          `;
+        });
+
+        html += `
               </div>
             </div>
         `;
 
         if (blockerText.trim()) {
           html += `
-            <!-- Blocker card -->
             <div style="flex: 1.3; background-color: #eff6ff; border: 1px solid #dbeafe; border-radius: 8px; border-top: 4px solid #2563eb; box-sizing: border-box; padding: 20px;">
               <h2 style="font-size: 13px; color: #1e3a8a; margin: 0 0 15px 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #dbeafe; padding-bottom: 8px;">BLOCKERS</h2>
               <p style="font-size: 12px; color: #1e40af; line-height: 1.6; white-space: pre-wrap; font-weight: 500; margin: 0;">${blockerText.trim()}</p>
@@ -3078,7 +5076,6 @@
         container.innerHTML = html;
         document.body.appendChild(container);
 
-        // Run html2canvas on the off-screen template element
         html2canvas(container, {
           scale: 2,
           useCORS: true,
@@ -3086,10 +5083,7 @@
           backgroundColor: "#ffffff",
         })
           .then((canvas) => {
-            // Remove temporary container
             document.body.removeChild(container);
-
-            // Convert canvas to JPG image and download
             const link = document.createElement("a");
             const dateSuffix =
               customDateStr && typeof customDateStr === "string"
@@ -3115,6 +5109,172 @@
             btn.disabled = false;
             alert("Error generating image report: " + err.message);
           });
+      };
+
+      // Dynamic UI First Load Trigger
+      populateUserDropdown();
+      populateCompanyDropdown();
+      if (defaultUser) {
+        userName.value = defaultUser;
+      }
+      renderUI();
+      runAutoBackup();
+
+      // ==============================
+      // Company Management Modal
+      // ==============================
+      window.openCompanyModal = function () {
+        editingCompanyIndex = -1;
+        const input = document.getElementById("newCompanyName");
+        if (input) input.value = "";
+        renderCompanyList();
+        document.getElementById("companyModal").style.display = "flex";
+      };
+
+      window.closeCompanyModal = function () {
+        document.getElementById("companyModal").style.display = "none";
+        populateCompanyDropdown();
+      };
+
+      window.renderCompanyList = function () {
+        const wrapper = document.getElementById("companyListWrapper");
+        if (!wrapper) return;
+        wrapper.innerHTML = "";
+
+        if (companies.length === 0) {
+          wrapper.innerHTML = `
+            <div style="padding: 15px; text-align: center; color: var(--color-label); font-style: italic;">
+              No companies added yet.
+            </div>
+          `;
+          return;
+        }
+
+        companies.forEach((co, idx) => {
+          const div = document.createElement("div");
+          div.style.display = "flex";
+          div.style.justifyContent = "space-between";
+          div.style.alignItems = "center";
+          div.style.gap = "12px";
+          div.style.padding = "10px 12px";
+          div.style.background =
+            idx % 2 === 0 ? "var(--bg-modal)" : "var(--bg-form-col)";
+          div.style.borderBottom =
+            idx < companies.length - 1
+              ? "1px solid var(--color-border)"
+              : "none";
+
+          if (editingCompanyIndex === idx) {
+            div.innerHTML = `
+              <input type="text" id="editCoVal_${idx}" value="${co.replace(/"/g, "&quot;")}" style="flex: 1; padding: 6px 10px; border: 1.5px solid #ff9900; border-radius: 6px; font-size: 13px; outline: none; margin-right: 8px; min-width: 0; background: var(--bg-input); color: var(--color-input-text);" />
+              <div style="display: flex; gap: 4px; flex-shrink: 0;">
+                <button type="button" class="save-btn" style="padding: 6px 10px; font-size: 11px; margin: 0; background: #10b981;" onclick="saveCompanyEdit(${idx})">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button type="button" class="reset-btn" style="padding: 6px 10px; font-size: 11px; margin: 0;" onclick="cancelCompanyEdit()">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            `;
+          } else {
+            div.innerHTML = `
+              <span style="font-size: 14px; font-weight: 500; color: var(--color-text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;" title="${co.replace(/"/g, "&quot;")}">${co}</span>
+              <div style="display: flex; gap: 4px; flex-shrink: 0;">
+                <button type="button" class="edit-btn" style="padding: 6px 10px; font-size: 11px; margin: 0;" onclick="startCompanyEdit(${idx})">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="delete-btn" style="padding: 6px 10px; font-size: 11px; margin: 0;" onclick="deleteCompany(${idx})">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            `;
+          }
+          wrapper.appendChild(div);
+        });
+      };
+
+      window.addCompany = function () {
+        const input = document.getElementById("newCompanyName");
+        if (!input) return;
+        const val = input.value.trim();
+
+        if (!val) {
+          alert("Please enter a valid company name.");
+          return;
+        }
+
+        const exists = companies.some(
+          (co) => co.toLowerCase() === val.toLowerCase(),
+        );
+        if (exists) {
+          alert("This company name already exists.");
+          return;
+        }
+
+        companies.push(val);
+        companies.sort((a, b) => a.localeCompare(b));
+
+        localStorage.setItem("amazonCompanies", JSON.stringify(companies));
+        input.value = "";
+
+        renderCompanyList();
+        populateCompanyDropdown();
+      };
+
+      window.startCompanyEdit = function (idx) {
+        editingCompanyIndex = idx;
+        renderCompanyList();
+        setTimeout(() => {
+          const inp = document.getElementById(`editCoVal_${idx}`);
+          if (inp) inp.select();
+        }, 50);
+      };
+
+      window.saveCompanyEdit = function (idx) {
+        const input = document.getElementById(`editCoVal_${idx}`);
+        if (!input) return;
+        const val = input.value.trim();
+
+        if (!val) {
+          alert("Please enter a valid company name.");
+          return;
+        }
+
+        const exists = companies.some(
+          (co, i) => i !== idx && co.toLowerCase() === val.toLowerCase(),
+        );
+        if (exists) {
+          alert("This company name already exists.");
+          return;
+        }
+
+        companies[idx] = val;
+        companies.sort((a, b) => a.localeCompare(b));
+
+        localStorage.setItem("amazonCompanies", JSON.stringify(companies));
+        editingCompanyIndex = -1;
+
+        renderCompanyList();
+        populateCompanyDropdown();
+      };
+
+      window.cancelCompanyEdit = function () {
+        editingCompanyIndex = -1;
+        renderCompanyList();
+      };
+
+      window.deleteCompany = function (idx) {
+        const name = companies[idx];
+        if (
+          confirm(
+            `Are you sure you want to delete "${name}" from the active dropdown? This will not affect existing reports.`,
+          )
+        ) {
+          companies.splice(idx, 1);
+          localStorage.setItem("amazonCompanies", JSON.stringify(companies));
+          renderCompanyList();
+          populateCompanyDropdown();
+        }
       };
     </script>
 
@@ -3185,7 +5345,7 @@
     <div id="blockerModal" class="modal-overlay" style="display: none">
       <div class="modal-content" style="border-left: 4px solid #3b82f6">
         <div class="modal-header">
-          <h3 style="color: #1e40af">
+          <h3 style="color: var(--color-filter-badge)">
             <i class="fa-solid fa-circle-info"></i> Blocker / Notes Detail
           </h3>
           <button
@@ -3206,7 +5366,7 @@
           <button
             type="button"
             class="modal-ok-btn"
-            style="background: #1e40af"
+            style="background: var(--color-filter-badge)"
             onclick="closeBlockerModal()"
           >
             Got it
@@ -3219,7 +5379,7 @@
     <div id="backupModal" class="modal-overlay" style="display: none">
       <div
         class="modal-content"
-        style="max-width: 800px; border-left: 4px solid #1e3a8a"
+        style="max-width: 800px; border-left: 4px solid var(--bg-table-header)"
       >
         <div class="modal-header">
           <h3>
@@ -3240,10 +5400,10 @@
               justify-content: space-between;
               align-items: center;
               margin-bottom: 20px;
-              background: #f8fafc;
+              background: var(--bg-form-col);
               padding: 12px 16px;
               border-radius: 8px;
-              border: 1px solid #e2e8f0;
+              border: 1px solid var(--color-border);
               gap: 10px;
               flex-wrap: wrap;
             "
@@ -3251,7 +5411,7 @@
             <div
               style="
                 font-size: 13px;
-                color: #475569;
+                color: var(--color-label);
                 display: flex;
                 align-items: center;
                 gap: 8px;
@@ -3294,11 +5454,266 @@
             </table>
           </div>
         </div>
-        <div class="modal-footer" style="margin-top: 10px">
+        <div class="modal-footer" style="margin-top: 10px; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+          <!-- Hidden file input for JSON import -->
+          <input
+            type="file"
+            id="importJsonFileInput"
+            accept=".json,application/json"
+            style="display: none"
+            onchange="handleImportFileSelect(event)"
+          />
+          <button
+            type="button"
+            class="import-action-btn btn-merge"
+            style="background: #6366f1;"
+            onclick="openImportModal()"
+            title="Import a previously downloaded .json backup file"
+          >
+            <i class="fa-solid fa-file-import"></i> Import JSON Backup
+          </button>
           <button
             type="button"
             class="modal-ok-btn"
             onclick="closeBackupModal()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Import Choice Modal ===================== -->
+    <div id="importChoiceModal" class="modal-overlay" style="display: none">
+      <div
+        class="modal-content"
+        style="max-width: 520px; border-left: 4px solid #6366f1"
+      >
+        <div class="modal-header">
+          <h3>
+            <i class="fa-solid fa-file-import" style="color: #6366f1"></i>
+            Import Backup File
+          </h3>
+          <button
+            type="button"
+            class="close-modal-btn"
+            onclick="closeImportModal()"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Drop Zone -->
+          <div
+            class="import-drop-zone"
+            id="importDropZone"
+            onclick="document.getElementById('importJsonFileInput').click()"
+            ondragover="handleImportDragOver(event)"
+            ondragleave="handleImportDragLeave(event)"
+            ondrop="handleImportDrop(event)"
+          >
+            <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+            <p>
+              Drag &amp; drop your <strong>.json backup file</strong> here<br />
+              <span style="font-size: 12px; margin-top: 4px; display: block">
+                or <strong onclick="event.stopPropagation(); document.getElementById('importJsonFileInput').click()">click to browse</strong>
+              </span>
+            </p>
+          </div>
+
+          <!-- File Preview -->
+          <div class="import-preview-box" id="importPreviewBox">
+            <div class="preview-title">
+              <i class="fa-solid fa-file-circle-check" style="color: #10b981"></i>
+              <span id="importPreviewFileName">file.json</span>
+            </div>
+            <div class="preview-stat">
+              <span>Total Records</span>
+              <span id="importPreviewRecords">–</span>
+            </div>
+            <div class="preview-stat">
+              <span>Date Range</span>
+              <span id="importPreviewDateRange">–</span>
+            </div>
+            <div class="preview-stat">
+              <span>Companies</span>
+              <span id="importPreviewCompanies">–</span>
+            </div>
+            <div class="preview-stat">
+              <span>New Records (not in current data)</span>
+              <span id="importPreviewNew" style="color: #10b981">–</span>
+            </div>
+          </div>
+
+          <!-- Warning Box -->
+          <div class="import-warning-box" id="importWarningBox">
+            <i class="fa-solid fa-triangle-exclamation" style="margin-top: 1px; flex-shrink: 0"></i>
+            <span id="importWarningText">Warning message here.</span>
+          </div>
+
+          <!-- Instructions -->
+          <div
+            style="
+              margin-top: 14px;
+              padding: 12px 14px;
+              background: var(--bg-form-col);
+              border-radius: 8px;
+              border: 1px solid var(--color-border);
+              font-size: 12px;
+              color: var(--color-label);
+            "
+          >
+            <strong style="color: var(--color-text-value)">How it works:</strong>
+            <ul style="margin: 6px 0 0 16px; line-height: 1.7">
+              <li>
+                <strong style="color: #10b981">Merge</strong> — Adds imported
+                records to your current data. Exact duplicates (same date +
+                company + user) are skipped automatically.
+              </li>
+              <li>
+                <strong style="color: #ef4444">Overwrite</strong> — Deletes ALL
+                current data and replaces it with the imported file.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="modal-footer"
+          style="gap: 10px; margin-top: 10px; justify-content: flex-end; align-items: center; flex-wrap: wrap"
+        >
+          <button
+            type="button"
+            class="import-action-btn btn-cancel-import"
+            onclick="closeImportModal()"
+          >
+            <i class="fa-solid fa-xmark"></i> Cancel
+          </button>
+          <button
+            type="button"
+            class="import-action-btn btn-merge"
+            id="importMergeBtn"
+            disabled
+            onclick="executeImport('merge')"
+            style="opacity: 0.45; cursor: not-allowed"
+          >
+            <i class="fa-solid fa-code-merge"></i> Merge
+          </button>
+          <button
+            type="button"
+            class="import-action-btn btn-overwrite"
+            id="importOverwriteBtn"
+            disabled
+            onclick="executeImport('overwrite')"
+            style="opacity: 0.45; cursor: not-allowed"
+          >
+            <i class="fa-solid fa-rotate"></i> Overwrite
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company Management Modal -->
+    <div id="companyModal" class="modal-overlay" style="display: none">
+      <div
+        class="modal-content"
+        style="max-width: 500px; border-left: 4px solid #ff9900"
+      >
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-building"></i> Manage Companies</h3>
+          <button
+            type="button"
+            class="close-modal-btn"
+            onclick="closeCompanyModal()"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 15px;
+              background: var(--bg-form-col);
+              padding: 10px 14px;
+              border-radius: 8px;
+              border: 1px solid var(--color-border);
+              font-size: 13px;
+              color: var(--color-label);
+            "
+          >
+            <span>Add, edit, or delete companies from the select list.</span>
+          </div>
+
+          <!-- Add New Company Form -->
+          <div style="display: flex; gap: 8px; margin-bottom: 18px">
+            <input
+              type="text"
+              id="newCompanyName"
+              placeholder="Type new company name..."
+              style="
+                flex: 1;
+                padding: 10px 12px;
+                border: 1.5px solid var(--color-input-border);
+                border-radius: 8px;
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.2s;
+                background: var(--bg-input);
+                color: var(--color-input-text);
+              "
+              onfocus="this.style.borderColor = '#ff9900'"
+              onblur="this.style.borderColor = ''"
+            />
+            <button
+              type="button"
+              class="save-btn"
+              style="
+                padding: 10px 16px;
+                font-size: 13px;
+                margin: 0;
+                background: #ff9900;
+                color: #111;
+                font-weight: 700;
+                box-shadow: 0 4px 10px rgba(255, 153, 0, 0.2);
+                transition: all 0.2s;
+              "
+              onmouseover="
+                this.style.background = '#ffad33';
+                this.style.transform = 'translateY(-1px)';
+              "
+              onmouseout="
+                this.style.background = '#ff9900';
+                this.style.transform = 'translateY(0)';
+              "
+              onclick="addCompany()"
+            >
+              Add
+            </button>
+          </div>
+
+          <!-- Company List Container -->
+          <div
+            id="companyListWrapper"
+            style="
+              max-height: 250px;
+              overflow-y: auto;
+              border: 1.5px solid var(--color-border);
+              border-radius: 10px;
+              background: var(--bg-form-col);
+            "
+          >
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <div class="modal-footer" style="margin-top: 10px">
+          <button
+            type="button"
+            class="modal-ok-btn"
+            onclick="closeCompanyModal()"
           >
             Close
           </button>
