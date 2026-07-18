@@ -4623,15 +4623,11 @@ function bulkSync(rows) {
       // ============================================================
       window.deleteData = function (index) {
         if (confirm("Delete this record?")) {
-          const item = workData[index];
           workData.splice(index, 1);
           localStorage.setItem("amazonWork", JSON.stringify(workData));
           loadData();
           runAutoBackup();
-          
-          if (item && item.id) {
-            deleteRowFromGoogleSheets(item.id);
-          }
+          // NOTE: Google Sheet data is NOT deleted - only removed from local list
         }
       };
 
@@ -4652,9 +4648,7 @@ function bulkSync(rows) {
             if (blocker) blocker.value = "";
             loadData();
             runAutoBackup();
-            
-            // Sync cleared state to Google Sheets
-            bulkSyncToGoogleSheets();
+            // NOTE: Google Sheet data is NOT cleared - only local app data is cleared
           }
         });
 
