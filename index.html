@@ -2879,7 +2879,7 @@
     } else if (action === 'syncRow') {
       result = syncRow(payload.row);
     } else if (action === 'deleteRow') {
-      result = deleteRow(payload.id);
+      result = deleteRow(payload.id, payload.userName);
     } else if (action === 'bulkSync') {
       result = bulkSync(payload.rows);
     } else {
@@ -2898,18 +2898,22 @@ function doOptions(e) {
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
-function getOrCreateSheet() {
+// Returns the sheet for a given user name. Creates it if it does not exist.
+// If no userName is provided, falls back to the default "Daily Work Reports" sheet.
+function getOrCreateSheet(userName) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetName = "Daily Work Reports";
+  var sheetName = (userName && userName.toString().trim())
+    ? userName.toString().trim()
+    : 'Daily Work Reports';
   var sheet = ss.getSheetByName(sheetName);
   if (!sheet) {
     sheet = ss.insertSheet(sheetName);
-    var initialHeaders = ["ID", "Date", "User Name", "Company", "Notes"];
+    var initialHeaders = ['ID', 'Date', 'User Name', 'Company', 'Notes'];
     sheet.getRange(1, 1, 1, initialHeaders.length).setValues([initialHeaders]);
     sheet.getRange(1, 1, 1, initialHeaders.length)
-      .setFontWeight("bold")
-      .setBackground("#1e3a8a")
-      .setFontColor("#ffffff");
+      .setFontWeight('bold')
+      .setBackground('#1e3a8a')
+      .setFontColor('#ffffff');
     sheet.setFrozenRows(1);
   }
   return sheet;
@@ -2926,7 +2930,7 @@ function updateHeadersIfNeeded(sheet, currentHeaders, row) {
   var sheetUpdated = false;
   
   for (var key in row) {
-    if (row.hasOwnProperty(key) &amp;&amp; key !== "id") {
+    if (row.hasOwnProperty(key) &amp;&amp; key !== 'id') {
       var headerName = getHeaderNameForKey(key);
       if (headers.indexOf(headerName) === -1) {
         headers.push(headerName);
@@ -2938,9 +2942,9 @@ function updateHeadersIfNeeded(sheet, currentHeaders, row) {
   if (sheetUpdated) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.getRange(1, 1, 1, headers.length)
-      .setFontWeight("bold")
-      .setBackground("#1e3a8a")
-      .setFontColor("#ffffff");
+      .setFontWeight('bold')
+      .setBackground('#1e3a8a')
+      .setFontColor('#ffffff');
   }
   
   return headers;
@@ -2948,11 +2952,11 @@ function updateHeadersIfNeeded(sheet, currentHeaders, row) {
 
 function getHeaderNameForKey(key) {
   var mappings = {
-    id: "ID",
-    date: "Date",
-    userName: "User Name",
-    company: "Company",
-    notes: "Notes"
+    id: 'ID',
+    date: 'Date',
+    userName: 'User Name',
+    company: 'Company',
+    notes: 'Notes'
   };
   if (mappings[key]) return mappings[key];
   return key.charAt(0).toUpperCase() + key.slice(1);
@@ -2970,13 +2974,14 @@ function prepareRowValues(headers, row) {
   for (var i = 0; i < headers.length; i++) {
     var hName = headers[i];
     var val = keyMap[hName];
-    values.push((val === undefined || val === null) ? "" : val);
+    values.push((val === undefined || val === null) ? '' : val);
   }
   return values;
 }
 
+// Sync a single row. Routes to the sheet named after row.userName.
 function syncRow(row) {
-  var sheet = getOrCreateSheet();
+  var sheet = getOrCreateSheet(row.userName);
   var headers = getHeaders(sheet);
   
   headers = updateHeadersIfNeeded(sheet, headers, row);
@@ -3003,52 +3008,74 @@ function syncRow(row) {
   }
 }
 
-function deleteRow(id) {
-  var sheet = getOrCreateSheet();
-  var lastRow = sheet.getLastRow();
-  if (lastRow <= 1) return { status: 'success', message: 'Sheet is empty' };
-  
-  var idColumnValues = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
-  var rowIndex = -1;
-  
-  for (var i = 0; i < idColumnValues.length; i++) {
-    if (idColumnValues[i][0] === id) {
-      rowIndex = i + 2;
-      break;
-    }
+// Delete a row by ID. Searches in the user's own sheet (and fallback sheet).
+function deleteRow(id, userName) {
+  // Try user sheet first, then fallback sheet
+  var sheetsToSearch = [];
+  if (userName && userName.toString().trim()) {
+    sheetsToSearch.push(getOrCreateSheet(userName));
   }
+  var fallback = getOrCreateSheet(null);
+  if (sheetsToSearch.indexOf(fallback) === -1) sheetsToSearch.push(fallback);
   
-  if (rowIndex !== -1) {
-    sheet.deleteRow(rowIndex);
-    return { status: 'success', message: 'Row deleted' };
+  for (var s = 0; s < sheetsToSearch.length; s++) {
+    var sheet = sheetsToSearch[s];
+    var lastRow = sheet.getLastRow();
+    if (lastRow <= 1) continue;
+    var idColumnValues = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+    for (var i = 0; i < idColumnValues.length; i++) {
+      if (idColumnValues[i][0] === id) {
+        sheet.deleteRow(i + 2);
+        return { status: 'success', message: 'Row deleted' };
+      }
+    }
   }
   return { status: 'error', message: 'Row not found' };
 }
 
+// Bulk sync: groups rows by userName and writes each group to its own sheet.
 function bulkSync(rows) {
-  var sheet = getOrCreateSheet();
-  var lastRow = sheet.getLastRow();
-  var lastCol = sheet.getLastColumn();
-  if (lastRow > 1) {
-    sheet.getRange(2, 1, lastRow - 1, lastCol).clearContent();
-  }
-  
   if (!rows || rows.length === 0) {
-    return { status: 'success', message: 'Sheet cleared' };
+    return { status: 'success', message: 'No rows to sync' };
   }
   
-  var headers = getHeaders(sheet);
+  // Group rows by userName
+  var groups = {};
   for (var i = 0; i < rows.length; i++) {
-    headers = updateHeadersIfNeeded(sheet, headers, rows[i]);
+    var key = (rows[i].userName && rows[i].userName.toString().trim())
+      ? rows[i].userName.toString().trim()
+      : 'Daily Work Reports';
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(rows[i]);
   }
   
-  var matrix = [];
-  for (var i = 0; i < rows.length; i++) {
-    matrix.push(prepareRowValues(headers, rows[i]));
+  var totalSynced = 0;
+  for (var userName in groups) {
+    if (!groups.hasOwnProperty(userName)) continue;
+    var userRows = groups[userName];
+    var sheet = getOrCreateSheet(userName);
+    
+    // Clear existing data rows
+    var lastRow = sheet.getLastRow();
+    var lastCol = sheet.getLastColumn() || 5;
+    if (lastRow > 1) {
+      sheet.getRange(2, 1, lastRow - 1, lastCol).clearContent();
+    }
+    
+    // Update headers and write data
+    var headers = getHeaders(sheet);
+    for (var j = 0; j < userRows.length; j++) {
+      headers = updateHeadersIfNeeded(sheet, headers, userRows[j]);
+    }
+    var matrix = [];
+    for (var j = 0; j < userRows.length; j++) {
+      matrix.push(prepareRowValues(headers, userRows[j]));
+    }
+    sheet.getRange(2, 1, matrix.length, headers.length).setValues(matrix);
+    totalSynced += userRows.length;
   }
   
-  sheet.getRange(2, 1, matrix.length, headers.length).setValues(matrix);
-  return { status: 'success', message: 'Bulk sync complete. Synced ' + rows.length + ' rows.' };
+  return { status: 'success', message: 'Bulk sync complete. Synced ' + totalSynced + ' rows across ' + Object.keys(groups).length + ' user sheet(s).' };
 }</pre>
               </div>
             </div>
@@ -4623,11 +4650,15 @@ function bulkSync(rows) {
       // ============================================================
       window.deleteData = function (index) {
         if (confirm("Delete this record?")) {
+          const deletedItem = workData[index];
           workData.splice(index, 1);
           localStorage.setItem("amazonWork", JSON.stringify(workData));
           loadData();
           runAutoBackup();
-          // NOTE: Google Sheet data is NOT deleted - only removed from local list
+          // Sync deletion to the correct user's Google Sheet tab
+          if (deletedItem && deletedItem.id) {
+            deleteRowFromGoogleSheets(deletedItem.id, deletedItem.userName || "");
+          }
         }
       };
 
@@ -5242,6 +5273,8 @@ function bulkSync(rows) {
         if (!googleSyncEnabled || !googleSyncUrl) return;
         updateSyncStatusBadge("syncing");
         
+        // Row is sent with its userName so the Apps Script can route it
+        // to the correct per-user sheet tab automatically.
         fetch(googleSyncUrl, {
           method: "POST",
           mode: "cors",
@@ -5265,17 +5298,18 @@ function bulkSync(rows) {
         });
       }
 
-      function deleteRowFromGoogleSheets(id) {
+      function deleteRowFromGoogleSheets(id, userName) {
         if (!googleSyncEnabled || !googleSyncUrl) return;
         updateSyncStatusBadge("syncing");
 
+        // Pass userName so the Apps Script can find the row in the correct sheet tab.
         fetch(googleSyncUrl, {
           method: "POST",
           mode: "cors",
           headers: {
             "Content-Type": "text/plain;charset=utf-8"
           },
-          body: JSON.stringify({ action: "deleteRow", id: id })
+          body: JSON.stringify({ action: "deleteRow", id: id, userName: userName || "" })
         })
         .then(response => response.json())
         .then(data => {
