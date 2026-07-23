@@ -1,0 +1,2544 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Work Report</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <!-- Google Font -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="10" y="8" width="44" height="52" rx="4" fill="white" stroke="%231e3a8a" stroke-width="3"/>
+  <rect x="22" y="2" width="20" height="8" rx="2" fill="%23f59e0b"/>
+  <rect x="18" y="22" width="5" height="14" fill="%23ef4444"/>
+  <rect x="27" y="16" width="5" height="20" fill="%233b82f6"/>
+  <rect x="36" y="11" width="5" height="25" fill="%2310b981"/>
+  <path d="M18 48 L26 42 L34 46 L42 38 L50 42" fill="none" stroke="%2310b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>' />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Floating Toast Notifications Container -->
+  <div id="toastContainer"></div>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="header-left">
+        <h1>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTcyLjAzOCA0MC43MDNjLTUuOCA0LjI4My0xNC4yMzQgNi41Ny0yMS40ODYgNi41Ny0xMC4xNjggMC0xOS4zMjMtMy43Ni0yNi4yNDgtMTAuMDE2LS41NDQtLjQ5Mi0uMDU3LTEuMTYyLjU5Ni0uNzggNy40NzQgNC4zNSAxNi43MTUgNi45NjUgMjYuMjYgNi45NjUgNi40MzggMCAxMy41Mi0xLjMzMiAyMC4wMzItNC4wOTYuOTg0LS40MTggMS44MDYuNjQ0Ljg0NCAxLjM1OG0yLjQxOC0yLjc2NGMtLjc0LS45NS00LjktLjQ0OC02Ljc4Mi0uMjI2LS41Ny4wNy0uNjU3LS40MjctLjE0NC0uNzg0IDMuMzItMi4zMzggOC43Ny0xLjY2MyA5LjQwNy0uODhzLS4xNjUgNi4yNS0zLjI4NiA4Ljg1OGMtLjQ4LjQtLjkzNi4xODctLjcyMy0uMzQ0LjctMS43NSAyLjI3Mi01LjY3MiAxLjUyOC02LjYyNSIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik02Ny44MDMgMjAuNDI3di0yLjI3MmEuNTYuNTYgMCAwIDEgLjU3NS0uNTc1SDc4LjU1Yy4zMjYgMCAuNTg4LjIzNS41ODguNTc1VjIwLjFjLS4wMDQuMzI2LS4yOC43NTMtLjc2NiAxLjQyOGwtNS4yNyA3LjUyNmMxLjk2LS4wNDggNC4wMjYuMjQ0IDUuODAyIDEuMjQ1LjQuMjI2LjUuNTU3LjU0Ljg4NHYyLjQyNWMwIC4zMy0uMzY2LjcxOC0uNzUuNTE4LTMuMTMtMS42NC03LjI4Ny0xLjgyLTEwLjc0Ny4wMTctLjM1My4xOTItLjcyMy0uMTkyLS43MjMtLjUyMnYtMi4zMDNjMC0uMzcuMDA0LTEgLjM3NC0xLjU2M2w2LjEwNy04Ljc1OEg2OC40Yy0uMzI2IDAtLjU4OC0uMjMtLjU4OC0uNTdNMzAuNjk0IDM0LjYwNUgyNy42Yy0uMjk2LS4wMjItLjUzLS4yNDQtLjU1My0uNTI3VjE4LjE5NGMwLS4zMTguMjY2LS41Ny41OTYtLjU3aDIuODg2Yy4zLjAxMy41NC4yNDQuNTYyLjUzdjIuMDc2aC4wNTdjLjc1My0yLjAwNyAyLjE2OC0yLjk0MyA0LjA3NC0yLjk0MyAxLjkzNyAwIDMuMTQ3LjkzNiA0LjAxOCAyLjk0My43NS0yLjAwNyAyLjQ1LTIuOTQzIDQuMjc1LTIuOTQzIDEuMjk3IDAgMi43MTYuNTM1IDMuNTgyIDEuNzM3Ljk4IDEuMzM2Ljc4IDMuMjc4Ljc4IDQuOThMNDcuODcgMzQuMDNjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1VjI1LjZjMC0uNjcuMDYtMi4zNDItLjA4Ny0yLjk3Ny0uMjMtMS4wNjYtLjkyMy0xLjM2Ny0xLjgyLTEuMzY3LS43NSAwLTEuNTMyLjUtMS44NSAxLjMwMnMtLjI4NyAyLjE0Mi0uMjg3IDMuMDQzdjguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zMTMtLjAyMi0uNTU3LS4yNy0uNTU3LS41NzVsLS4wMDQtOC40MmMwLTEuNzcyLjI5Mi00LjM4LTEuOTA3LTQuMzgtMi4yMjQgMC0yLjEzNyAyLjU0Mi0yLjEzNyA0LjM4djguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1TTg3Ljg5NiAxNy4zYzQuNTkyIDAgNy4wNzggMy45NDQgNy4wNzggOC45NTggMCA0Ljg0NS0yLjc0NyA4LjY4OC03LjA3OCA4LjY4OC00LjUgMC02Ljk2NS0zLjk0NC02Ljk2NS04Ljg1OCAwLTQuOTQ1IDIuNDg2LTguOCA2Ljk2NS04LjhtLjAyNiAzLjI0M2MtMi4yOCAwLTIuNDI1IDMuMTA4LTIuNDI1IDUuMDQ1cy0uMDMgNi4wODUgMi4zOTggNi4wODVjMi4zOTggMCAyLjUxMi0zLjM0MyAyLjUxMi01LjM4IDAtMS4zNC0uMDU3LTIuOTQzLS40Ni00LjIxNC0uMzQ4LTEuMTA2LTEuMDQtMS41MzctMi4wMjQtMS41MzdtMTMuMDA3IDE0LjA3NWgtMy4wODJjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1bC0uMDA0LTE1Ljg4OGMuMDI2LS4yOTIuMjgzLS41MTguNTk2LS41MThoMi44N2MuMjcuMDEzLjQ5Mi4xOTYuNTUzLjQ0NHYyLjQzaC4wNTdjLjg2Ni0yLjE3MiAyLjA4LTMuMjA4IDQuMjE4LTMuMjA4IDEuNCAwIDIuNzQyLjUgMy42MTMgMS44NzIuOCAxLjI3LjggMy40MDguOCA0Ljk0NXYxMGMtLjAzNS4yOC0uMjkyLjUtLjU5Ni41SDEwNi4zYy0uMjgzLS4wMjItLjUxOC0uMjMtLjU0OC0uNVYyNS40OGMwLTEuNzM3LjItNC4yOC0xLjkzNy00LjI4LS43NTMgMC0xLjQ0NS41MDUtMS44IDEuMjctLjQzNS45Ny0uNDkyIDEuOTM3LS40OTIgMy4wMDh2OC41NTRjLS4wMDQuMzE4LS4yNzQuNTc1LS42MDUuNTc1bS00MS4yMjUtNy42YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjc1IDEuNDA2LTIuMTQyIDEuNDA2LTEuMTg4IDAtMS44ODUtLjkwNS0xLjg4NS0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNjA1LTMuMTE3di42N20zLjEyIDcuNTQ0Yy0uMjA1LjE4My0uNS4xOTYtLjczLjA3NC0xLjAyNy0uODUzLTEuMjE0LTEuMjUtMS43NzYtMi4wNjMtMS42OTggMS43MzItMi45MDMgMi4yNS01LjEwMiAyLjI1LTIuNjA3IDAtNC42MzItMS42MDYtNC42MzItNC44MjMgMC0yLjUxMiAxLjM1OC00LjIyMiAzLjMtNS4wNTggMS42OC0uNzQgNC4wMjYtLjg3IDUuODItMS4wNzV2LS40YzAtLjczNi4wNTctMS42MDYtLjM4LTIuMjQyLS4zNzQtLjU3LTEuMDk3LS44MDUtMS43MzctLjgwNS0xLjE4IDAtMi4yMy42MDUtMi40ODYgMS44Ni0uMDUyLjI4LS4yNTcuNTUzLS41NC41NjZsLTMtLjMyMmMtLjI1Mi0uMDU3LS41MzUtLjI2LS40Ni0uNjUuNjg4LTMuNjQgMy45OC00LjczNiA2LjkyLTQuNzM2IDEuNTA2IDAgMy40NzQuNCA0LjY2MiAxLjU0IDEuNTA2IDEuNDA2IDEuMzYyIDMuMjgyIDEuMzYyIDUuMzI0djQuODIzYzAgMS40NS42IDIuMDg1IDEuMTY3IDIuODcuMTk2LjI4LjI0LjYxNC0uMDEzLjgyM0w2Mi44MiAzNC41N2wtLjAwNC0uMDFNMTkuMTIgMjcuMDE3YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjcgMS40MDYtMi4xNDIgMS40MDYtMS4xODggMC0xLjg4LS45MDUtMS44OC0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNi0zLjExN3YuNjdtMy4xMiA3LjU0NGMtLjIwNS4xODMtLjUuMTk2LS43My4wNzQtMS4wMjctLjg1My0xLjItMS4yNS0xLjc3Ni0yLjA2My0xLjY5OCAxLjczMi0yLjkgMi4yNS01LjEwMiAyLjI1QzEyLjAyOCAzNC44MjIgMTAgMzMuMjE2IDEwIDMwYzAtMi41MTIgMS4zNjItNC4yMjIgMy4zLTUuMDU4IDEuNjgtLjc0IDQuMDI2LS44NyA1LjgyLTEuMDc1di0uNGMwLS43MzYuMDU3LTEuNjA2LS4zNzQtMi4yNDItLjM4LS41Ny0xLjEtLjgwNS0xLjczNy0uODA1LTEuMTggMC0yLjIzMy42MDUtMi41IDEuODYtLjA1Mi4yOC0uMjU3LjU1My0uNTM1LjU2NmwtMy4wMDQtLjMyMmMtLjI1Mi0uMDU3LS41My0uMjYtLjQ2LS42NS42OTItMy42NCAzLjk4LTQuNzM2IDYuOTItNC43MzYgMS41MDYgMCAzLjQ3NC40IDQuNjYyIDEuNTQgMS41MDYgMS40MDYgMS4zNjIgMy4yODIgMS4zNjIgNS4zMjR2NC44MjNjMCAxLjQ1LjYgMi4wODUgMS4xNjcgMi44Ny4yLjI4LjI0NC42MTQtLjAxLjgyM2wtMi4zNiAyLjA1Mi0uMDEtLjAxIiBmaWxsPSIjMjIxZjFmIi8+PC9zdmc+"
+            alt="Amazon" width="100" height="50" style="
+                vertical-align: middle;
+                display: inline-block;
+                margin-right: 10px;
+                filter: brightness(0) invert(1);
+              " />
+          Daily Work Report
+        </h1>
+        <div class="header-subtitle" id="headerDateTime">
+          <i class="fa-regular fa-calendar-days"></i> Loading date and time...
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="settingsBtn" class="header-action-btn" onclick="openSettingsModal()" type="button">
+          <i class="fa-solid fa-gear"></i> Settings
+        </button>
+        <!-- Quick Tools Dropdown -->
+        <div class="header-dropdown-container" id="headerToolsDropdown">
+          <button type="button" class="header-action-btn dropdown-trigger" onclick="toggleHeaderToolsDropdown(event)">
+            <i class="fa-solid fa-layer-group"></i> Quick Tools <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+          <div class="header-dropdown-menu" id="headerToolsMenu">
+            <button type="button" class="dropdown-item" onclick="openBackupModal(); closeHeaderToolsDropdown();">
+              <i class="fa-solid fa-database" style="color: #3b82f6;"></i> Backup History
+            </button>
+            <button type="button" class="dropdown-item" onclick="toggleArchiveSection(); closeHeaderToolsDropdown();">
+              <i class="fa-solid fa-box-archive" style="color: #a855f7;"></i> Old Employees 
+              <span id="archiveHeaderCount" class="dropdown-badge">0</span>
+            </button>
+          </div>
+        </div>
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Live Session</span>
+        </div>
+        <div id="userProfileBadge" class="status-badge" style="background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-user-gear" style="color: #ff9900;"></i>
+          <span id="headerUserNameText">Guest</span>
+          <span id="headerRoleBadge" class="role-pill-badge" style="background: #3b82f6; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700;">USER</span>
+          <button type="button" onclick="logoutUser()" title="Logout" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 0 4px; font-size: 12px;">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+        <div id="syncStatusBadge" class="status-badge"
+          style="background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); cursor: pointer; user-select: none;"
+          onclick="openSettingsModal(); switchSettingsTab('gsync');"
+          title="Google Sheet Sync Status. Click to configure.">
+          <span class="sync-status-dot disabled" id="syncStatusDot"></span>
+          <span id="syncStatusText">Sync Off</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Admin Missing Reports Alert Banner -->
+    <div id="missingReportsAlertBanner" class="alert-banner" style="display: none; background: rgba(239, 68, 68, 0.12); border: 1.5px solid #ef4444; border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; color: var(--color-text-main);">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 20px;"></i>
+          <div>
+            <strong style="color: #ef4444; font-size: 14px;">Missing Daily Reports Alert</strong>
+            <p id="missingReportsAlertText" style="margin: 2px 0 0; font-size: 13px; color: var(--color-label);">
+              The following team members have not submitted today's report yet: <span id="missingUsersList" style="font-weight: 600; color: #1e3b8ac7;">None</span>
+            </p>
+          </div>
+        </div>
+        <button type="button" onclick="document.getElementById('missingReportsAlertBanner').style.display='none'" style="background: none; border: none; color: var(--color-label); cursor: pointer; font-size: 16px;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Dashboard Cards (Dynamic) -->
+    <section class="cards" id="dashboardCards">
+      <!-- Rendered by JS renderDashboard() -->
+    </section>
+
+    <!-- Form -->
+    <section class="form-section">
+      <h2>Add Today's Work</h2>
+
+      <form id="workForm" class="grouped-form">
+        <!-- Column 1: Session Details -->
+        <div class="form-column">
+          <h3 class="form-group-title">
+            <i class="fa-solid fa-circle-info"></i> Session Details
+          </h3>
+
+          <div class="input-group">
+            <label>Date</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-calendar input-icon"></i>
+              <input type="date" id="date" required />
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>User Name</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user input-icon"></i>
+              <select id="userName" required>
+                <option value="">Select User</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 8px;
+                ">
+              <label style="margin-bottom: 0">Select Company</label>
+              <button type="button" onclick="openCompanyModal()" style="
+                    background: none;
+                    border: none;
+                    color: #ff9900;
+                    font-size: 13px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    padding: 0;
+                    transition: color 0.2s;
+                  " onmouseover="this.style.color = '#ffad33'" onmouseout="this.style.color = '#ff9900'">
+                <i class="fa-solid fa-gear"></i> Manage
+              </button>
+            </div>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-building input-icon"></i>
+              <select id="company" required>
+                <option value="">Select Company</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-group full-width" style="margin-bottom: 0">
+            <label>Notes
+              <span style="color: #64748b; font-size: 12px">(Store-specific / Tomorrow's Plan)</span></label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-comment-dots input-icon textarea-icon"></i>
+              <textarea id="notes" rows="4"
+                placeholder="Write today's store-specific work / tomorrow's work..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Work Counters -->
+        <div class="form-column">
+          <h3 class="form-group-title">
+            <i class="fa-solid fa-chart-line"></i> Work Counters
+          </h3>
+          <!-- Work Counters (Dynamic) -->
+          <div class="input-grid" id="formCountersGrid">
+            <!-- Rendered by JS renderFormCounters() -->
+          </div>
+
+          <!-- Global Day Work Blocker -->
+          <div class="input-group full-width" style="margin-top: 20px; margin-bottom: 0">
+            <label>Blocker<span style="color: #64748b; font-size: 12px">(Overall Day Work)</span></label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-circle-exclamation input-icon textarea-icon"></i>
+              <textarea id="blocker" rows="3" placeholder="Facing internet issue, server down, etc..."></textarea>
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 8px">
+              <button type="button" class="save-blocker-btn" onclick="saveBlocker()">
+                <i class="fa-solid fa-floppy-disk"></i> Save
+              </button>
+              <button type="button" class="delete-blocker-btn" onclick="clearBlocker()">
+                <i class="fa-solid fa-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons Row -->
+        <div class="buttons">
+          <button type="submit" class="save-btn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Save Data
+          </button>
+
+          <button type="reset" class="reset-btn">
+            <i class="fa-solid fa-rotate-left"></i>
+            Reset
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Table -->
+    <section class="table-section">
+      <div class="table-header">
+        <h2>Work History</h2>
+
+        <div class="table-actions">
+          <button id="clearAll" class="reset-btn" type="button">
+            <i class="fa-solid fa-trash-can"></i>
+            Clear All
+          </button>
+
+          <button id="downloadPdf" class="save-btn" type="button">
+            <i class="fa-solid fa-file-pdf"></i>
+            Download PDF
+          </button>
+
+          <button id="downloadImage" class="save-btn" style="background: #10b981" type="button"
+            onclick="downloadScreenshot()">
+            <i class="fa-solid fa-image"></i>
+            Download Image
+          </button>
+        </div>
+      </div>
+
+      <div class="table-filters">
+        <div class="filter-header">
+          <span class="filter-title">
+            <i class="fa-solid fa-sliders"></i>
+            Filter Records
+          </span>
+          <span class="filter-results-badge" id="filterResultsBadge">All Records</span>
+        </div>
+        <div class="filter-row">
+          <div class="filter-group">
+            <span class="filter-icon-badge">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="text" id="searchFilter" placeholder="Search by User or Company..." />
+          </div>
+          <div class="filter-group">
+            <span class="filter-icon-badge">
+              <i class="fa-regular fa-calendar-days"></i>
+            </span>
+            <input type="date" id="dateFilter" />
+          </div>
+          <button class="filter-clear-btn" id="clearFiltersBtn" title="Clear all filters">
+            <i class="fa-solid fa-xmark"></i>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- User tabs for separate sheets -->
+      <!-- <div class="user-tabs-container" id="userTabsContainer"></div> -->
+
+      <!-- Duplicate Warning Alert -->
+      <div id="duplicateAlert" class="alert-danger" style="
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+          ">
+        <div style="display: flex; align-items: center; gap: 10px; flex: 1">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span></span>
+        </div>
+        <i class="fa-solid fa-circle-info duplicate-info-icon" onclick="showMergeInfoGlobal()"
+          title="Click for merge instructions"></i>
+      </div>
+
+      <!-- Blocker Warning Alert -->
+      <div id="blockerAlert" class="alert-info" style="
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+          ">
+        <div style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              flex: 1;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            ">
+          <i class="fa-solid fa-circle-exclamation" style="font-size: 16px"></i>
+          <span id="blockerAlertText" style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              "></span>
+        </div>
+        <i class="fa-solid fa-circle-info blocker-info-icon" id="blockerAlertIcon" style="margin-left: 10px"
+          title="Click to view full notes"></i>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead id="tableHead">
+            <!-- Rendered dynamically by JS renderTableHeader() -->
+          </thead>
+
+          <tbody id="tableBody">
+            <!-- JS Data -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ARCHIVE SECTION (Old Employees)
+    ============================================================ -->
+    <div id="archiveSection" class="archive-section" style="display:none;">
+      <div class="archive-section-header">
+        <div class="archive-section-title">
+          <i class="fa-solid fa-box-archive"></i>
+          Archived Employees
+          <span class="archive-count-badge" id="archiveCountBadge">0</span>
+        </div>
+        <button type="button" class="archive-action-btn btn-view" onclick="toggleArchiveSection()"
+          style="border-color:rgba(124,58,237,0.3);color:#7c3aed;">
+          <i class="fa-solid fa-xmark"></i> Hide
+        </button>
+      </div>
+      <div id="archiveListContainer">
+        <!-- Rendered by JS renderArchiveSection() -->
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <div class="footer">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <!-- <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTcyLjAzOCA0MC43MDNjLTUuOCA0LjI4My0xNC4yMzQgNi41Ny0yMS40ODYgNi41Ny0xMC4xNjggMC0xOS4zMjMtMy43Ni0yNi4yNDgtMTAuMDE2LS41NDQtLjQ5Mi0uMDU3LTEuMTYyLjU5Ni0uNzggNy40NzQgNC4zNSAxNi43MTUgNi45NjUgMjYuMjYgNi45NjUgNi40MzggMCAxMy41Mi0xLjMzMiAyMC4wMzItNC4wOTYuOTg0LS40MTggMS44MDYuNjQ0Ljg0NCAxLjM1OG0yLjQxOC0yLjc2NGMtLjc0LS45NS00LjktLjQ0OC02Ljc4Mi0uMjI2LS41Ny4wNy0uNjU3LS40MjctLjE0NC0uNzg0IDMuMzItMi4zMzggOC43Ny0xLjY2MyA5LjQwNy0uODhzLS4xNjUgNi4yNS0zLjI4NiA4Ljg1OGMtLjQ4LjQtLjkzNi4xODctLjcyMy0uMzQ0LjctMS43NSAyLjI3Mi01LjY3MiAxLjUyOC02LjYyNSIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik02Ny44MDMgMjAuNDI3di0yLjI3MmEuNTYuNTYgMCAwIDEgLjU3NS0uNTc1SDc4LjU1Yy4zMjYgMCAuNTg4LjIzNS41ODguNTc1VjIwLjFjLS4wMDQuMzI2LS4yOC43NTMtLjc2NiAxLjQyOGwtNS4yNyA3LjUyNmMxLjk2LS4wNDggNC4wMjYuMjQ0IDUuODAyIDEuMjQ1LjQuMjI2LjUuNTU3LjU0Ljg4NHYyLjQyNWMwIC4zMy0uMzY2LjcxOC0uNzUuNTE4LTMuMTMtMS42NC03LjI4Ny0xLjgyLTEwLjc0Ny4wMTctLjM1My4xOTItLjcyMy0uMTkyLS43MjMtLjUyMnYtMi4zMDNjMC0uMzcuMDA0LTEgLjM3NC0xLjU2M2w2LjEwNy04Ljc1OEg2OC40Yy0uMzI2IDAtLjU4OC0uMjMtLjU4OC0uNTdNMzAuNjk0IDM0LjYwNUgyNy42Yy0uMjk2LS4wMjItLjUzLS4yNDQtLjU1My0uNTI3VjE4LjE5NGMwLS4zMTguMjY2LS41Ny41OTYtLjU3aDIuODg2Yy4zLjAxMy41NC4yNDQuNTYyLjUzdjIuMDc2aC4wNTdjLjc1My0yLjAwNyAyLjE2OC0yLjk0MyA0LjA3NC0yLjk0MyAxLjkzNyAwIDMuMTQ3LjkzNiA0LjAxOCAyLjk0My43NS0yLjAwNyAyLjQ1LTIuOTQzIDQuMjc1LTIuOTQzIDEuMjk3IDAgMi43MTYuNTM1IDMuNTgyIDEuNzM3Ljk4IDEuMzM2Ljc4IDMuMjc4Ljc4IDQuOThMNDcuODcgMzQuMDNjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1VjI1LjZjMC0uNjcuMDYtMi4zNDItLjA4Ny0yLjk3Ny0uMjMtMS4wNjYtLjkyMy0xLjM2Ny0xLjgyLTEuMzY3LS43NSAwLTEuNTMyLjUtMS44NSAxLjMwMnMtLjI4NyAyLjE0Mi0uMjg3IDMuMDQzdjguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zMTMtLjAyMi0uNTU3LS4yNy0uNTU3LS41NzVsLS4wMDQtOC40MmMwLTEuNzcyLjI5Mi00LjM4LTEuOTA3LTQuMzgtMi4yMjQgMC0yLjEzNyAyLjU0Mi0yLjEzNyA0LjM4djguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1TTg3Ljg5NiAxNy4zYzQuNTkyIDAgNy4wNzggMy45NDQgNy4wNzggOC45NTggMCA0Ljg0NS0yLjc0NyA4LjY4OC03LjA3OCA4LjY4OC00LjUgMC02Ljk2NS0zLjk0NC02Ljk2NS04Ljg1OCAwLTQuOTQ1IDIuNDg2LTguOCA2Ljk2NS04LjhtLjAyNiAzLjI0M2MtMi4yOCAwLTIuNDI1IDMuMTA4LTIuNDI1IDUuMDQ1cy0uMDMgNi4wODUgMi4zOTggNi4wODVjMi4zOTggMCAyLjUxMi0zLjM0MyAyLjUxMi01LjM4IDAtMS4zNC0uMDU3LTIuOTQzLS40Ni00LjIxNC0uMzQ4LTEuMTA2LTEuMDQtMS41MzctMi4wMjQtMS41MzdtMTMuMDA3IDE0LjA3NWgtMy4wODJjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1bC0uMDA0LTE1Ljg4OGMuMDI2LS4yOTIuMjgzLS41MTguNTk2LS41MThoMi44N2MuMjcuMDEzLjQ5Mi4xOTYuNTUzLjQ0NHYyLjQzaC4wNTdjLjg2Ni0yLjE3MiAyLjA4LTMuMjA4IDQuMjE4LTMuMjA4IDEuNCAwIDIuNzQyLjUgMy42MTMgMS44NzIuOCAxLjI3LjggMy40MDguOCA0Ljk0NXYxMGMtLjAzNS4yOC0uMjkyLjUtLjU5Ni41SDEwNi4zYy0uMjgzLS4wMjItLjUxOC0uMjMtLjU0OC0uNVYyNS40OGMwLTEuNzM3LjItNC4yOC0xLjkzNy00LjI4LS43NTMgMC0xLjQ0NS41MDUtMS44IDEuMjctLjQzNS45Ny0uNDkyIDEuOTM3LS40OTIgMy4wMDh2OC41NTRjLS4wMDQuMzE4LS4yNzQuNTc1LS42MDUuNTc1bS00MS4yMjUtNy42YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjc1IDEuNDA2LTIuMTQyIDEuNDA2LTEuMTg4IDAtMS44ODUtLjkwNS0xLjg4NS0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNjA1LTMuMTE3di42N20zLjEyIDcuNTQ0Yy0uMjA1LjE4My0uNS4xOTYtLjczLjA3NC0xLjAyNy0uODUzLTEuMjE0LTEuMjUtMS43NzYtMi4wNjMtMS42OTggMS43MzItMi45MDMgMi4yNS01LjEwMiAyLjI1LTIuNjA3IDAtNC42MzItMS42MDYtNC42MzItNC44MjMgMC0yLjUxMiAxLjM1OC00LjIyMiAzLjMtNS4wNTggMS42OC0uNzQgNC4wMjYtLjg3IDUuODItMS4wNzV2LS40YzAtLjczNi4wNTctMS42MDYtLjM4LTIuMjQyLS4zNzQtLjU3LTEuMDk3LS44MDUtMS43MzctLjgwNS0xLjE4IDAtMi4yMy42MDUtMi40ODYgMS44Ni0uMDUyLjI4LS4yNTcuNTUzLS41NC41NjZsLTMtLjMyMmMtLjI1Mi0uMDU3LS41MzUtLjI2LS40Ni0uNjUuNjg4LTMuNjQgMy45OC00LjczNiA2LjkyLTQuNzM2IDEuNTA2IDAgMy40NzQuNCA0LjY2MiAxLjU0IDEuNTA2IDEuNDA2IDEuMzYyIDMuMjgyIDEuMzYyIDUuMzI0djQuODIzYzAgMS40NS42IDIuMDg1IDEuMTY3IDIuODcuMTk2LjI4LjI0LjYxNC0uMDEzLjgyM0w2Mi44MiAzNC41N2wtLjAwNC0uMDFNMTkuMTIgMjcuMDE3YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjcgMS40MDYtMi4xNDIgMS40MDYtMS4xODggMC0xLjg4LS45MDUtMS44OC0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNi0zLjExN3YuNjdtMy4xMiA3LjU0NGMtLjIwNS4xODMtLjUuMTk2LS43My4wNzQtMS4wMjctLjg1My0xLjItMS4yNS0xLjc3Ni0yLjA2My0xLjY5OCAxLjczMi0yLjkgMi4yNS01LjEwMiAyLjI1QzEyLjAyOCAzNC44MjIgMTAgMzMuMjE2IDEwIDMwYzAtMi41MTIgMS4zNjItNC4yMjIgMy4zLTUuMDU4IDEuNjgtLjc0IDQuMDI2LS44NyA1LjgyLTEuMDc1di0uNGMwLS43MzYuMDU3LTEuNjA2LS4zNzQtMi4yNDItLjM4LS41Ny0xLjEtLjgwNS0xLjczNy0uODA1LTEuMTggMC0yLjIzMy42MDUtMi41IDEuODYtLjA1Mi4yOC0uMjU3LjU1My0uNTM1LjU2NmwtMy4wMDQtLjMyMmMtLjI1Mi0uMDU3LS41My0uMjYtLjQ2LS42NS42OTItMy42NCAzLjk4LTQuNzM2IDYuOTItNC43MzYgMS41MDYgMCAzLjQ3NC40IDQuNjYyIDEuNTQgMS41MDYgMS40MDYgMS4zNjIgMy4yODIgMS4zNjIgNS4zMjR2NC44MjNjMCAxLjQ1LjYgMi4wODUgMS4xNjcgMi44Ny4yLjI4LjI0NC42MTQtLjAxLjgyM2wtMi4zNiAyLjA1Mi0uMDEtLjAxIiBmaWxsPSIjMjIxZjFmIi8+PC9zdmc+"
+              alt="Amazon"
+              width="90"
+              height="45"
+              style="display: block"
+            /> -->
+
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTcyLjAzOCA0MC43MDNjLTUuOCA0LjI4My0xNC4yMzQgNi41Ny0yMS40ODYgNi41Ny0xMC4xNjggMC0xOS4zMjMtMy43Ni0yNi4yNDgtMTAuMDE2LS41NDQtLjQ5Mi0uMDU3LTEuMTYyLjU5Ni0uNzggNy40NzQgNC4zNSAxNi43MTUgNi45NjUgMjYuMjYgNi45NjUgNi40MzggMCAxMy41Mi0xLjMzMiAyMC4wMzItNC4wOTYuOTg0LS40MTggMS44MDYuNjQ0Ljg0NCAxLjM1OG0yLjQxOC0yLjc2NGMtLjc0LS45NS00LjktLjQ0OC02Ljc4Mi0uMjI2LS41Ny4wNy0uNjU3LS40MjctLjE0NC0uNzg0IDMuMzItMi4zMzggOC43Ny0xLjY2MyA5LjQwNy0uODhzLS4xNjUgNi4yNS0zLjI4NiA4Ljg1OGMtLjQ4LjQtLjkzNi4xODctLjcyMy0uMzQ0LjctMS43NSAyLjI3Mi01LjY3MiAxLjUyOC02LjYyNSIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik02Ny44MDMgMjAuNDI3di0yLjI3MmEuNTYuNTYgMCAwIDEgLjU3NS0uNTc1SDc4LjU1Yy4zMjYgMCAuNTg4LjIzNS41ODguNTc1VjIwLjFjLS4wMDQuMzI2LS4yOC43NTMtLjc2NiAxLjQyOGwtNS4yNyA3LjUyNmMxLjk2LS4wNDggNC4wMjYuMjQ0IDUuODAyIDEuMjQ1LjQuMjI2LjUuNTU3LjU0Ljg4NHYyLjQyNWMwIC4zMy0uMzY2LjcxOC0uNzUuNTE4LTMuMTMtMS42NC03LjI4Ny0xLjgyLTEwLjc0Ny4wMTctLjM1My4xOTItLjcyMy0uMTkyLS43MjMtLjUyMnYtMi4zMDNjMC0uMzcuMDA0LTEgLjM3NC0xLjU2M2w2LjEwNy04Ljc1OEg2OC40Yy0uMzI2IDAtLjU4OC0uMjMtLjU4OC0uNTdNMzAuNjk0IDM0LjYwNUgyNy42Yy0uMjk2LS4wMjItLjUzLS4yNDQtLjU1My0uNTI3VjE4LjE5NGMwLS4zMTguMjY2LS41Ny41OTYtLjU3aDIuODg2Yy4zLjAxMy41NC4yNDQuNTYyLjUzdjIuMDc2aC4wNTdjLjc1My0yLjAwNyAyLjE2OC0yLjk0MyA0LjA3NC0yLjk0MyAxLjkzNyAwIDMuMTQ3LjkzNiA0LjAxOCAyLjk0My43NS0yLjAwNyAyLjQ1LTIuOTQzIDQuMjc1LTIuOTQzIDEuMjk3IDAgMi43MTYuNTM1IDMuNTgyIDEuNzM3Ljk4IDEuMzM2Ljc4IDMuMjc4Ljc4IDQuOThMNDcuODcgMzQuMDNjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1VjI1LjZjMC0uNjcuMDYtMi4zNDItLjA4Ny0yLjk3Ny0uMjMtMS4wNjYtLjkyMy0xLjM2Ny0xLjgyLTEuMzY3LS43NSAwLTEuNTMyLjUtMS44NSAxLjMwMnMtLjI4NyAyLjE0Mi0uMjg3IDMuMDQzdjguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1aC0zLjFjLS4zMTMtLjAyMi0uNTU3LS4yNy0uNTU3LS41NzVsLS4wMDQtOC40MmMwLTEuNzcyLjI5Mi00LjM4LTEuOTA3LTQuMzgtMi4yMjQgMC0yLjEzNyAyLjU0Mi0yLjEzNyA0LjM4djguNDJjMCAuMzE4LS4yNjYuNTc1LS41OTYuNTc1TTg3Ljg5NiAxNy4zYzQuNTkyIDAgNy4wNzggMy45NDQgNy4wNzggOC45NTggMCA0Ljg0NS0yLjc0NyA4LjY4OC03LjA3OCA4LjY4OC00LjUgMC02Ljk2NS0zLjk0NC02Ljk2NS04Ljg1OCAwLTQuOTQ1IDIuNDg2LTguOCA2Ljk2NS04LjhtLjAyNiAzLjI0M2MtMi4yOCAwLTIuNDI1IDMuMTA4LTIuNDI1IDUuMDQ1cy0uMDMgNi4wODUgMi4zOTggNi4wODVjMi4zOTggMCAyLjUxMi0zLjM0MyAyLjUxMi01LjM4IDAtMS4zNC0uMDU3LTIuOTQzLS40Ni00LjIxNC0uMzQ4LTEuMTA2LTEuMDQtMS41MzctMi4wMjQtMS41MzdtMTMuMDA3IDE0LjA3NWgtMy4wODJjLS4zLS4wMjItLjU1Ny0uMjctLjU1Ny0uNTc1bC0uMDA0LTE1Ljg4OGMuMDI2LS4yOTIuMjgzLS41MTguNTk2LS41MThoMi44N2MuMjcuMDEzLjQ5Mi4xOTYuNTUzLjQ0NHYyLjQzaC4wNTdjLjg2Ni0yLjE3MiAyLjA4LTMuMjA4IDQuMjE4LTMuMjA4IDEuNCAwIDIuNzQyLjUgMy42MTMgMS44NzIuOCAxLjI3LjggMy40MDguOCA0Ljk0NXYxMGMtLjAzNS4yOC0uMjkyLjUtLjU5Ni41SDEwNi4zYy0uMjgzLS4wMjItLjUxOC0uMjMtLjU0OC0uNVYyNS40OGMwLTEuNzM3LjItNC4yOC0xLjkzNy00LjI4LS43NTMgMC0xLjQ0NS41MDUtMS44IDEuMjctLjQzNS45Ny0uNDkyIDEuOTM3LS40OTIgMy4wMDh2OC41NTRjLS4wMDQuMzE4LS4yNzQuNTc1LS42MDUuNTc1bS00MS4yMjUtNy42YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjc1IDEuNDA2LTIuMTQyIDEuNDA2LTEuMTg4IDAtMS44ODUtLjkwNS0xLjg4NS0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNjA1LTMuMTE3di42N20zLjEyIDcuNTQ0Yy0uMjA1LjE4My0uNS4xOTYtLjczLjA3NC0xLjAyNy0uODUzLTEuMjE0LTEuMjUtMS43NzYtMi4wNjMtMS42OTggMS43MzItMi45MDMgMi4yNS01LjEwMiAyLjI1LTIuNjA3IDAtNC42MzItMS42MDYtNC42MzItNC44MjMgMC0yLjUxMiAxLjM1OC00LjIyMiAzLjMtNS4wNTggMS42OC0uNzQgNC4wMjYtLjg3IDUuODItMS4wNzV2LS40YzAtLjczNi4wNTctMS42MDYtLjM4LTIuMjQyLS4zNzQtLjU3LTEuMDk3LS44MDUtMS43MzctLjgwNS0xLjE4IDAtMi4yMy42MDUtMi40ODYgMS44Ni0uMDUyLjI4LS4yNTcuNTUzLS41NC41NjZsLTMtLjMyMmMtLjI1Mi0uMDU3LS41MzUtLjI2LS40Ni0uNjUuNjg4LTMuNjQgMy45OC00LjczNiA2LjkyLTQuNzM2IDEuNTA2IDAgMy40NzQuNCA0LjY2MiAxLjU0IDEuNTA2IDEuNDA2IDEuMzYyIDMuMjgyIDEuMzYyIDUuMzI0djQuODIzYzAgMS40NS42IDIuMDg1IDEuMTY3IDIuODcuMTk2LjI4LjI0LjYxNC0uMDEzLjgyM0w2Mi44MiAzNC41N2wtLjAwNC0uMDFNMTkuMTIgMjcuMDE3YzAgMS4yMDYuMDMgMi4yLS41OCAzLjI4Mi0uNDkyLjg3LTEuMjcgMS40MDYtMi4xNDIgMS40MDYtMS4xODggMC0xLjg4LS45MDUtMS44OC0yLjI0MiAwLTIuNjM4IDIuMzY0LTMuMTE3IDQuNi0zLjExN3YuNjdtMy4xMiA3LjU0NGMtLjIwNS4xODMtLjUuMTk2LS43My4wNzQtMS4wMjctLjg1My0xLjItMS4yNS0xLjc3Ni0yLjA2My0xLjY5OCAxLjczMi0yLjkgMi4yNS01LjEwMiAyLjI1QzEyLjAyOCAzNC44MjIgMTAgMzMuMjE2IDEwIDMwYzAtMi41MTIgMS4zNjItNC4yMjIgMy4zLTUuMDU4IDEuNjgtLjc0IDQuMDI2LS44NyA1LjgyLTEuMDc1di0uNGMwLS43MzYuMDU3LTEuNjA2LS4zNzQtMi4yNDItLjM4LS41Ny0xLjEtLjgwNS0xLjczNy0uODA1LTEuMTggMC0yLjIzMy42MDUtMi41IDEuODYtLjA1Mi4yOC0uMjU3LjU1My0uNTM1LjU2NmwtMy4wMDQtLjMyMmMtLjI1Mi0uMDU3LS41My0uMjYtLjQ2LS42NS42OTItMy42NCAzLjk4LTQuNzM2IDYuOTItNC43MzYgMS41MDYgMCAzLjQ3NC40IDQuNjYyIDEuNTQgMS41MDYgMS40MDYgMS4zNjIgMy4yODIgMS4zNjIgNS4zMjR2NC44MjNjMCAxLjQ1LjYgMi4wODUgMS4xNjcgMi44Ny4yLjI4LjI0NC42MTQtLjAxLjgyM2wtMi4zNiAyLjA1Mi0uMDEtLjAxIiBmaWxsPSIjMjIxZjFmIi8+PC9zdmc+"
+            alt="Amazon" width="90" height="45" style="
+                vertical-align: middle;
+                display: inline-block;
+                margin-right: 10px;
+                filter: brightness(0) invert(1);
+              " />
+        </div>
+        <p>
+          © 2026 • Designed &amp; Developed by
+          <span>Abdul Rehman</span> • All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+         SETTINGS MODAL
+    ============================================================ -->
+  <div id="settingsModal" class="modal-overlay" style="display: none">
+    <div class="modal-content" style="
+          max-width: 680px;
+          width: 95%;
+          padding: 0;
+          overflow: hidden;
+          border-top: 4px solid #ff9900;
+        ">
+      <!-- Modal Header -->
+      <div style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--bg-form-col);
+          ">
+        <h3 style="
+              color: #ff9900;
+              font-size: 18px;
+              font-weight: 700;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              margin: 0;
+            ">
+          <i class="fa-solid fa-gear"></i> App Settings
+        </h3>
+        <button type="button" class="close-modal-btn" onclick="closeSettingsModal()">
+          &times;
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div style="
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--bg-form-col);
+          ">
+        <button type="button" class="settings-tab active" id="tab-users" onclick="switchSettingsTab('users')" style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: #ff9900;
+              border-bottom: 2px solid #ff9900;
+              cursor: pointer;
+              transition: all 0.2s;
+            ">
+          <i class="fa-solid fa-users"></i><br />Team / Users
+        </button>
+        <button type="button" class="settings-tab" id="tab-counters" onclick="switchSettingsTab('counters')" style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            ">
+          <i class="fa-solid fa-chart-bar"></i><br />Work Counters
+        </button>
+        <button type="button" class="settings-tab" id="tab-appearance" onclick="switchSettingsTab('appearance')" style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            ">
+          <i class="fa-solid fa-palette"></i><br />Appearance
+        </button>
+        <button type="button" class="settings-tab" id="tab-gsync" onclick="switchSettingsTab('gsync')" style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            ">
+          <i class="fa-solid fa-cloud-arrow-up"></i><br />Google Sync
+        </button>
+        <button type="button" class="settings-tab" id="tab-owner" onclick="switchSettingsTab('owner')" style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            ">
+          <i class="fa-solid fa-shield-halved"></i><br />Owner
+        </button>
+        <button type="button" class="settings-tab" id="tab-guide" onclick="switchSettingsTab('guide')" style="
+              flex: 1;
+              padding: 12px;
+              border: none;
+              background: transparent;
+              font-size: 13px;
+              font-weight: 600;
+              color: var(--color-label);
+              border-bottom: 2px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s;
+            ">
+          <i class="fa-solid fa-circle-question"></i><br />User Guide
+        </button>
+      </div>
+
+      <!-- Tab Bodies -->
+      <div style="
+            padding: 22px 24px;
+            max-height: 420px;
+            overflow-y: auto;
+            background: var(--bg-modal);
+          ">
+        <!-- USERS TAB -->
+        <div id="settingsPanel-users">
+          <p style="
+                font-size: 12px;
+                color: var(--color-label);
+                margin-bottom: 14px;
+              ">
+            Manage your team members. The <strong>default user</strong> will
+            auto-fill in the form on load.
+          </p>
+          <div style="display: flex; gap: 8px; margin-bottom: 16px">
+            <input type="text" id="newUserName" placeholder="Type new team member name..." style="
+                  flex: 1;
+                  padding: 10px 12px;
+                  border: 1.5px solid var(--color-input-border);
+                  border-radius: 8px;
+                  font-size: 13px;
+                  outline: none;
+                  background: var(--bg-input);
+                  color: var(--color-input-text);
+                " onfocus="this.style.borderColor = '#ff9900'" onblur="this.style.borderColor = ''" />
+            <button type="button" class="save-btn" style="
+                  padding: 10px 16px;
+                  font-size: 13px;
+                  margin: 0;
+                  background: #ff9900;
+                  color: #111;
+                  font-weight: 700;
+                " onclick="addUser()">
+              Add
+            </button>
+          </div>
+          <div style="
+                margin-bottom: 14px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex-wrap: wrap;
+              ">
+            <label style="
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--color-label);
+                  white-space: nowrap;
+                ">Default User:</label>
+            <select id="defaultUserSelect" onchange="saveDefaultUser()" style="
+                  flex: 1;
+                  padding: 8px 32px 8px 12px !important;
+                  border: 1.5px solid var(--color-input-border);
+                  border-radius: 8px;
+                  font-size: 13px;
+                  outline: none;
+                  background: var(--bg-input);
+                  color: var(--color-input-text);
+                "></select>
+          </div>
+          <div id="userListWrapper" style="
+                border: 1.5px solid var(--color-border);
+                border-radius: 10px;
+                background: var(--bg-form-col);
+                overflow: hidden;
+                max-height: 200px;
+                overflow-y: auto;
+              ">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <!-- COUNTERS TAB -->
+        <div id="settingsPanel-counters" style="display: none">
+          <p style="
+                font-size: 12px;
+                color: var(--color-label);
+                margin-bottom: 14px;
+              ">
+            Toggle visibility of built-in counters. Add custom counters that
+            appear in the form, dashboard and table.
+          </p>
+          <div id="counterToggleList" style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 18px;
+              ">
+            <!-- rendered by JS -->
+          </div>
+          <div style="
+                border-top: 1px solid var(--color-border);
+                padding-top: 16px;
+              ">
+            <p style="
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: var(--color-label);
+                  margin-bottom: 10px;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                ">
+              Add Custom Counter
+            </p>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <input type="text" id="customCounterLabel" placeholder="Label (e.g. Sourcing)" style="
+                    flex: 1;
+                    min-width: 120px;
+                    padding: 9px 12px;
+                    border: 1.5px solid var(--color-input-border);
+                    border-radius: 8px;
+                    font-size: 13px;
+                    outline: none;
+                    background: var(--bg-input);
+                    color: var(--color-input-text);
+                  " onfocus="this.style.borderColor = '#ff9900'" onblur="this.style.borderColor = ''" />
+              <select id="customCounterIcon" style="
+                    flex: 1;
+                    min-width: 120px;
+                    padding: 9px 32px 9px 12px !important;
+                    border: 1.5px solid var(--color-input-border);
+                    border-radius: 8px;
+                    font-size: 13px;
+                    outline: none;
+                    background: var(--bg-input);
+                    color: var(--color-input-text);
+                  " onfocus="this.style.borderColor = '#ff9900'" onblur="this.style.borderColor = ''">
+                <option value="fa-solid fa-star">⭐ Star</option>
+                <option value="fa-solid fa-circle-check">
+                  ✅ Check/Completed
+                </option>
+                <option value="fa-solid fa-gear">⚙️ Gear/Settings</option>
+                <option value="fa-solid fa-envelope">✉️ Email/Message</option>
+                <option value="fa-solid fa-phone">📞 Phone/Call</option>
+                <option value="fa-solid fa-cart-shopping">
+                  🛒 Sourcing/Cart
+                </option>
+                <option value="fa-solid fa-box">📦 Package/Box</option>
+                <option value="fa-solid fa-truck">🚚 Delivery/Truck</option>
+                <option value="fa-solid fa-file-invoice">
+                  📑 Invoice/Doc
+                </option>
+                <option value="fa-solid fa-paper-plane">✈️ Submission</option>
+                <option value="fa-solid fa-folder-open">
+                  📂 Cases/Folder
+                </option>
+                <option value="fa-solid fa-rotate">🔄 Reload/Reopen</option>
+                <option value="fa-solid fa-bolt">⚡ Bolt/Auto</option>
+                <option value="fa-solid fa-copy">📋 Copy/Listing</option>
+                <option value="fa-solid fa-clock">⏰ Clock/Time</option>
+                <option value="fa-solid fa-chart-line">📈 Stats/Chart</option>
+                <option value="fa-solid fa-dollar-sign">
+                  💰 Sales/Dollar
+                </option>
+                <option value="fa-solid fa-tag">🏷️ Tag/Price</option>
+                <option value="fa-solid fa-users">👥 Team/Users</option>
+                <option value="fa-solid fa-shield-halved">
+                  🛡️ Ungate/Shield
+                </option>
+                <option value="fa-solid fa-magnifying-glass">
+                  🔍 Search/Find
+                </option>
+                <option value="fa-solid fa-ban">🚫 Blocked/Ban</option>
+                <option value="fa-solid fa-bullhorn">📢 Promo/Horn</option>
+                <option value="fa-solid fa-key">🔑 Key/Password</option>
+                <option value="fa-solid fa-thumbs-up">
+                  👍 Like/Approval
+                </option>
+              </select>
+              <button type="button" class="save-btn" style="
+                    padding: 9px 14px;
+                    font-size: 13px;
+                    margin: 0;
+                    background: #ff9900;
+                    color: #111;
+                    font-weight: 700;
+                    white-space: nowrap;
+                  " onclick="addCustomCounter()">
+                <i class="fa-solid fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- APPEARANCE TAB -->
+        <div id="settingsPanel-appearance" style="display: none">
+          <p style="
+                font-size: 12px;
+                color: var(--color-label);
+                margin-bottom: 20px;
+              ">
+            Switch between Amazon Light Theme and the premium Dark Slate Mode.
+          </p>
+          <div style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: var(--bg-form-col);
+                padding: 16px 18px;
+                border-radius: 12px;
+                border: 1.5px solid var(--color-border);
+              ">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <i class="fa-solid fa-moon" style="font-size: 20px; color: #8b5cf6"></i>
+              <div>
+                <p style="
+                      font-size: 14px;
+                      font-weight: 600;
+                      color: var(--color-text-main);
+                      margin: 0;
+                    ">
+                  Dark Mode
+                </p>
+                <p style="
+                      font-size: 12px;
+                      color: var(--color-label);
+                      margin: 2px 0 0;
+                    ">
+                  Amazon Slate — eye-friendly dark theme
+                </p>
+              </div>
+            </div>
+            <label style="
+                  position: relative;
+                  display: inline-block;
+                  width: 50px;
+                  height: 26px;
+                  cursor: pointer;
+                ">
+              <input type="checkbox" id="darkModeToggle" style="opacity: 0; width: 0; height: 0"
+                onchange="toggleDarkMode()" />
+              <span id="darkModeSlider" style="
+                    position: absolute;
+                    inset: 0;
+                    background: #cbd5e1;
+                    border-radius: 26px;
+                    transition: 0.3s;
+                    cursor: pointer;
+                  ">
+                <span style="
+                      position: absolute;
+                      height: 20px;
+                      width: 20px;
+                      left: 3px;
+                      bottom: 3px;
+                      background: #fff;
+                      border-radius: 50%;
+                      transition: 0.3s;
+                      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+                    "></span>
+              </span>
+            </label>
+          </div>
+          <div style="
+                margin-top: 14px;
+                background: var(--bg-alert-info);
+                border: 1px solid var(--border-alert-info);
+                border-radius: 8px;
+                padding: 10px 14px;
+                font-size: 12px;
+                color: var(--color-alert-info);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              ">
+            <i class="fa-solid fa-circle-info"></i>
+            Theme preference is saved automatically and restores on page load.
+          </div>
+        </div>
+
+        <!-- GOOGLE SYNC & BACKUPS TAB -->
+        <div id="settingsPanel-gsync" style="display: none; padding: 5px 2px;">
+          <p style="font-size: 12.5px; color: var(--color-label); margin-bottom: 20px; line-height: 1.5;">
+            Sync your work records to Google Sheets in real-time. Changes are pushed automatically as you add, edit, or
+            delete items.
+          </p>
+
+          <!-- Sync Toggle -->
+          <div class="toggle-container">
+            <div>
+              <span class="toggle-label">Enable Real-Time Sync</span>
+              <p class="toggle-subtext">Sync additions, edits, and deletions automatically.</p>
+            </div>
+            <label
+              style="position: relative; display: inline-block; width: 44px; height: 22px; cursor: pointer; margin: 0;">
+              <input type="checkbox" id="googleSyncToggle" style="opacity: 0; width: 0; height: 0"
+                onchange="toggleGoogleSync()">
+              <span id="googleSyncSlider"
+                style="position: absolute; inset: 0; background: #cbd5e1; border-radius: 22px; transition: 0.3s;">
+                <span
+                  style="position: absolute; height: 16px; width: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2);"></span>
+              </span>
+            </label>
+          </div>
+
+          <!-- Web App URL Input -->
+          <div class="sync-input-group">
+            <label>Google Apps Script Web App URL</label>
+            <div class="sync-input-wrapper">
+              <input type="text" id="googleSyncUrl" class="sync-input"
+                placeholder="https://script.google.com/macros/s/.../exec" oninput="saveGoogleSyncSettings()">
+            </div>
+          </div>
+
+          <!-- Sync Actions -->
+          <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button type="button" class="sync-btn sync-btn-secondary" id="testSyncBtn" onclick="testSyncConnection()">
+              <i class="fa-solid fa-link"></i> Test Connection
+            </button>
+            <button type="button" class="sync-btn sync-btn-primary" id="forceSyncBtn" onclick="forceSyncAllData()">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Force Sync All Local Data
+            </button>
+          </div>
+
+          <!-- Local Backup Retention -->
+          <div class="sync-input-group"
+            style="background: var(--bg-form-col); padding: 14px; border-radius: 8px; border: 1.5px solid var(--color-border); margin-bottom: 20px; box-sizing: border-box;">
+            <label style="margin-bottom: 4px; font-size: 13.5px; color: var(--color-text-main); display: block;">Local
+              Backup Retention Policy</label>
+            <p style="font-size: 11.5px; color: var(--color-label); margin-bottom: 10px;">Select how long local browser
+              backups should be retained.</p>
+            <div style="max-width: 250px;">
+              <select id="localBackupRetention" onchange="saveBackupRetentionSettings()"
+                style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1.5px solid var(--color-input-border); background: var(--bg-input); color: var(--color-input-text); outline: none; font-size: 13px;">
+                <option value="none">No Limit (Keep All Backups)</option>
+                <option value="30">Keep Last 30 Days</option>
+                <option value="7">Keep Last 7 Days</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Apps Script Deployment Guide -->
+          <div class="sync-instruction-box" style="box-sizing: border-box;">
+            <h4 style="margin-top: 0;"><i class="fa-solid fa-graduation-cap" style="color: #ff9900;"></i> Setup
+              Instructions / Tarika</h4>
+            <p style="font-size: 12px; color: var(--color-label); margin-bottom: 12px; line-height: 1.6;">
+              <strong>English:</strong> Connect Google Sheets by deploying an Apps Script as a Web App.<br>
+              <strong>Urdu:</strong> Google Sheet ko connect karne ke liye Apps Script deploy karein.
+            </p>
+
+            <ol style="margin-bottom: 16px; padding-left: 15px;">
+              <li style="margin-bottom: 6px;">Open a new <a href="https://sheets.new" target="_blank"
+                  style="color: #ff9900; text-decoration: underline; font-weight: 600;">Google Sheet</a>.</li>
+              <li style="margin-bottom: 6px;">Go to <strong>Extensions</strong> &rarr; <strong>Apps Script</strong>.
+              </li>
+              <li style="margin-bottom: 6px;">Delete the default code and paste the code below.</li>
+              <li style="margin-bottom: 6px;">Click <strong>Deploy</strong> &rarr; <strong>New Deployment</strong>.</li>
+              <li style="margin-bottom: 6px;">Click the Gear icon &rarr; <strong>Web App</strong>.</li>
+              <li style="margin-bottom: 6px;">Set "Execute as" to <strong>Me</strong> and "Who has access" to
+                <strong>Anyone</strong>.
+              </li>
+              <li style="margin-bottom: 6px;">Click <strong>Deploy</strong>, authorize permissions, and copy the
+                <strong>Web App URL</strong>.
+              </li>
+              <li style="margin-bottom: 6px;">Paste it above, enable sync, and click "Test Connection"!</li>
+            </ol>
+
+            <h4 style="font-size: 12.5px; margin-bottom: 6px;"><i class="fa-solid fa-code" style="color: #6366f1;"></i>
+              Apps Script Code</h4>
+            <div class="code-copy-container">
+              <button type="button" class="code-copy-btn" onclick="copyAppsScriptCode(this)">
+                <i class="fa-regular fa-copy"></i> Copy Code
+              </button>
+              <pre class="code-copy-block" id="appsScriptCodeBlock">// ================================================================
+// Daily Work Report - Google Apps Script (Enhanced Version)
+// Features: All Data sheet, User sheets, Dashboard calculations,
+//           Archive & Restore System with Formatting Preservation,
+//           Duplicate Records Validation & Comprehensive Error Logging.
+// ================================================================
+
+function doPost(e) {
+  var result = {};
+  try {
+    if (!e || !e.postData || !e.postData.contents) {
+      return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'No payload received' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    var payload = JSON.parse(e.postData.contents);
+    var action = payload.action;
+
+    Logger.log("Received action: " + action);
+
+    if (action === 'test') {
+      result = { status: 'success', message: 'Connected successfully to Google Sheet!' };
+    } else if (action === 'syncRow') {
+      result = syncRow(payload.row);
+    } else if (action === 'deleteRow') {
+      result = deleteRow(payload.id, payload.userName);
+    } else if (action === 'bulkSync') {
+      result = bulkSync(payload.rows);
+    } else if (action === 'archiveEmployee') {
+      result = archiveEmployee(payload.userName, payload.archiveData);
+    } else if (action === 'restoreEmployee') {
+      result = restoreEmployee(payload.userName, payload.workRecords);
+    } else if (action === 'deleteArchived') {
+      result = deleteArchived(payload.userName);
+    } else {
+      result = { status: 'error', message: 'Unknown action: ' + action };
+    }
+  } catch (err) {
+    Logger.log("Error processing request: " + err.toString());
+    result = { status: 'error', message: err.toString() };
+  }
+  return ContentService.createTextOutput(JSON.stringify(result))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doOptions(e) {
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+
+// ---- Column Name Mappings ----
+var HEADER_MAP = {
+  id:          'ID-NO',
+  date:        'Date',
+  userName:    'User Name',
+  company:     'Company',
+  invoice:     'Made Invoices',
+  submission:  'Submission',
+  cases:       'Case Open',
+  reopen:      'Reopen Case',
+  approval:    'Approval',
+  ungate:      'Auto Ungate',
+  copyListing: 'Copy Listing'
+};
+var EXCLUDED_KEYS = ['notes'];
+var COUNTER_KEYS  = ['invoice','submission','cases','reopen','approval','ungate','copyListing'];
+
+function getHeaderNameForKey(key) {
+  if (HEADER_MAP[key]) return HEADER_MAP[key];
+  return key.charAt(0).toUpperCase() + key.slice(1);
+}
+
+function isExcluded(key) {
+  return EXCLUDED_KEYS.indexOf(key) !== -1;
+}
+
+// ---- Initial Headers ----
+var INITIAL_HEADERS = ['ID-NO', 'Date', 'User Name', 'Company',
+  'Made Invoices', 'Submission', 'Case Open', 'Reopen Case',
+  'Approval', 'Auto Ungate', 'Copy Listing'];
+
+// ---- Sheet Helpers with Strict Formatting Preservation ----
+function getOrCreateSheet(sheetName) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+    sheet.getRange(1, 1, 1, INITIAL_HEADERS.length)
+      .setValues([INITIAL_HEADERS])
+      .setFontWeight('bold')
+      .setBackground('#1e3a8a')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function getHeaders(sheet) {
+  var lastCol = sheet.getLastColumn();
+  if (lastCol === 0) return [];
+  return sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+}
+
+function updateHeadersIfNeeded(sheet, currentHeaders, row) {
+  var headers = currentHeaders.slice();
+  var updated = false;
+  for (var key in row) {
+    if (!row.hasOwnProperty(key)) continue;
+    if (key === 'id') continue;
+    if (isExcluded(key)) continue;
+    var hName = getHeaderNameForKey(key);
+    if (headers.indexOf(hName) === -1) {
+      headers.push(hName);
+      updated = true;
+    }
+  }
+  if (updated) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  }
+  return headers;
+}
+
+function prepareRowValues(headers, row) {
+  var keyMap = {};
+  for (var key in row) {
+    if (!row.hasOwnProperty(key)) continue;
+    if (isExcluded(key)) continue;
+    var hName = getHeaderNameForKey(key);
+    keyMap[hName] = row[key];
+  }
+  var values = [];
+  for (var i = 0; i < headers.length; i++) {
+    var val = keyMap[headers[i]];
+    values.push((val === undefined || val === null) ? '' : val);
+  }
+  return values;
+}
+
+function findRowById(sheet, id) {
+  if (!id) return -1;
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return -1;
+  var ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+  for (var i = 0; i < ids.length; i++) {
+    if (String(ids[i][0]) === String(id)) return i + 2;
+  }
+  return -1;
+}
+
+function findRowByCompositeKey(sheet, dateVal, userNameVal, companyVal) {
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return -1;
+  var headers = getHeaders(sheet);
+  var dateCol = headers.indexOf('Date');
+  var userCol = headers.indexOf('User Name');
+  var compCol = headers.indexOf('Company');
+  if (dateCol === -1 || compCol === -1) return -1;
+
+  var data = sheet.getRange(2, 1, lastRow - 1, headers.length).getValues();
+  for (var i = 0; i < data.length; i++) {
+    var d = data[i][dateCol];
+    var u = userCol !== -1 ? data[i][userCol] : '';
+    var c = data[i][compCol];
+    if (String(d).trim() === String(dateVal).trim() && 
+        String(c).toLowerCase().trim() === String(companyVal).toLowerCase().trim() &&
+        (!userNameVal || String(u).toLowerCase().trim() === String(userNameVal).toLowerCase().trim())) {
+      return i + 2;
+    }
+  }
+  return -1;
+}
+
+function syncRow(row) {
+  try {
+    if (!row) return { status: 'error', message: 'No row data provided' };
+    
+    var userName = (row.userName && row.userName.trim()) ? row.userName.trim() : 'Unknown User';
+    var sheets = [
+      getOrCreateSheet(userName),
+      getOrCreateSheet('All Data')
+    ];
+    
+    for (var s = 0; s < sheets.length; s++) {
+      var sheet = sheets[s];
+      var headers = getHeaders(sheet);
+      headers = updateHeadersIfNeeded(sheet, headers, row);
+      
+      var rowIndex = findRowById(sheet, row.id);
+      if (rowIndex === -1) {
+        rowIndex = findRowByCompositeKey(sheet, row.date, row.userName, row.company);
+      }
+
+      var values = prepareRowValues(headers, row);
+      if (rowIndex !== -1) {
+        sheet.getRange(rowIndex, 1, 1, values.length).setValues([values]);
+      } else {
+        sheet.appendRow(values);
+      }
+    }
+    
+    updateDashboard();
+    return { status: 'success', message: 'Row synced successfully.' };
+  } catch (err) {
+    Logger.log("Error in syncRow: " + err.toString());
+    return { status: 'error', message: err.toString() };
+  }
+}
+
+function deleteRow(id, userName) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var allSheets = ss.getSheets();
+    for (var s = 0; s < allSheets.length; s++) {
+      var sheet = allSheets[s];
+      var name = sheet.getName();
+      if (name === 'Dashboard' || name === 'Archive') continue;
+      var rowIndex = findRowById(sheet, id);
+      if (rowIndex !== -1) {
+        sheet.deleteRow(rowIndex);
+      }
+    }
+    updateDashboard();
+    return { status: 'success', message: 'Row deleted from all sheets.' };
+  } catch (err) {
+    Logger.log("Error in deleteRow: " + err.toString());
+    return { status: 'error', message: err.toString() };
+  }
+}
+
+function bulkSync(rows) {
+  try {
+    if (!rows || rows.length === 0) {
+      return { status: 'success', message: 'No rows to sync.' };
+    }
+
+    var allSheet = getOrCreateSheet('All Data');
+    var allLastRow = allSheet.getLastRow();
+    var allLastCol = allSheet.getLastColumn() || INITIAL_HEADERS.length;
+    
+    if (allLastRow > 1) {
+      allSheet.getRange(2, 1, allLastRow - 1, allLastCol).clearContent();
+    }
+    var allHeaders = getHeaders(allSheet);
+    for (var i = 0; i < rows.length; i++) {
+      allHeaders = updateHeadersIfNeeded(allSheet, allHeaders, rows[i]);
+    }
+    var allMatrix = [];
+    for (var i = 0; i < rows.length; i++) {
+      allMatrix.push(prepareRowValues(allHeaders, rows[i]));
+    }
+    allSheet.getRange(2, 1, allMatrix.length, allHeaders.length).setValues(allMatrix);
+
+    var groups = {};
+    for (var i = 0; i < rows.length; i++) {
+      var key = (rows[i].userName && rows[i].userName.trim())
+        ? rows[i].userName.trim()
+        : 'Unknown User';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(rows[i]);
+    }
+    for (var uName in groups) {
+      if (!groups.hasOwnProperty(uName)) continue;
+      var uSheet = getOrCreateSheet(uName);
+      var uLastRow = uSheet.getLastRow();
+      var uLastCol = uSheet.getLastColumn() || INITIAL_HEADERS.length;
+      if (uLastRow > 1) {
+        uSheet.getRange(2, 1, uLastRow - 1, uLastCol).clearContent();
+      }
+      var uHeaders = getHeaders(uSheet);
+      var uRows = groups[uName];
+      for (var j = 0; j < uRows.length; j++) {
+        uHeaders = updateHeadersIfNeeded(uSheet, uHeaders, uRows[j]);
+      }
+      var uMatrix = [];
+      for (var j = 0; j < uRows.length; j++) {
+        uMatrix.push(prepareRowValues(uHeaders, uRows[j]));
+      }
+      uSheet.getRange(2, 1, uMatrix.length, uHeaders.length).setValues(uMatrix);
+    }
+
+    updateDashboard();
+    return { status: 'success', message: 'Bulk sync complete. Synced ' + rows.length + ' rows.' };
+  } catch (err) {
+    Logger.log("Error in bulkSync: " + err.toString());
+    return { status: 'error', message: err.toString() };
+  }
+}
+
+function updateDashboard() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    var dash = ss.getSheetByName('Dashboard');
+    var isNewSheet = false;
+    if (!dash) {
+      dash = ss.insertSheet('Dashboard', 0);
+      isNewSheet = true;
+    } else {
+      dash.clearContents();
+    }
+
+    var allSheet = ss.getSheetByName('All Data');
+    if (!allSheet || allSheet.getLastRow() <= 1) {
+      dash.getRange(1, 1).setValue('No data to display yet.');
+      return;
+    }
+
+    var allHeaders = allSheet.getRange(1, 1, 1, allSheet.getLastColumn()).getValues()[0];
+    var allData    = allSheet.getRange(2, 1, allSheet.getLastRow() - 1, allSheet.getLastColumn()).getValues();
+
+    var colIdx = {};
+    for (var i = 0; i < allHeaders.length; i++) {
+      colIdx[allHeaders[i]] = i;
+    }
+
+    var counterCols = ['Made Invoices','Submission','Case Open','Reopen Case','Approval','Auto Ungate','Copy Listing'];
+    var activeCols = [];
+    for (var i = 0; i < counterCols.length; i++) {
+      if (colIdx[counterCols[i]] !== undefined) activeCols.push(counterCols[i]);
+    }
+
+    var knownCols = ['ID-NO','Date','User Name','Company','Made Invoices','Submission',
+      'Case Open','Reopen Case','Approval','Auto Ungate','Copy Listing'];
+    for (var i = 0; i < allHeaders.length; i++) {
+      if (knownCols.indexOf(allHeaders[i]) === -1 && activeCols.indexOf(allHeaders[i]) === -1) {
+        activeCols.push(allHeaders[i]);
+      }
+    }
+
+    var userTotals = {};
+    var userColIdx = colIdx['User Name'];
+    for (var r = 0; r < allData.length; r++) {
+      var uName = (userColIdx !== undefined ? allData[r][userColIdx] : '') || 'Unknown';
+      if (!userTotals[uName]) {
+        userTotals[uName] = {};
+        for (var c = 0; c < activeCols.length; c++) userTotals[uName][activeCols[c]] = 0;
+      }
+      for (var c = 0; c < activeCols.length; c++) {
+        var cIdx = colIdx[activeCols[c]];
+        if (cIdx !== undefined) {
+          userTotals[uName][activeCols[c]] += Number(allData[r][cIdx]) || 0;
+        }
+      }
+    }
+
+    var dashRow = 1;
+    var headerRow = ['User Name'];
+    for (var c = 0; c < activeCols.length; c++) headerRow.push(activeCols[c]);
+
+    dash.getRange(dashRow, 1).setValue('DAILY WORK REPORT — DASHBOARD');
+    if (isNewSheet) {
+      dash.getRange(dashRow, 1, 1, headerRow.length).merge()
+        .setBackground('#1e3a8a')
+        .setFontColor('#ffffff')
+        .setFontWeight('bold')
+        .setFontSize(14)
+        .setHorizontalAlignment('center');
+    }
+    dashRow += 2;
+
+    dash.getRange(dashRow, 1, 1, headerRow.length).setValues([headerRow]);
+    if (isNewSheet) {
+      dash.getRange(dashRow, 1, 1, headerRow.length)
+        .setFontWeight('bold')
+        .setBackground('#ff9900')
+        .setFontColor('#111111')
+        .setHorizontalAlignment('center');
+    }
+    dashRow++;
+
+    var uNames = Object.keys(userTotals);
+    var grandTotals = {};
+    for (var c = 0; c < activeCols.length; c++) grandTotals[activeCols[c]] = 0;
+
+    for (var u = 0; u < uNames.length; u++) {
+      var uName = uNames[u];
+      var dataRow = [uName];
+      for (var c = 0; c < activeCols.length; c++) {
+        var val = userTotals[uName][activeCols[c]] || 0;
+        dataRow.push(val);
+        grandTotals[activeCols[c]] += val;
+      }
+      dash.getRange(dashRow, 1, 1, dataRow.length).setValues([dataRow]);
+      if (isNewSheet) {
+        dash.getRange(dashRow, 1, 1, dataRow.length)
+          .setBackground(u % 2 === 0 ? '#ffffff' : '#eff6ff');
+        dash.getRange(dashRow, 1).setFontWeight('bold').setFontColor('#1e3a8a');
+      }
+      dashRow++;
+    }
+
+    var totalRow = ['TOTAL'];
+    for (var c = 0; c < activeCols.length; c++) totalRow.push(grandTotals[activeCols[c]]);
+    dash.getRange(dashRow, 1, 1, totalRow.length).setValues([totalRow]);
+    if (isNewSheet) {
+      dash.getRange(dashRow, 1, 1, totalRow.length)
+        .setFontWeight('bold')
+        .setBackground('#ff9900')
+        .setFontColor('#111111');
+      dash.autoResizeColumns(1, headerRow.length);
+    }
+  } catch (err) {
+    Logger.log("Error in updateDashboard: " + err.toString());
+  }
+}
+
+function getOrCreateArchiveSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheetName = "Archive";
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+    var headers = ['Employee Name', 'Archive Date', 'Archived By', 'Reason', 
+                   'Total Invoices', 'Total Submissions', 'Total Cases', 
+                   'Total Approvals', 'Total Auto Ungate', 'Total Copy Listing', 
+                   'Last Working Date', 'Status'];
+    sheet.getRange(1, 1, 1, headers.length)
+      .setValues([headers])
+      .setFontWeight('bold')
+      .setBackground('#7c3aed')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function archiveEmployee(userName, archiveData) {
+  try {
+    Logger.log("Archiving employee: " + userName);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = getOrCreateArchiveSheet();
+    
+    var totals = (archiveData && archiveData.totals) ? archiveData.totals : {};
+    var rowValues = [
+      archiveData ? archiveData.name : userName,
+      archiveData ? archiveData.archivedDate : new Date().toLocaleDateString('en-GB').replace(/\//g, '-'),
+      (archiveData && archiveData.archivedBy) ? archiveData.archivedBy : 'Owner',
+      (archiveData && archiveData.archiveReason) ? archiveData.archiveReason : '-',
+      totals.invoice || 0,
+      totals.submission || 0,
+      totals.cases || 0,
+      totals.approval || 0,
+      totals.ungate || 0,
+      totals.copyListing || 0,
+      (archiveData && archiveData.lastWorkingDate) ? archiveData.lastWorkingDate : '-',
+      'Archived'
+    ];
+
+    var lastRow = sheet.getLastRow();
+    var existingRow = -1;
+    if (lastRow > 1) {
+      var existingNames = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+      for (var i = 0; i < existingNames.length; i++) {
+        if (existingNames[i][0] === userName) {
+          existingRow = i + 2;
+          break;
+        }
+      }
+    }
+
+    if (existingRow !== -1) {
+      sheet.getRange(existingRow, 1, 1, rowValues.length).setValues([rowValues]);
+    } else {
+      sheet.appendRow(rowValues);
+    }
+
+    var activeUserSheet = ss.getSheetByName(userName);
+    if (activeUserSheet) {
+      ss.deleteSheet(activeUserSheet);
+    }
+
+    var allSheet = ss.getSheetByName('All Data');
+    if (allSheet) {
+      var allLast = allSheet.getLastRow();
+      if (allLast > 1) {
+        var data = allSheet.getRange(2, 3, allLast - 1, 1).getValues();
+        for (var r = data.length - 1; r >= 0; r--) {
+          if (data[r][0] === userName) {
+            allSheet.deleteRow(r + 2);
+          }
+        }
+      }
+    }
+
+    updateDashboard();
+
+    return { status: 'success', message: 'Employee "' + userName + '" archived successfully.' };
+  } catch (err) {
+    Logger.log("Error in archiveEmployee: " + err.toString());
+    return { status: 'error', message: err.toString() };
+  }
+}
+
+function restoreEmployee(userName, workRecords) {
+  try {
+    Logger.log("Restoring employee: " + userName);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = getOrCreateArchiveSheet();
+    var lastRow = sheet.getLastRow();
+
+    if (lastRow > 1) {
+      var data = sheet.getRange(2, 1, lastRow - 1, 12).getValues();
+      for (var i = 0; i < data.length; i++) {
+        if (data[i][0] === userName && data[i][11] === 'Archived') {
+          sheet.getRange(i + 2, 12).setValue('Restored');
+          break;
+        }
+      }
+    }
+
+    if (workRecords && workRecords.length > 0) {
+      var uSheet = getOrCreateSheet(userName);
+      var uHeaders = getHeaders(uSheet);
+      for (var j = 0; j < workRecords.length; j++) {
+        uHeaders = updateHeadersIfNeeded(uSheet, uHeaders, workRecords[j]);
+      }
+      var uMatrix = [];
+      for (var j = 0; j < workRecords.length; j++) {
+        uMatrix.push(prepareRowValues(uHeaders, workRecords[j]));
+      }
+      var uLastRow = uSheet.getLastRow();
+      var uLastCol = uSheet.getLastColumn() || INITIAL_HEADERS.length;
+      if (uLastRow > 1) {
+        uSheet.getRange(2, 1, uLastRow - 1, uLastCol).clearContent();
+      }
+      uSheet.getRange(2, 1, uMatrix.length, uHeaders.length).setValues(uMatrix);
+
+      var allSheet = getOrCreateSheet('All Data');
+      var allHeaders = getHeaders(allSheet);
+      for (var j = 0; j < workRecords.length; j++) {
+        allHeaders = updateHeadersIfNeeded(allSheet, allHeaders, workRecords[j]);
+        var existingIndex = findRowById(allSheet, workRecords[j].id);
+        if (existingIndex === -1) {
+          existingIndex = findRowByCompositeKey(allSheet, workRecords[j].date, workRecords[j].userName, workRecords[j].company);
+        }
+        var rowVals = prepareRowValues(allHeaders, workRecords[j]);
+        if (existingIndex !== -1) {
+          allSheet.getRange(existingIndex, 1, 1, rowVals.length).setValues([rowVals]);
+        } else {
+          allSheet.appendRow(rowVals);
+        }
+      }
+    }
+
+    updateDashboard();
+
+    return { status: 'success', message: 'Employee "' + userName + '" restored successfully. User sheet, All Data & Dashboard synced.' };
+  } catch (err) {
+    Logger.log("Error in restoreEmployee: " + err.toString());
+    return { status: 'error', message: err.toString() };
+  }
+}
+
+function deleteArchived(userName) {
+  try {
+    Logger.log("Deleting archived employee: " + userName);
+    var sheet = getOrCreateArchiveSheet();
+    var lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      var data = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+      for (var i = data.length - 1; i >= 0; i--) {
+        if (data[i][0] === userName) {
+          sheet.deleteRow(i + 2);
+        }
+      }
+    }
+    return { status: 'success', message: 'Archived record permanently deleted.' };
+  } catch (err) {
+    Logger.log("Error in deleteArchived: " + err.toString());
+    return { status: 'error', message: err.toString() };
+  }
+}</pre>
+              </pre>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- OWNER SETTINGS TAB -->
+        <div id="settingsPanel-owner" style="display: none">
+          <div id="ownerSettingsContent">
+            <!-- Rendered by JS renderOwnerSettings() -->
+          </div>
+        </div>
+
+        <!-- USER GUIDE TAB -->
+        <div id="settingsPanel-guide" style="display: none">
+          <p style="
+                font-size: 13px;
+                font-weight: 600;
+                color: #ff9900;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+              ">
+            <i class="fa-solid fa-book-open"></i> Daily Report Editor Guide
+          </p>
+          <p style="
+                font-size: 11px;
+                color: var(--color-label);
+                margin-bottom: 15px;
+                line-height: 1.5;
+              ">
+            A comprehensive guide explaining all application options,
+            features, dark mode settings, and system configurations.
+          </p>
+
+          <div style="
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                font-size: 12.5px;
+                line-height: 1.5;
+                color: var(--color-modal-text);
+              ">
+            <!-- Section 1: Team & Users -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">1</span>
+                Team &amp; User Management
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Add Users:</strong> Enter a user name under the
+                  <em>Team / Users</em> settings tab and click
+                  <strong>Add</strong>.
+                </li>
+                <li>
+                  <strong>Rename Users:</strong> Click the edit (pen) icon to
+                  rename a team member. The system will automatically rename
+                  that user across all previously saved records in your
+                  history database!
+                </li>
+                <li>
+                  <strong>Default User:</strong> Select a default user to
+                  auto-fill the user selector dropdown every time the
+                  application is loaded.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 2: Custom Counters -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">2</span>
+                Dynamic Work Counters
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Custom Counters:</strong> Create new counters under
+                  <em>Work Counters</em> by writing a label and choosing one
+                  of the 25 custom icons from the icon list.
+                </li>
+                <li>
+                  <strong>Toggle Switches:</strong> Temporarily hide built-in
+                  or custom counters from the page layout using the toggle
+                  switch. The values are preserved but hidden from active
+                  inputs, statistics, and reports.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 3: Data Entry & Company Management -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">3</span>
+                Form Entry &amp; Company Manager
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Daily Entry:</strong> Enter the Date, User, Company,
+                  and counter values, then click <strong>Submit</strong>.
+                </li>
+                <li>
+                  <strong>Company List:</strong> Click the
+                  <strong>Manage</strong> button next to "Select Company" to
+                  add, edit, or delete companies from the dropdown menu.
+                </li>
+                <li>
+                  <strong>Inactive Companies:</strong> If you edit a record
+                  that uses a deleted company name, the dropdown automatically
+                  shows it as <em>(Inactive)</em> so you don't lose data
+                  consistency.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 4: Auto Merge duplicates -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">4</span>
+                Duplicate Detection &amp; Auto Merge
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Smart Alerts:</strong> If duplicate entries (same
+                  company on the same date) are recorded, a red alert banner
+                  lights up. Click the banner to view details in English and
+                  Urdu.
+                </li>
+                <li>
+                  <strong>Auto Merge:</strong> Click the
+                  <strong>Merge Automatically</strong> button to combine these
+                  duplicate entries: it sums the counter values, merges notes
+                  with a divider <code>|</code>, and appends user names
+                  together automatically!
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 5: Theme & Custom Styling -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">5</span>
+                Dark Slate Mode &amp; Typography
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Theme Toggling:</strong> Go to the
+                  <em>Appearance</em> tab to toggle the premium
+                  <strong>Dark Mode</strong>. It transforms the screen into an
+                  eye-friendly dark slate layout matching Amazon Central
+                  accents.
+                </li>
+                <li>
+                  <strong>Auto Memory:</strong> Theme settings are saved in
+                  your browser and automatically loaded on refresh.
+                </li>
+                <li>
+                  <strong>Custom Select Styles:</strong> Dropdowns are custom
+                  styled with vector arrows that switch colors dynamically
+                  depending on the active theme.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 6: Realtime Dashboard & History -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">6</span>
+                Interactive Dashboard &amp; History list
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Live Metrics:</strong> The dashboard cards show
+                  overall sums for each active counter. When filters are
+                  applied, the dashboard dynamically updates to reflect only
+                  the filtered subset!
+                </li>
+                <li>
+                  <strong>Search and Filter:</strong> Use the live search
+                  field to instantly filter by user or company, or target
+                  specific calendar dates.
+                </li>
+                <li>
+                  <strong>Edit/Delete:</strong> Click the edit (yellow pen) or
+                  delete (red trash) icons next to any row in the history list
+                  to manage entries.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 7: Automatic & Manual Backups -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">7</span>
+                Automatic Backup &amp; Recovery
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Auto Backups:</strong> The system automatically
+                  records a daily restore point inside local storage every
+                  time you submit a change.
+                </li>
+                <li>
+                  <strong>Backup Operations:</strong> Click the
+                  <strong>Manage Backups</strong> button at the bottom of the
+                  page to view date-wise backups. You can restore previous
+                  databases, delete unneeded snapshots, or export backups as
+                  PDF / JSON files.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 8: Exporting & Report Generation -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">8</span>
+                PDF &amp; High-Res Image Exporter
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Download PDF:</strong> Generates and downloads a
+                  clean A4 PDF table including a dedicated sums summary card
+                  at the bottom.
+                </li>
+                <li>
+                  <strong>Download Image:</strong> Renders and downloads a
+                  premium Daily Report image card. The card automatically
+                  prints user summaries, active blockers/notes, and
+                  timestamps, perfect for immediate sharing with clients.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 9: Data Persistence & Safety -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                       background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">9</span>
+                Local Storage &amp; Data Safety
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>Data Persistence:</strong> All entered reports,
+                  custom counters, added companies, and user lists are saved
+                  directly to browser local storage. Your configuration
+                  remains intact even if the tab is closed.
+                </li>
+                <li>
+                  <strong>Clear Data:</strong> Use the
+                  <strong>Clear All</strong> button to reset the database. The
+                  system will prompt a confirmation modal to avoid accidental
+                  data loss.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Section 10: Import & Restore Backup -->
+            <div style="
+                  background: var(--bg-form-col);
+                  border: 1.5px solid var(--color-border);
+                  border-radius: 10px;
+                  padding: 10px 12px;
+                ">
+              <h5 style="
+                    color: var(--color-text-main);
+                    font-weight: 700;
+                    margin: 0 0 5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                  ">
+                <span style="
+                      background: #ff9900;
+                      color: #111;
+                      width: 18px;
+                      height: 18px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      border-radius: 50%;
+                      font-size: 10px;
+                      font-weight: 800;
+                    ">10</span>
+                Import &amp; Restore Backup (JSON)
+              </h5>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px">
+                <li>
+                  <strong>How to Open:</strong> Click the
+                  <strong style="
+                        background: #6366f1;
+                        color: #fff;
+                        padding: 1px 6px;
+                        border-radius: 4px;
+                        font-size: 11px;
+                      "><i class="fa-solid fa-file-import"></i> Import JSON
+                    Backup</strong>
+                  button at the bottom of the <strong>Backup History</strong>
+                  modal. A dedicated Import window will open.
+                </li>
+                <li>
+                  <strong>Upload File:</strong> Either
+                  <strong>drag &amp; drop</strong> your
+                  <code>.json</code> backup file into the upload zone, or
+                  click the zone / &ldquo;click to browse&rdquo; to select
+                  the file from your computer.
+                </li>
+                <li>
+                  <strong>File Preview:</strong> Once a valid file is loaded,
+                  a preview card shows the <em>total records</em>,
+                  <em>date range</em>, <em>companies</em> in the file, and
+                  how many <em>new records</em> will actually be added
+                  (exact duplicates are pre-counted and excluded).
+                </li>
+                <li>
+                  <strong style="color: #10b981">Merge:</strong> Appends
+                  only <em>new</em> records from the file to your existing
+                  data. Exact duplicates (same date + company + user) are
+                  automatically skipped — no manual cleanup needed.
+                </li>
+                <li>
+                  <strong style="color: #ef4444">Overwrite:</strong> Deletes
+                  <em>all</em> current records and replaces them with the
+                  imported file. A confirmation dialog appears before any
+                  data is deleted. Ideal for migrating to a new device.
+                </li>
+                <li>
+                  <strong>After Import:</strong> Data is sorted by date,
+                  saved to local storage, an auto-backup is created, and a
+                  green success toast appears at the bottom-right of the
+                  screen.
+                </li>
+                <li>
+                  <strong>Compatible Files:</strong> Works with any
+                  <code>.json</code> file exported via the
+                  <em>Download JSON</em> button in the Backup History panel.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="
+            padding: 14px 24px;
+            border-top: 1px solid var(--color-border);
+            background: var(--bg-form-col);
+            display: flex;
+            justify-content: flex-end;
+          ">
+        <button type="button" class="modal-ok-btn" onclick="closeSettingsModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end #settingsModal -->
+
+  <!-- ============================================================
+       PIN VERIFICATION MODAL
+  ============================================================ -->
+  <div id="pinModal" class="modal-overlay" style="display: none">
+    <div class="modal-content pin-modal-content">
+      <div class="pin-lock-icon">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h3 style="font-size:18px; font-weight:700; color:var(--color-text-value); margin:0 0 6px;">Owner Verification
+      </h3>
+      <p style="font-size:13px; color:var(--color-label); margin:0;">Enter your 4-digit Owner PIN to continue</p>
+      <div class="pin-input-row">
+        <input class="pin-digit-input" id="pin1" type="password" maxlength="1" inputmode="numeric" />
+        <input class="pin-digit-input" id="pin2" type="password" maxlength="1" inputmode="numeric" />
+        <input class="pin-digit-input" id="pin3" type="password" maxlength="1" inputmode="numeric" />
+        <input class="pin-digit-input" id="pin4" type="password" maxlength="1" inputmode="numeric" />
+      </div>
+      <div class="pin-error" id="pinError"><i class="fa-solid fa-circle-exclamation"></i> Incorrect PIN. Please try
+        again.</div>
+      <button type="button" class="pin-submit-btn" onclick="submitPinVerification()">
+        <i class="fa-solid fa-unlock"></i> Verify PIN
+      </button>
+      <button type="button"
+        style="background:none;border:none;color:var(--color-label);font-size:13px;cursor:pointer;margin-top:12px;width:100%;"
+        onclick="closePinModal()">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ARCHIVE REASON MODAL
+  ============================================================ -->
+  <div id="archiveReasonModal" class="modal-overlay" style="display: none">
+    <div class="modal-content archive-reason-modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-box-archive" style="color:#7c3aed;"></i> Archive Employee</h3>
+        <button type="button" class="close-modal-btn" onclick="closeArchiveReasonModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom:6px;">You are archiving: <strong id="archiveReasonUserName"
+            style="color:#7c3aed;"></strong></p>
+        <p style="font-size:13px;color:var(--color-label);">This employee's data will be safely stored in the Archive.
+          You can restore them anytime.</p>
+        <label style="font-size:13px;font-weight:600;color:var(--color-label);display:block;margin-top:14px;">Reason for
+          Archiving <span style="color:#ef4444;">*</span></label>
+        <textarea id="archiveReasonInput" class="archive-reason-textarea"
+          placeholder="e.g., Resigned, Contract ended, On leave..."></textarea>
+        <div style="font-size:12px;color:#ef4444;display:none;margin-top:6px;" id="archiveReasonError">Please enter a
+          reason.</div>
+      </div>
+      <div class="modal-footer" style="gap:10px;">
+        <button type="button"
+          style="background:var(--bg-form-col);border:1.5px solid var(--color-border);color:var(--color-label);padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;"
+          onclick="closeArchiveReasonModal()">Cancel</button>
+        <button type="button"
+          style="background:#7c3aed;color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;"
+          onclick="confirmArchiveEmployee()">
+          <i class="fa-solid fa-box-archive"></i> Archive Employee
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ARCHIVE DETAILS MODAL
+  ============================================================ -->
+  <div id="archiveDetailsModal" class="modal-overlay" style="display: none">
+    <div class="modal-content archive-details-modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-file-lines" style="color:#7c3aed;"></i> Employee Archive Details</h3>
+        <button type="button" class="close-modal-btn" onclick="closeArchiveDetailsModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="archiveDetailsBody" style="max-height:65vh;overflow-y:auto;">
+        <!-- Rendered by JS showArchiveDetails() -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-ok-btn" onclick="closeArchiveDetailsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Info Modal for Duplicates -->
+  <div id="infoModal" class="modal-overlay" style="display: none">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-circle-info"></i> Duplicate Entries</h3>
+        <div style="display: flex; align-items: center; gap: 15px">
+          <button type="button" class="translate-icon-btn" id="langToggleBtn" onclick="toggleModalLanguage()"
+            title="Translate to Urdu">
+            <i class="fa-solid fa-language"></i>
+          </button>
+          <button type="button" class="close-modal-btn" onclick="closeInfoModal()">
+            &times;
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p id="modalMainText">
+          Duplicate entries (same company and date) have been detected in the
+          work history list.
+        </p>
+        <div class="alert-tip">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span id="modalTipText"><strong>How to resolve:</strong> You should merge these duplicate
+            lists. Edit one list to add the counters together, and then delete
+            the other duplicate list.</span>
+        </div>
+      </div>
+      <div class="modal-footer" style="
+            justify-content: flex-end;
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            width: 100%;
+          ">
+        <button type="button" class="merge-action-btn" id="modalMergeBtn" onclick="autoMergeDuplicates()">
+          <i class="fa-solid fa-code-merge"></i> Merge Automatically
+        </button>
+        <button type="button" class="modal-ok-btn" onclick="closeInfoModal()">
+          Got it
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blocker Modal -->
+  <div id="blockerModal" class="modal-overlay" style="display: none">
+    <div class="modal-content" style="border-left: 4px solid #3b82f6">
+      <div class="modal-header">
+        <h3 style="color: var(--color-filter-badge)">
+          <i class="fa-solid fa-circle-info"></i> Blocker / Notes Detail
+        </h3>
+        <button type="button" class="close-modal-btn" onclick="closeBlockerModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="blockerModalText" style="white-space: pre-wrap; font-weight: 500"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-ok-btn" style="background: var(--color-filter-badge)"
+          onclick="closeBlockerModal()">
+          Got it
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup History Modal -->
+  <div id="backupModal" class="modal-overlay" style="display: none">
+    <div class="modal-content" style="max-width: 800px; border-left: 4px solid var(--bg-table-header)">
+      <div class="modal-header">
+        <h3>
+          <i class="fa-solid fa-database"></i> Backup History &amp; Restore
+        </h3>
+        <button type="button" class="close-modal-btn" onclick="closeBackupModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body" style="max-height: 400px; overflow-y: auto">
+        <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 20px;
+              background: var(--bg-form-col);
+              padding: 12px 16px;
+              border-radius: 8px;
+              border: 1px solid var(--color-border);
+              gap: 10px;
+              flex-wrap: wrap;
+            ">
+          <div style="
+                font-size: 13px;
+                color: var(--color-label);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              ">
+            <i class="fa-solid fa-circle-check" style="color: #10b981"></i>
+            <span>Auto-backup active. Last 7 days kept.</span>
+          </div>
+          <button type="button" class="save-btn" style="
+                padding: 8px 14px;
+                font-size: 12px;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                margin: 0;
+              " onclick="manualBackup()">
+            <i class="fa-solid fa-plus"></i> Backup Current Data
+          </button>
+        </div>
+        <div class="table-wrapper">
+          <table style="font-size: 13px; width: 100%">
+            <thead>
+              <tr>
+                <th style="padding: 10px">Backup Date</th>
+                <th style="padding: 10px">Time</th>
+                <th style="padding: 10px">Records</th>
+                <th style="padding: 10px">Invoices</th>
+                <th style="padding: 10px">Submissions</th>
+                <th style="padding: 10px">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="backupListBody">
+              <!-- JS Data -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer"
+        style="margin-top: 10px; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <!-- Hidden file input for JSON import -->
+        <input type="file" id="importJsonFileInput" accept=".json,application/json" style="display: none"
+          onchange="handleImportFileSelect(event)" />
+        <button type="button" class="import-action-btn btn-merge" style="background: #6366f1;"
+          onclick="openImportModal()" title="Import a previously downloaded .json backup file">
+          <i class="fa-solid fa-file-import"></i> Import JSON Backup
+        </button>
+        <button type="button" class="modal-ok-btn" onclick="closeBackupModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== Import Choice Modal ===================== -->
+  <div id="importChoiceModal" class="modal-overlay" style="display: none">
+    <div class="modal-content" style="max-width: 520px; border-left: 4px solid #6366f1">
+      <div class="modal-header">
+        <h3>
+          <i class="fa-solid fa-file-import" style="color: #6366f1"></i>
+          Import Backup File
+        </h3>
+        <button type="button" class="close-modal-btn" onclick="closeImportModal()">
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Drop Zone -->
+        <div class="import-drop-zone" id="importDropZone"
+          onclick="document.getElementById('importJsonFileInput').click()" ondragover="handleImportDragOver(event)"
+          ondragleave="handleImportDragLeave(event)" ondrop="handleImportDrop(event)">
+          <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+          <p>
+            Drag &amp; drop your <strong>.json backup file</strong> here<br />
+            <span style="font-size: 12px; margin-top: 4px; display: block">
+              or <strong onclick="event.stopPropagation(); document.getElementById('importJsonFileInput').click()">click
+                to browse</strong>
+            </span>
+          </p>
+        </div>
+
+        <!-- File Preview -->
+        <div class="import-preview-box" id="importPreviewBox">
+          <div class="preview-title">
+            <i class="fa-solid fa-file-circle-check" style="color: #10b981"></i>
+            <span id="importPreviewFileName">file.json</span>
+          </div>
+          <div class="preview-stat">
+            <span>Total Records</span>
+            <span id="importPreviewRecords">–</span>
+          </div>
+          <div class="preview-stat">
+            <span>Date Range</span>
+            <span id="importPreviewDateRange">–</span>
+          </div>
+          <div class="preview-stat">
+            <span>Companies</span>
+            <span id="importPreviewCompanies">–</span>
+          </div>
+          <div class="preview-stat">
+            <span>New Records (not in current data)</span>
+            <span id="importPreviewNew" style="color: #10b981">–</span>
+          </div>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="import-warning-box" id="importWarningBox">
+          <i class="fa-solid fa-triangle-exclamation" style="margin-top: 1px; flex-shrink: 0"></i>
+          <span id="importWarningText">Warning message here.</span>
+        </div>
+
+        <!-- Instructions -->
+        <div style="
+              margin-top: 14px;
+              padding: 12px 14px;
+              background: var(--bg-form-col);
+              border-radius: 8px;
+              border: 1px solid var(--color-border);
+              font-size: 12px;
+              color: var(--color-label);
+            ">
+          <strong style="color: var(--color-text-value)">How it works:</strong>
+          <ul style="margin: 6px 0 0 16px; line-height: 1.7">
+            <li>
+              <strong style="color: #10b981">Merge</strong> — Adds imported
+              records to your current data. Exact duplicates (same date +
+              company + user) are skipped automatically.
+            </li>
+            <li>
+              <strong style="color: #ef4444">Overwrite</strong> — Deletes ALL
+              current data and replaces it with the imported file.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer"
+        style="gap: 10px; margin-top: 10px; justify-content: flex-end; align-items: center; flex-wrap: wrap">
+        <button type="button" class="import-action-btn btn-cancel-import" onclick="closeImportModal()">
+          <i class="fa-solid fa-xmark"></i> Cancel
+        </button>
+        <button type="button" class="import-action-btn btn-merge" id="importMergeBtn" disabled
+          onclick="executeImport('merge')" style="opacity: 0.45; cursor: not-allowed">
+          <i class="fa-solid fa-code-merge"></i> Merge
+        </button>
+        <button type="button" class="import-action-btn btn-overwrite" id="importOverwriteBtn" disabled
+          onclick="executeImport('overwrite')" style="opacity: 0.45; cursor: not-allowed">
+          <i class="fa-solid fa-rotate"></i> Overwrite
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Management Modal -->
+  <div id="companyModal" class="modal-overlay" style="display: none">
+    <div class="modal-content" style="max-width: 500px; border-left: 4px solid #ff9900">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-building"></i> Manage Companies</h3>
+        <button type="button" class="close-modal-btn" onclick="closeCompanyModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 15px;
+              background: var(--bg-form-col);
+              padding: 10px 14px;
+              border-radius: 8px;
+              border: 1px solid var(--color-border);
+              font-size: 13px;
+              color: var(--color-label);
+            ">
+          <span>Add, edit, or delete companies from the select list.</span>
+        </div>
+
+        <!-- Add New Company Form -->
+        <div style="display: flex; gap: 8px; margin-bottom: 18px">
+          <input type="text" id="newCompanyName" placeholder="Type new company name..." style="
+                flex: 1;
+                padding: 10px 12px;
+                border: 1.5px solid var(--color-input-border);
+                border-radius: 8px;
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.2s;
+                background: var(--bg-input);
+                color: var(--color-input-text);
+              " onfocus="this.style.borderColor = '#ff9900'" onblur="this.style.borderColor = ''" />
+          <button type="button" class="save-btn" style="
+                padding: 10px 16px;
+                font-size: 13px;
+                margin: 0;
+                background: #ff9900;
+                color: #111;
+                font-weight: 700;
+                box-shadow: 0 4px 10px rgba(255, 153, 0, 0.2);
+                transition: all 0.2s;
+              " onmouseover="
+                this.style.background = '#ffad33';
+                this.style.transform = 'translateY(-1px)';
+              " onmouseout="
+                this.style.background = '#ff9900';
+                this.style.transform = 'translateY(0)';
+              " onclick="addCompany()">
+            Add
+          </button>
+        </div>
+
+        <!-- Company List Container -->
+        <div id="companyListWrapper" style="
+              max-height: 250px;
+              overflow-y: auto;
+              border: 1.5px solid var(--color-border);
+              border-radius: 10px;
+              background: var(--bg-form-col);
+            ">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: 10px">
+        <button type="button" class="modal-ok-btn" onclick="closeCompanyModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Authentication Modal -->
+  <div class="modal-overlay" id="authModal" style="display: none; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 99999;">
+    <div class="modal-content" style="position: relative; max-width: 440px; border-radius: 16px; padding: 24px 28px; background: var(--bg-modal); border: 1.5px solid var(--color-border); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+      <button type="button" onclick="closeAuthModal()" title="Close / Guest Mode" style="position: absolute; top: 16px; right: 18px; background: none; border: none; color: var(--color-label); cursor: pointer; font-size: 18px;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: rgba(255, 153, 0, 0.15); color: #ff9900; font-size: 24px; margin-bottom: 12px;">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h3 id="authModalTitle" style="color: var(--color-text-main); font-size: 20px; font-weight: 700; margin: 0;">Account Login</h3>
+        <p id="authModalSubtitle" style="color: var(--color-label); font-size: 13px; margin: 4px 0 0;">Sign in to access Daily Work Report system</p>
+      </div>
+
+      <!-- Auth Form -->
+      <form id="authForm" onsubmit="handleAuthSubmit(event)">
+        <!-- Name (for Sign Up) -->
+        <div class="input-group" id="authNameGroup" style="display: none; margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 600;">Full Name / Employee Name</label>
+          <div class="input-wrapper">
+            <i class="fa-regular fa-user input-icon"></i>
+            <input type="text" id="authNameInput" placeholder="e.g. Abdul Rehman" style="width: 100%; border-radius: 8px;" />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group" style="margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 600;">Email Address</label>
+          <div class="input-wrapper">
+            <i class="fa-regular fa-envelope input-icon"></i>
+            <input type="email" id="authEmailInput" required placeholder="user@company.com" style="width: 100%; border-radius: 8px;" />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group" style="margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 600;">Password</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-key input-icon"></i>
+            <input type="password" id="authPasswordInput" required placeholder="••••••••" style="width: 100%; border-radius: 8px;" />
+          </div>
+        </div>
+
+        <!-- Role Selection (for Sign Up) -->
+        <div class="input-group" id="authRoleGroup" style="display: none; margin-bottom: 16px;">
+          <label style="font-size: 12px; font-weight: 600;">Select Account Role</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user-shield input-icon"></i>
+            <select id="authRoleInput" style="width: 100%; border-radius: 8px;">
+              <option value="user">User (View/Submit Own Reports)</option>
+              <option value="admin">Admin (Full Control & All Reports)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="authErrorMsg" style="display: none; color: #ef4444; font-size: 12px; margin-bottom: 14px; text-align: center; font-weight: 500;"></div>
+
+        <button type="submit" id="authSubmitBtn" style="width: 100%; padding: 12px; background: #ff9900; color: #111; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(255,153,0,0.3);">
+          Sign In
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 16px; font-size: 12px; color: var(--color-label); display: flex; flex-direction: column; gap: 8px; align-items: center;">
+        <div>
+          <span id="authToggleText">Need an account?</span>
+          <button type="button" id="authToggleBtn" onclick="toggleAuthMode()" style="background: none; border: none; color: #ff9900; font-weight: 600; cursor: pointer; text-decoration: underline; margin-left: 4px;">
+            Create One
+          </button>
+        </div>
+        <div style="margin-top: 4px;">
+          <button type="button" onclick="continueAsGuest()" style="background: none; border: none; color: var(--color-label); font-size: 12px; cursor: pointer; text-decoration: underline;">
+            <i class="fa-solid fa-eye" style="margin-right: 4px;"></i> Continue in Guest Mode (Read-Only)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit History Audit Log Modal -->
+  <div class="modal-overlay" id="editHistoryModal" style="display: none; z-index: 9999;">
+    <div class="modal-content" style="max-width: 550px; border-radius: 16px; padding: 24px; background: var(--bg-modal); border: 1.5px solid var(--color-border);">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="margin: 0; color: var(--color-text-main); font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-clock-rotate-left" style="color: #ff9900;"></i> Report Edit History
+        </h3>
+        <button type="button" onclick="closeEditHistoryModal()" style="background: none; border: none; color: var(--color-label); cursor: pointer; font-size: 18px;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="editHistoryContent" style="max-height: 360px; overflow-y: auto; padding-right: 4px;">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div style="margin-top: 16px; text-align: right;">
+        <button type="button" class="modal-ok-btn" onclick="closeEditHistoryModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" type="button" onclick="scrollToTop()" title="Back to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Firebase Web SDK Compat (v10.8.0) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  
+  <!-- App Firebase Config & Script -->
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

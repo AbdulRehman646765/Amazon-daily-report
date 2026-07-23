@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.role == 'admin' ||
+        getUserData().role == 'admin'
+      );
+    }
+
+    function isOwner(userUid) {
+      return isSignedIn() && request.auth.uid == userUid;
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update, delete: if isAdmin() || isOwner(userId);
+    }
+
+    // Reports Collection
+    match /reports/{reportId} {
+      allow read: if isSignedIn() && (
+        isAdmin() ||
+        resource == null ||
+        resource.data.userUid == request.auth.uid ||
+        resource.data.userName == getUserData().userName
+      );
+
+      allow create: if isSignedIn() && (
+        isAdmin() ||
+        request.resource.data.userUid == request.auth.uid ||
+        request.resource.data.userName == getUserData().userName
+      );
+
+      allow update: if isSignedIn() && (
+        isAdmin() ||
+        resource.data.userUid == request.auth.uid ||
+        resource.data.userName == getUserData().userName
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // Archived Users & Reports
+    match /archivedUsers/{archiveId} {
+      allow read, write: if isAdmin();
+    }
+
+    // App Settings Collection
+    match /settings/{settingId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}
